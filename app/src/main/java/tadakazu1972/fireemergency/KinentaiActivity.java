@@ -336,7 +336,7 @@ public class KinentaiActivity extends AppCompatActivity {
 
     //アクションプラン
     private void showKinentai3(){
-        final CharSequence[] actions = {"東海地震","首都直下地震","東南海・南海地震","南海トラフ"};
+        final CharSequence[] actions = {"東海地震","首都直下地震","南海トラフ"}; //"東南海・南海地震"削除　2018/08/28
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("アクションプラン");
         builder.setItems(actions, new DialogInterface.OnClickListener(){
@@ -349,10 +349,10 @@ public class KinentaiActivity extends AppCompatActivity {
                     case 1:
                         showActionPlan((String)actions[which],"kinentai_syutochokka.txt");
                         break;
-                    case 2:
+                    /* case 2:
                         showActionPlan((String)actions[which],"kinentai_tounankai.txt");
-                        break;
-                    case 3:
+                        break; */
+                    case 2: //3:
                         showNankaitraf();
                         break;
                 }

@@ -353,7 +353,7 @@ public class KinentaiActivity extends AppCompatActivity {
                         showActionPlan((String)actions[which],"kinentai_tounankai.txt");
                         break; */
                     case 2: //3:
-                        showNankaitraf();
+                        showNankaitraf1(); //showNankaitraf(); 2018/08/29 showNankaitrafを経ずに直接実行
                         break;
                 }
             }
@@ -397,7 +397,7 @@ public class KinentaiActivity extends AppCompatActivity {
         builder.show();
     }
 
-    //南海トラフ　ケース選択
+    //南海トラフ　ケース選択  => 2018-08-29 使用しない
     private void showNankaitraf(){
         final CharSequence[] actions = {"ケース１(条件判定)","ケース２(同程度被害)"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -421,13 +421,13 @@ public class KinentaiActivity extends AppCompatActivity {
         builder.show();
     }
 
-    //南海トラフ　ケース１
+    //南海トラフ　ケース１  => 2018-08-29 showNankaitrafを経ずに直接実行, R.layout を nankaitraf => plan_nankaitraf に変更
     private void showNankaitraf1(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("南海トラフ　次の①②が合致した場合にアクションプランを適用する");
+        builder.setTitle("南海トラフ地震アクションプラン");
         //カスタムビュー設定
         LayoutInflater inflater = (LayoutInflater)this.getSystemService(LAYOUT_INFLATER_SERVICE);
-        final View layout = inflater.inflate(R.layout.nankaitraf, (ViewGroup)findViewById(R.id.nankaitraf));
+        final View layout = inflater.inflate(R.layout.plan_nankaitraf, (ViewGroup)findViewById(R.id.plan_nankaitraf));
         //判定準備
         final Spinner nankaitraf1 = (Spinner)layout.findViewById(R.id.spnNankaitraf1);
         final Spinner nankaitraf21 = (Spinner)layout.findViewById(R.id.spnNankaitraf21);
@@ -443,24 +443,57 @@ public class KinentaiActivity extends AppCompatActivity {
                 String check23 = (String)nankaitraf23.getSelectedItem();
                 //いざ、判定
                 if (!check1.equals("その他")&&!check21.equals("その他")&&!check22.equals("その他")&&!check23.equals("その他")){
-                    showActionPlan("南海トラフ","kinentai_nankaitraf.txt");
+                    // showActionPlan("南海トラフ地震アクションプラン","kinentai_nankaitraf.txt");
+                    showNankaitraf11();
                 } else {
-                    showActionPlan("南海トラフ","kinentai_nankaitraf2.txt");
+                    showActionPlan("南海トラフ地震アクションプラン","kinentai_nankaitraf2.txt");
                 }
             }
         });
-        builder.setNegativeButton("キャンセル", new DialogInterface.OnClickListener(){
+        builder.setNegativeButton("キャンセル",null);
+        /* builder.setNegativeButton("キャンセル", new DialogInterface.OnClickListener(){
             @Override
             public void onClick(DialogInterface dialog, int which){
                 showNankaitraf();
             }
-        });
+        }); */
         builder.setCancelable(true);
         builder.create();
         builder.show();
     }
 
-    //南海トラフ　ケース２
+    // 2018-08-29 作成　南海トラフ　部隊選択
+    private void showNankaitraf11(){
+        final CharSequence[] actions = {
+                "\n■指揮支援部隊\n　→出動可能な全隊出動\n　→出動先(タップで表示)\n",
+                "\n■大阪府大隊(陸上)\n　→被害確認後、出動可能な全隊出動\n　→出動先(タップで表示)\n",
+                "\n■航空小隊\n　→被害確認後、出動可能な全隊出動\n　→出動先(タップで表示)\n"
+        };
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("南海トラフ地震アクションプラン適用");
+        builder.setItems(actions, new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int which){
+                switch(which){
+                    case 0:
+                        showActionPlan("南海トラフ地震アクションプラン適用","kinentai_nankaitraf110.txt");
+                        break;
+                    case 1:
+                        showActionPlan("南海トラフ地震アクションプラン適用","kinentai_nankaitraf111.txt");
+                        break;
+                    case 2:
+                        showActionPlan("南海トラフ地震アクションプラン適用","kinentai_nankaitraf112.txt");
+                        break;
+                }
+            }
+        });
+        builder.setNegativeButton("キャンセル", null);
+        builder.setCancelable(true);
+        builder.create();
+        builder.show();
+    }
+
+    //南海トラフ　ケース２  => 2018/08/29 使用しない
     private void showNankaitraf2(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("南海トラフ　ケース２");

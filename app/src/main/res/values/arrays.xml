@@ -486,4 +486,11 @@
         <item>宮崎県</item>
         <item>その他</item>
     </string-array>
+    <string-array name="toukai1">
+        <item>静岡県中部</item>
+        <item>静岡県西部</item>
+        <item>駿河湾</item>
+        <item>遠州灘</item>
+        <item>その他</item>
+    </string-array>
 </resources>

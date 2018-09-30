@@ -20,6 +20,7 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
+import android.widget.CheckBox;
 
 import com.opencsv.CSVParser;
 import com.opencsv.CSVReader;
@@ -336,7 +337,7 @@ public class KinentaiActivity extends AppCompatActivity {
 
     //アクションプラン
     private void showKinentai3(){
-        final CharSequence[] actions = {"東海地震","首都直下地震","東南海・南海地震","南海トラフ"};
+        final CharSequence[] actions = {"東海地震","首都直下地震","南海トラフ"}; //"東南海・南海地震"削除　2018/08/28
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("アクションプラン");
         builder.setItems(actions, new DialogInterface.OnClickListener(){
@@ -344,16 +345,16 @@ public class KinentaiActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which){
                 switch(which){
                     case 0:
-                        showActionPlan((String)actions[which],"kinentai_toukai.txt");
+                        showToukai1(); //showActionPlan((String)actions[which],"kinentai_toukai.txt");
                         break;
                     case 1:
-                        showActionPlan((String)actions[which],"kinentai_syutochokka.txt");
+                        showShutochokka1(); //showActionPlan((String)actions[which],"kinentai_syutochokka.txt");
                         break;
-                    case 2:
+                    /* case 2:
                         showActionPlan((String)actions[which],"kinentai_tounankai.txt");
-                        break;
-                    case 3:
-                        showNankaitraf();
+                        break; */
+                    case 2: //3:
+                        showNankaitraf1(); //showNankaitraf(); 2018/08/29 showNankaitrafを経ずに直接実行
                         break;
                 }
             }
@@ -397,7 +398,223 @@ public class KinentaiActivity extends AppCompatActivity {
         builder.show();
     }
 
-    //南海トラフ　ケース選択
+    // 2018-08-30 作成　東海地震
+    int countToukai1Checked = 0;
+    private void showToukai1(){
+
+        //カスタムビュー設定
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("東海地震アクションプラン");
+        LayoutInflater inflater = (LayoutInflater)this.getSystemService(LAYOUT_INFLATER_SERVICE);
+        final View layout = inflater.inflate(R.layout.plan_toukai, (ViewGroup)findViewById(R.id.plan_toukai));
+        final Spinner toukai1 = (Spinner)layout.findViewById(R.id.spnToukai1);
+        builder.setView(layout);
+
+        //checkbox
+        countToukai1Checked = 0;
+        layout.findViewById(R.id.checkBox1).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CheckBox chk = (CheckBox) v;
+                if(chk.isChecked() == true) {
+                    countToukai1Checked += 1;
+                }
+                else {
+                    countToukai1Checked -= 1;
+                }
+            }
+        });
+        layout.findViewById(R.id.checkBox2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CheckBox chk = (CheckBox) v;
+                if(chk.isChecked() == true) {
+                    countToukai1Checked += 1;
+                }
+                else {
+                    countToukai1Checked -= 1;
+                }
+            }
+        });
+        layout.findViewById(R.id.checkBox3).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CheckBox chk = (CheckBox) v;
+                if(chk.isChecked() == true) {
+                    countToukai1Checked += 1;
+                }
+                else {
+                    countToukai1Checked -= 1;
+                }
+            }
+        });
+        layout.findViewById(R.id.checkBox4).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CheckBox chk = (CheckBox) v;
+                if(chk.isChecked() == true) {
+                    countToukai1Checked += 1;
+                }
+                else {
+                    countToukai1Checked -= 1;
+                }
+            }
+        });
+        layout.findViewById(R.id.checkBox5).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CheckBox chk = (CheckBox) v;
+                if(chk.isChecked() == true) {
+                    countToukai1Checked += 1;
+                }
+                else {
+                    countToukai1Checked -= 1;
+                }
+            }
+        });
+        layout.findViewById(R.id.checkBox6).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CheckBox chk = (CheckBox) v;
+                if(chk.isChecked() == true) {
+                    countToukai1Checked += 1;
+                }
+                else {
+                    countToukai1Checked -= 1;
+                }
+            }
+        });
+        layout.findViewById(R.id.checkBox7).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CheckBox chk = (CheckBox) v;
+                if(chk.isChecked() == true) {
+                    countToukai1Checked += 1;
+                }
+                else {
+                    countToukai1Checked -= 1;
+                }
+            }
+        });
+        layout.findViewById(R.id.checkBox8).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CheckBox chk = (CheckBox) v;
+                if(chk.isChecked() == true) {
+                    countToukai1Checked += 1;
+                }
+                else {
+                    countToukai1Checked -= 1;
+                }
+            }
+        });
+
+        // button
+        builder.setPositiveButton("判定", new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int which){
+                String check1 = (String)toukai1.getSelectedItem();
+                //いざ、判定
+                if (!check1.equals("その他") && countToukai1Checked >= 2){
+                    showToukai11();
+                } else {
+                    showActionPlan("東海地震アクションプラン","kinentai_toukai2.txt");
+                }
+            }
+        });
+        builder.setNegativeButton("キャンセル",null);
+        builder.setCancelable(true);
+        builder.create();
+        builder.show();
+    }
+
+    // 2018-08-30 作成　東海適用　部隊選択
+    private void showToukai11(){
+        final CharSequence[] actions = {
+                "\n■指揮支援部隊\n　→第二次応援\n　→出動先(タップで表示)\n",
+                "\n■大阪府大隊\n　→第二次応援\n　→出動先(タップで表示)\n",
+                "\n■航空小隊\n　→第一次応援（全隊出動）\n　→出動先(タップで表示)\n"
+        };
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("東海地震アクションプラン適用");
+        builder.setItems(actions, new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int which){
+                switch(which){
+                    case 0:
+                        showActionPlan("東海地震アクションプラン適用","kinentai_toukai110.txt");
+                        break;
+                    case 1:
+                        showActionPlan("東海地震アクションプラン適用","kinentai_toukai111.txt");
+                        break;
+                    case 2:
+                        showActionPlan("東海地震アクションプラン適用","kinentai_toukai112.txt");
+                        break;
+                }
+            }
+        });
+        builder.setNegativeButton("キャンセル", null);
+        builder.setCancelable(true);
+        builder.create();
+        builder.show();
+    }
+
+    // 2018-08-30 作成　首都直下
+    private void showShutochokka1(){
+        final CharSequence[] actions = {"東京23区において、震度6強以上が観測された場合"};
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("首都直下地震アクションプラン");
+        builder.setItems(actions, new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int which){
+                switch(which){
+                    case 0:
+                        showShutochokka11();
+                        break;
+                    /* case 1:
+                        showNankaitraf2();
+                        break; */
+                }
+            }
+        });
+        builder.setNegativeButton("キャンセル", null);
+        builder.setCancelable(true);
+        builder.create();
+        builder.show();
+    }
+
+    // 2018-08-30 作成　首都直下適用　部隊選択
+    private void showShutochokka11(){
+        final CharSequence[] actions = {
+                "\n■指揮支援部隊\n　→指揮支援部隊長として出動\n　→出動先(タップで表示)\n",
+                "\n■大阪府大隊(陸上)\n　→全隊出動\n　→出動先(タップで表示)\n",
+                "\n■航空小隊\n　→指揮支援部隊長の輸送\n　→出動先(タップで表示)\n"
+        };
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("首都直下地震アクションプラン適用");
+        builder.setItems(actions, new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int which){
+                switch(which){
+                    case 0:
+                        showActionPlan("首都直下地震アクションプラン適用","kinentai_shutochokka110.txt");
+                        break;
+                    case 1:
+                        showActionPlan("首都直下地震アクションプラン適用","kinentai_shutochokka111.txt");
+                        break;
+                    case 2:
+                        showActionPlan("首都直下地震アクションプラン適用","kinentai_shutochokka112.txt");
+                        break;
+                }
+            }
+        });
+        builder.setNegativeButton("キャンセル", null);
+        builder.setCancelable(true);
+        builder.create();
+        builder.show();
+    }
+
+    //南海トラフ　ケース選択  => 2018-08-29 使用しない
     private void showNankaitraf(){
         final CharSequence[] actions = {"ケース１(条件判定)","ケース２(同程度被害)"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -421,13 +638,13 @@ public class KinentaiActivity extends AppCompatActivity {
         builder.show();
     }
 
-    //南海トラフ　ケース１
+    //南海トラフ　ケース１  => 2018-08-29 showNankaitrafを経ずに直接実行, R.layout を nankaitraf => plan_nankaitraf に変更
     private void showNankaitraf1(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("南海トラフ　次の①②が合致した場合にアクションプランを適用する");
+        builder.setTitle("南海トラフ地震アクションプラン");
         //カスタムビュー設定
         LayoutInflater inflater = (LayoutInflater)this.getSystemService(LAYOUT_INFLATER_SERVICE);
-        final View layout = inflater.inflate(R.layout.nankaitraf, (ViewGroup)findViewById(R.id.nankaitraf));
+        final View layout = inflater.inflate(R.layout.plan_nankaitraf, (ViewGroup)findViewById(R.id.plan_nankaitraf));
         //判定準備
         final Spinner nankaitraf1 = (Spinner)layout.findViewById(R.id.spnNankaitraf1);
         final Spinner nankaitraf21 = (Spinner)layout.findViewById(R.id.spnNankaitraf21);
@@ -443,24 +660,57 @@ public class KinentaiActivity extends AppCompatActivity {
                 String check23 = (String)nankaitraf23.getSelectedItem();
                 //いざ、判定
                 if (!check1.equals("その他")&&!check21.equals("その他")&&!check22.equals("その他")&&!check23.equals("その他")){
-                    showActionPlan("南海トラフ","kinentai_nankaitraf.txt");
+                    // showActionPlan("南海トラフ地震アクションプラン","kinentai_nankaitraf.txt");
+                    showNankaitraf11();
                 } else {
-                    showActionPlan("南海トラフ","kinentai_nankaitraf2.txt");
+                    showActionPlan("南海トラフ地震アクションプラン","kinentai_nankaitraf2.txt");
                 }
             }
         });
-        builder.setNegativeButton("キャンセル", new DialogInterface.OnClickListener(){
+        builder.setNegativeButton("キャンセル",null);
+        /* builder.setNegativeButton("キャンセル", new DialogInterface.OnClickListener(){
             @Override
             public void onClick(DialogInterface dialog, int which){
                 showNankaitraf();
             }
-        });
+        }); */
         builder.setCancelable(true);
         builder.create();
         builder.show();
     }
 
-    //南海トラフ　ケース２
+    // 2018-08-29 作成　南海トラフ　部隊選択
+    private void showNankaitraf11(){
+        final CharSequence[] actions = {
+                "\n■指揮支援部隊\n　→出動可能な全隊出動\n　→出動先(タップで表示)\n",
+                "\n■大阪府大隊(陸上)\n　→被害確認後、出動可能な全隊出動\n　→出動先(タップで表示)\n",
+                "\n■航空小隊\n　→被害確認後、出動可能な全隊出動\n　→出動先(タップで表示)\n"
+        };
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("南海トラフ地震アクションプラン適用");
+        builder.setItems(actions, new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int which){
+                switch(which){
+                    case 0:
+                        showActionPlan("南海トラフ地震アクションプラン適用","kinentai_nankaitraf110.txt");
+                        break;
+                    case 1:
+                        showActionPlan("南海トラフ地震アクションプラン適用","kinentai_nankaitraf111.txt");
+                        break;
+                    case 2:
+                        showActionPlan("南海トラフ地震アクションプラン適用","kinentai_nankaitraf112.txt");
+                        break;
+                }
+            }
+        });
+        builder.setNegativeButton("キャンセル", null);
+        builder.setCancelable(true);
+        builder.create();
+        builder.show();
+    }
+
+    //南海トラフ　ケース２  => 2018/08/29 使用しない
     private void showNankaitraf2(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("南海トラフ　ケース２");

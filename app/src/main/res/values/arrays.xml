@@ -449,7 +449,8 @@
         <item>愛媛県東予</item>
         <item>愛媛県中予</item>
         <item>愛媛県南予</item>
-        <item>伊予灘豊後水道</item>
+        <item>伊予灘</item>
+        <item>豊後水道</item>
         <item>高知県東部</item>
         <item>高知県中部</item>
         <item>高知県西部</item>
@@ -483,6 +484,13 @@
         <item>高知県</item>
         <item>大分県</item>
         <item>宮崎県</item>
+        <item>その他</item>
+    </string-array>
+    <string-array name="toukai1">
+        <item>静岡県中部</item>
+        <item>静岡県西部</item>
+        <item>駿河湾</item>
+        <item>遠州灘</item>
         <item>その他</item>
     </string-array>
 </resources>

@@ -926,7 +926,7 @@ public class TyphoonActivity extends AppCompatActivity {
                 s1 = "招集なし";
                 s2 = "";
             } else {
-                s1 = "２号非常招集(非番・日勤)";
+                s1 = "２号非常招集";
                 if (mMainStation.equals("消防局")) {
                     s2 = mMainStation + "へ参集(所属担当者に確認すること)";
                 } else {
@@ -1046,7 +1046,7 @@ public class TyphoonActivity extends AppCompatActivity {
                 s1 = "招集なし";
                 s2 = "";
             } else {
-                s1 = "２号非常招集(非番・日勤)";
+                s1 = "２号非常招集";
                 if (mMainStation.equals("消防局")) {
                     s2 = mMainStation + "へ参集(所属担当者に確認すること)";
                 } else {
@@ -1152,7 +1152,7 @@ public class TyphoonActivity extends AppCompatActivity {
             s1 = "招集なし";
             s2 = "";
         } else {
-            s1 = "２号非常招集(非番・日勤)";
+            s1 = "２号非常招集";
             if (mMainStation.equals("消防局")||mMainStation.equals("教育訓練センター")) {
                 s2 = mMainStation + "へ参集(所属担当者に確認すること)";
             } else {
@@ -1310,7 +1310,7 @@ public class TyphoonActivity extends AppCompatActivity {
 
     //安威川（千歳橋）
     private void showTyphoon34() {
-        final CharSequence[] actions = {"■氾濫注意水位(水位3.25m)、水防警報(出動)", "■避難準備・高齢者等避難開始発令の見込み(1時間以内に水位3.5mに到達)", "■避難準備・高齢者等避難開始(水位3.5m)、避難勧告発令の見込み", "■避難勧告(水位4.25m)", "■避難指示(避難指示)(水位5.1m)"};
+        final CharSequence[] actions = {"■氾濫注意水位(水位3.25m)、水防警報(出動)", "■避難準備・高齢者等避難開始発令の見込み(1時間以内に水位3.5mに到達)", "■避難準備・高齢者等避難開始(水位3.5m)、避難勧告発令の見込み", "■避難勧告(水位4.25m)", "■避難指示(緊急)(水位5.1m)"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("水位の状況は？");
         builder.setItems(actions, new DialogInterface.OnClickListener() {

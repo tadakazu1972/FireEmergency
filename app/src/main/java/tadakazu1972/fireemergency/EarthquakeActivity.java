@@ -376,7 +376,7 @@ public class EarthquakeActivity extends AppCompatActivity {
                 s = mTsunamiStation+"消防署へ参集";
             }
         }
-        builder.setMessage("２号非常招集(非番・日勤)\n\n"+s);
+        builder.setMessage("２号非常招集\n\n"+s);
         builder.setNegativeButton("キャンセル", null);
         builder.setCancelable(true);
         builder.create();
@@ -397,7 +397,7 @@ public class EarthquakeActivity extends AppCompatActivity {
                 s = mMainStation+"消防署へ参集";
             }
         }
-        builder.setMessage("２号非常招集(非番・日勤)\n\n"+s);
+        builder.setMessage("２号非常招集\n\n"+s);
         builder.setNegativeButton("キャンセル", null);
         builder.setCancelable(true);
         builder.create();

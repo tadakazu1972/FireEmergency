@@ -40,4 +40,13 @@
     <string name="guide53">河川水位、気象警報、渋滞情報サイトなどを閲覧することができます。</string>
     <string name="guide63">■データ全件一覧表示\n　データ全件一覧を表示させ、個別に電話、メール送信することが可能です。\n\n■グループ検索\n　所属、勤務区分を選択し検索します。　個別に電話、メール送信が可能\n　また、メールは一斉送信することが可能です。</string>
     <string name="guide64">個別に電話する場合は電話番号をタップ、メール送信する場合はアドレスをタップします。\n\nグループに一斉メールする場合は「メール一斉送信」をタップします。</string>
+    <string name="toukai1">■指揮支援部隊\n　→第二次応援\n　→</string>
+    <string name="toukai2">■大阪府大隊\n　→第二次応援\n　→</string>
+    <string name="toukai3">■航空小隊\n　→第一次応援(全隊出動)\n　→</string>
+    <string name="shutochokka1">■指揮支援部隊\n　→指揮支援部隊長として出動\n　→</string>
+    <string name="shutochokka2">■大阪府大隊(陸上)\n　→全隊出動\n　→</string>
+    <string name="shutochokka3">■航空小隊\n　→指揮支援部隊長の輸送\n　→</string>
+    <string name="nankaitraf1">■指揮支援部隊\n　→出動可能な全隊出動\n　→</string>
+    <string name="nankaitraf2">■大阪府大隊(陸上)\n　→被害確認後、出動可能な全隊出動\n　→</string>
+    <string name="nankaitraf3">■航空小隊\n　→被害確認後、出動可能な全隊出動\n　→</string>
 </resources>

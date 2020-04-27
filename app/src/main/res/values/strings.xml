@@ -43,9 +43,9 @@
     <string name="toukai1">■指揮支援部隊\n　→第二次応援\n　→</string>
     <string name="toukai2">■大阪府大隊\n　→第二次応援\n　→</string>
     <string name="toukai3">■航空小隊\n　→第一次応援(全隊出動)\n　→</string>
-    <string name="shutochokka1">■指揮支援部隊\n　→指揮支援部隊長として出動\n　→</string>
+    <string name="shutochokka1">■指揮支援部隊\n　→統括指揮支援隊として出動\n　→</string>
     <string name="shutochokka2">■大阪府大隊(陸上)\n　→全隊出動\n　→</string>
-    <string name="shutochokka3">■航空小隊\n　→指揮支援部隊長の輸送\n　→</string>
+    <string name="shutochokka3">■航空小隊\n　→統括指揮支援隊輸送航空小隊\n　→</string>
     <string name="nankaitraf1">■指揮支援部隊\n　→出動可能な全隊出動\n　→</string>
     <string name="nankaitraf2">■大阪府大隊(陸上)\n　→被害確認後、出動可能な全隊出動\n　→</string>
     <string name="nankaitraf3">■航空小隊\n　→被害確認後、出動可能な全隊出動\n　→</string>

@@ -50,7 +50,7 @@
         android:id="@+id/lblData3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="■大津波・津波警報時参集指定署"
+        android:text="■大津波警報・津波警報時(震度5弱以上)参集指定署"
         android:textColor="#111111"
         android:textSize="20sp"
         android:layout_marginBottom="10dp"/>

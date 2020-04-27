@@ -151,6 +151,12 @@ public class EarthquakeActivity extends AppCompatActivity {
                 showEarthquake5();
             }
         });
+        mView.findViewById(R.id.btnEarthquake6).setOnClickListener(new OnClickListener(){
+            @Override
+            public void onClick(View v){
+                showEarthquake6();
+            }
+        });
         mView.findViewById(R.id.btnEarthquakeEarthquake).setOnClickListener(new OnClickListener(){
             @Override
             public void onClick(View v){
@@ -450,18 +456,35 @@ public class EarthquakeActivity extends AppCompatActivity {
     private void showEarthquake32(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("■津波警報");
-        String s;
-        //３号招集なので、１号、２号は参集なしの判定する
-        if (mKubun.equals("１号招集")||mKubun.equals("２号招集")){
-            s = "招集なし";
-        } else {
-            if (mTsunamiStation.equals("消防局")||mTsunamiStation.equals("教育訓練センター")) {
-                s = mTsunamiStation+"へ参集\n\n※平日の9時～17時30分は、原則、勤務中の毎日勤務者で活動体制を確保する";
+        //以下の勤務消防署に該当する場合は第5非常警備(大津波・津波警報時参集指定署ではないことに注意)、それ以外は3号招集
+        String s, message;
+        String[] a = {"天王寺","東淀川","東成","生野","阿倍野","東住吉","平野"};
+        if (Arrays.asList(a).contains(mMainStation)){
+            //４号招集なので、１号、２号、３号は参集なしの判定する
+            if (mKubun.equals("４号招集")) {
+                if (mMainStation.equals("消防局")||mMainStation.equals("教育訓練センター")) { //勤務消防署であることに注意!
+                    s = mMainStation + "へ参集　所属担当者に確認すること\n\n※平日の9時～17時30分は、原則、勤務中の毎日勤務者で活動体制を確保する";
+                } else {
+                    s = mMainStation + "消防署へ参集\n\n※平日の9時～17時30分は、原則、勤務中の毎日勤務者で活動体制を確保する";
+                }
             } else {
-                s = mTsunamiStation+"消防署へ参集\n\n※平日の9時～17時30分は、原則、勤務中の毎日勤務者で活動体制を確保する";
+                s = "招集なし";
             }
+            message = "４号非常招集(非番・日勤)\n(天王寺,東淀川,東成,生野,阿倍野,東住吉,平野)\n\n" + s + "\n\n招集なし";
+        } else {
+            //３号招集なので、１号、２号は参集なしの判定する
+            if (mKubun.equals("１号招集") || mKubun.equals("２号招集")) {
+                s = "招集なし";
+            } else {
+                if (mTsunamiStation.equals("消防局") || mTsunamiStation.equals("教育訓練センター")) {
+                    s = mTsunamiStation + "へ参集\n\n※平日の9時～17時30分は、原則、勤務中の毎日勤務者で活動体制を確保する";
+                } else {
+                    s = mTsunamiStation + "消防署へ参集\n\n※平日の9時～17時30分は、原則、勤務中の毎日勤務者で活動体制を確保する";
+                }
+            }
+            message = "３号非常招集(非番・日勤)\n(北,都島,福島,此花,中央,西,港,大正,浪速,西淀川,淀川,旭,城東,鶴見,住之江,住吉,西成,水上,消防局)\n\n" + s;
         }
-        builder.setMessage("３号非常招集(非番・日勤)\n\n"+s);
+        builder.setMessage(message);
         builder.setNegativeButton("キャンセル", null);
         builder.setCancelable(true);
         builder.create();
@@ -472,17 +495,17 @@ public class EarthquakeActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("■警報なし");
         String s;
-        //３号招集なので、１号、２号は参集なしの判定する
-        if (mKubun.equals("１号招集")||mKubun.equals("２号招集")){
-            s = "招集なし";
-        } else {
+        //４号招集なので、１号、２号、３号は参集なしの判定する
+        if (mKubun.equals("４号招集")) {
             if (mMainStation.equals("消防局")||mMainStation.equals("教育訓練センター")) { //勤務消防署であることに注意!
-                s = mMainStation+"へ参集\n\n※平日の9時～17時30分は、原則、勤務中の毎日勤務者で活動体制を確保する";
+                s = mMainStation + "へ参集　所属担当者に確認すること\n\n※平日の9時～17時30分は、原則、勤務中の毎日勤務者で活動体制を確保する";
             } else {
-                s = mMainStation+"消防署へ参集\n\n※平日の9時～17時30分は、原則、勤務中の毎日勤務者で活動体制を確保する";
+                s = mMainStation + "消防署へ参集\n\n※平日の9時～17時30分は、原則、勤務中の毎日勤務者で活動体制を確保する";
             }
+        } else {
+            s = "招集なし";
         }
-        builder.setMessage("３号非常招集(非番・日勤)\n\n"+s);
+        builder.setMessage("４号非常招集(非番・日勤)\n\n" + s);
         builder.setNegativeButton("キャンセル", null);
         builder.setCancelable(true);
         builder.create();
@@ -538,18 +561,30 @@ public class EarthquakeActivity extends AppCompatActivity {
     private void showEarthquake42(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("■津波警報");
-        String s;
-        //３号招集なので、１号、２号は参集なしの判定する
-        if (mKubun.equals("１号招集")||mKubun.equals("２号招集")){
-            s = "招集なし";
-        } else {
-            if (mTsunamiStation.equals("消防局")||mTsunamiStation.equals("教育訓練センター")) {
-                s = mTsunamiStation+"へ参集\n\n※平日の9時～17時30分は、原則、勤務中の毎日勤務者で活動体制を確保する";
+        //以下の勤務消防署に該当する場合は第5非常警備(大津波・津波警報時参集指定署ではないことに注意)、それ以外は3号招集
+        String s, message;
+        String[] a = {"天王寺","東淀川","東成","生野","阿倍野","東住吉","平野"};
+        if (Arrays.asList(a).contains(mMainStation)){
+            if (mMainStation.equals("消防局")||mMainStation.equals("教育訓練センター")) { //勤務消防署であることに注意!
+                s = mMainStation;
             } else {
-                s = mTsunamiStation+"消防署へ参集\n\n※平日の9時～17時30分は、原則、勤務中の毎日勤務者で活動体制を確保する";
+                s = mMainStation + "消防署";
             }
+            message = "第５非常警備(全署、消防局)\n(天王寺,東淀川,東成,生野,阿倍野,東住吉,平野)\n\n" + s + "\n\n招集なし";
+        } else {
+            //３号招集なので、１号、２号は参集なしの判定する
+            if (mKubun.equals("１号招集") || mKubun.equals("２号招集")) {
+                s = "招集なし";
+            } else {
+                if (mTsunamiStation.equals("消防局") || mTsunamiStation.equals("教育訓練センター")) {
+                    s = mTsunamiStation + "へ参集\n\n※平日の9時～17時30分は、原則、勤務中の毎日勤務者で活動体制を確保する";
+                } else {
+                    s = mTsunamiStation + "消防署へ参集\n\n※平日の9時～17時30分は、原則、勤務中の毎日勤務者で活動体制を確保する";
+                }
+            }
+            message = "３号非常招集(非番・日勤)\n(北,都島,福島,此花,中央,西,港,大正,浪速,西淀川,淀川,旭,城東,鶴見,住之江,住吉,西成,水上,消防局)\n\n" + s;
         }
-        builder.setMessage("３号非常招集(非番・日勤)\n\n"+s);
+        builder.setMessage(message);
         builder.setNegativeButton("キャンセル", null);
         builder.setCancelable(true);
         builder.create();
@@ -561,7 +596,7 @@ public class EarthquakeActivity extends AppCompatActivity {
         builder.setTitle("■津波注意報");
         //勤務消防署がリストに該当するか判定
         String s;
-        String[] a = {"消防局","此花","港","大正","西淀川","住之江","西成","水上"};
+        String[] a = {"北","都島","福島","此花","中央","西","港","大正","浪速","西淀川","淀川","旭","城東","鶴見","住之江","住吉","西成","水上","消防局"};
         if (Arrays.asList(a).contains(mMainStation)) {
             if (mMainStation.equals("消防局")||mMainStation.equals("教育訓練センター")) { //勤務消防署であることに注意!
                 s = mMainStation;
@@ -571,7 +606,7 @@ public class EarthquakeActivity extends AppCompatActivity {
         } else {
             s = "招集なし";
         }
-        builder.setMessage("第５非常警備(此花,港,大正,西淀川,住之江,西成,水上,消防局)\n\n"+s);
+        builder.setMessage("第５非常警備\n(北,都島,福島,此花,中央,西,港,大正,浪速,西淀川,淀川,旭,城東,鶴見,住之江,住吉,西成,水上,消防局)\n\n"+s);
         builder.setNegativeButton("キャンセル", null);
         builder.setCancelable(true);
         builder.create();
@@ -667,6 +702,91 @@ public class EarthquakeActivity extends AppCompatActivity {
             s = mMainStation + "消防署";
         }
         builder.setMessage("第５非常警備(全署、消防局)\n\n"+ s + "\n\n招集なし");
+        builder.setNegativeButton("キャンセル", null);
+        builder.setCancelable(true);
+        builder.create();
+        builder.show();
+    }
+
+    //東海地震に伴う非常招集
+    private void showEarthquake6(){
+        final CharSequence[] actions = {"■調査中","■巨大地震注意","■巨大地震警戒"};
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("発令されている警報は？");
+        builder.setItems(actions, new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int which){
+                switch(which){
+                    case 0:
+                        showEarthquake61();
+                        break;
+                    case 1:
+                        showEarthquake62();
+                        break;
+                    case 2:
+                        showEarthquake63();
+                        break;
+                }
+            }
+        });
+        builder.setNegativeButton("キャンセル", null);
+        builder.setCancelable(true);
+        builder.create();
+        builder.show();
+    }
+
+    private void showEarthquake61(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("■調査中");
+        String s;
+        if (mMainStation.equals("消防局")||mMainStation.equals("教育訓練センター")) { //勤務消防署であることに注意!
+            s = mMainStation;
+        } else {
+            s = mMainStation + "消防署";
+        }
+        builder.setMessage("第５非常警備(全署、消防局)\n\n"+ s + "\n\n招集なし");
+        builder.setNegativeButton("キャンセル", null);
+        builder.setCancelable(true);
+        builder.create();
+        builder.show();
+    }
+
+    private void showEarthquake62(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("■巨大地震注意");
+        String s;
+        //４号招集なので、１号、２号、３号は参集なしの判定する
+        if (mKubun.equals("４号招集")) {
+            if (mMainStation.equals("消防局")||mMainStation.equals("教育訓練センター")) { //勤務消防署であることに注意!
+                s = mMainStation + "へ参集　所属担当者に確認すること\n\n※平日の9時～17時30分は、原則、勤務中の毎日勤務者で活動体制を確保する";
+            } else {
+                s = mMainStation + "消防署へ参集\n\n※平日の9時～17時30分は、原則、勤務中の毎日勤務者で活動体制を確保する";
+            }
+        } else {
+            s = "招集なし";
+        }
+        builder.setMessage("４号非常招集(非番・日勤)\n\n"+s);
+        builder.setNegativeButton("キャンセル", null);
+        builder.setCancelable(true);
+        builder.create();
+        builder.show();
+    }
+
+    private void showEarthquake63(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("■巨大地震警戒");
+        String s;
+        //４号招集なので、１号、２号、３号は参集なしの判定する
+        if (mKubun.equals("４号招集")) {
+            if (mMainStation.equals("消防局")||mMainStation.equals("教育訓練センター")) { //勤務消防署であることに注意!
+                s = mMainStation + "へ参集　所属担当者に確認すること\n\n※平日の9時～17時30分は、原則、勤務中の毎日勤務者で活動体制を確保する";
+            } else {
+                s = mMainStation + "消防署へ参集\n\n※平日の9時～17時30分は、原則、勤務中の毎日勤務者で活動体制を確保する";
+            }
+        } else {
+            s = "招集なし";
+        }
+        builder.setMessage("４号非常招集(非番・日勤)\n\n"+s);
         builder.setNegativeButton("キャンセル", null);
         builder.setCancelable(true);
         builder.create();

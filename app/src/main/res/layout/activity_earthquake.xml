@@ -101,6 +101,14 @@
             android:text="東海地震に伴う非常招集"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:id="@+id/btnEarthquake5"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="10dp"/>
+        <Button
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="南海トラフ地震臨時情報"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/btnEarthquake6"
             android:layout_gravity="center_horizontal"/>
     </LinearLayout>
     <LinearLayout

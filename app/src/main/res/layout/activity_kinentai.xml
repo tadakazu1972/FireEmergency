@@ -95,14 +95,32 @@
             android:id="@+id/btnKinentai4"
             android:layout_marginBottom="10dp"
             android:layout_gravity="center"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
         <Button
-            android:layout_width="300dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="特殊災害(NBC含む)"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:id="@+id/btnKinentai5"
-            android:layout_marginBottom="10dp"
-            android:layout_gravity="center"/>
+            android:text=""
+            android:textSize="18sp"
+            android:background="#991111"
+            android:layout_weight="1"/>
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="情報(緊援)"
+            android:textSize="18sp"
+            android:id="@+id/btnKinentaiKinen"
+            android:layout_weight="1"/>
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="18sp"
+            android:background="#991111"
+            android:layout_weight="1"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"

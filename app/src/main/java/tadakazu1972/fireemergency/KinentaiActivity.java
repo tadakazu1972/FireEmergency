@@ -135,10 +135,10 @@ public class KinentaiActivity extends AppCompatActivity {
                 showKinentai4();
             }
         });
-        mView.findViewById(R.id.btnKinentai5).setOnClickListener(new OnClickListener(){
+        mView.findViewById(R.id.btnKinentaiKinen).setOnClickListener(new OnClickListener(){
             @Override
             public void onClick(View v){
-                showKinentai5();
+                showKinen();
             }
         });
         mView.findViewById(R.id.btnKinentaiEarthquake).setOnClickListener(new OnClickListener(){
@@ -940,6 +940,20 @@ public class KinentaiActivity extends AppCompatActivity {
         }
         builder.setTitle(title+"　"+pref);
         builder.setMessage("・指揮支援隊\n\n　"+data1+"\n\n・大阪府大隊(陸上)\n\n　"+data2+"\n\n・大阪府大隊(航空)\n\n　"+data3);
+        builder.setNegativeButton("キャンセル", null);
+        builder.setCancelable(true);
+        builder.create();
+        builder.show();
+    }
+
+    //情報（緊援）
+    private void showKinen(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("URLをタップしてください");
+        //カスタムビュー設定
+        LayoutInflater inflater = (LayoutInflater)this.getSystemService(LAYOUT_INFLATER_SERVICE);
+        final View layout = inflater.inflate(R.layout.info_kinen, (ViewGroup)findViewById(R.id.infoKinen));
+        builder.setView(layout);
         builder.setNegativeButton("キャンセル", null);
         builder.setCancelable(true);
         builder.create();

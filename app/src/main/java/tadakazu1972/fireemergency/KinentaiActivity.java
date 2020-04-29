@@ -15,12 +15,13 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
-import android.widget.CheckBox;
 
 import com.opencsv.CSVParser;
 import com.opencsv.CSVReader;
@@ -206,17 +207,26 @@ public class KinentaiActivity extends AppCompatActivity {
         builder.show();
     }
 
+
     //震度７
     private void showRiku7(){
-        final CharSequence[] actions = {"北海道","青森県","岩手県","宮城県","秋田県","山形県","福島県","茨城県","栃木県","群馬県","埼玉県","千葉県","東京都","神奈川県","新潟県","富山県","石川県","福井県","山梨県","長野県","岐阜県","静岡県","愛知県","三重県","滋賀県","京都府","大阪府","兵庫県","奈良県","和歌山県","鳥取県","島根県","岡山県","広島県","山口県","徳島県","香川県","愛媛県","高知県","福岡県","佐賀県","長崎県","熊本県","大分県","宮崎県","鹿児島県","沖縄県"};
+        /*List<String> mList = Arrays.asList("北海道", "青森県", "岩手県", "宮城県", "秋田県", "山形県", "福島県", "茨城県", "栃木県", "群馬県", "埼玉県", "千葉県", "東京都", "神奈川県", "新潟県", "富山県", "石川県", "福井県", "山梨県", "長野県", "岐阜県", "静岡県", "愛知県", "三重県", "滋賀県", "京都府", "大阪府", "兵庫県", "奈良県", "和歌山県", "鳥取県", "島根県", "岡山県", "広島県", "山口県", "徳島県", "香川県", "愛媛県", "高知県", "福岡県", "佐賀県", "長崎県", "熊本県", "大分県", "宮崎県", "鹿児島県", "沖縄県");*/
+        // res/values/arrays.xmlにprefectureとして47都道府県を設定している。それを読み込む。
+        int resourceId = getResources().getIdentifier("prefecture", "array", getPackageName());
+        //取得した配列リソースIDを文字列配列に格納
+        String[] mList = getResources().getStringArray(resourceId);
+        GridView gridView = new GridView(this);
+        gridView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, mList));
+        gridView.setNumColumns(3);
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?>parent, View view, int position, long id){
+                showCSV(position, "■最大震度７(特別区６強)", "riku7.csv");
+            }
+        });
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("■最大震度７(特別区６強)\n   震央管轄都道府県は？");
-        builder.setItems(actions, new DialogInterface.OnClickListener(){
-           @Override
-            public void onClick(DialogInterface dialog, int which){
-               showCSV(which, "■最大震度７(特別区６強)", "riku7.csv");
-           }
-        });
+        builder.setView(gridView);
         builder.setNegativeButton("キャンセル", null);
         builder.setCancelable(true);
         builder.create();
@@ -225,15 +235,22 @@ public class KinentaiActivity extends AppCompatActivity {
 
     //震度６強
     private void showRiku6strong(){
-        final CharSequence[] actions = {"北海道","青森県","岩手県","宮城県","秋田県","山形県","福島県","茨城県","栃木県","群馬県","埼玉県","千葉県","東京都","神奈川県","新潟県","富山県","石川県","福井県","山梨県","長野県","岐阜県","静岡県","愛知県","三重県","滋賀県","京都府","大阪府","兵庫県","奈良県","和歌山県","鳥取県","島根県","岡山県","広島県","山口県","徳島県","香川県","愛媛県","高知県","福岡県","佐賀県","長崎県","熊本県","大分県","宮崎県","鹿児島県","沖縄県"};
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("■最大震度６強(特別区６弱)\n   震央管轄都道府県は？");
-        builder.setItems(actions, new DialogInterface.OnClickListener(){
+        // res/values/arrays.xmlにprefectureとして47都道府県を設定している。それを読み込む。
+        int resourceId = getResources().getIdentifier("prefecture", "array", getPackageName());
+        //取得した配列リソースIDを文字列配列に格納
+        String[] mList = getResources().getStringArray(resourceId);
+        GridView gridView = new GridView(this);
+        gridView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, mList));
+        gridView.setNumColumns(3);
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
-            public void onClick(DialogInterface dialog, int which){
-                showCSV(which, "■最大震度６強(特別区６弱)","riku6strong.csv");
+            public void onItemClick(AdapterView<?>parent, View view, int position, long id){
+                showCSV(position, "■最大震度６強(特別区６弱)","riku6strong.csv");
             }
         });
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("■最大震度６強(特別区６弱)\n   震央管轄都道府県は？");
+        builder.setView(gridView);
         builder.setNegativeButton("キャンセル", null);
         builder.setCancelable(true);
         builder.create();
@@ -242,15 +259,22 @@ public class KinentaiActivity extends AppCompatActivity {
 
     //震度６弱
     private void showRiku6weak(){
-        final CharSequence[] actions = {"北海道(札幌市)","青森県","岩手県","宮城県(仙台市)","秋田県","山形県","福島県","茨城県","栃木県","群馬県","埼玉県(さいたま市)","千葉県(千葉市)","東京都","神奈川県(横浜市、川崎市、相模原市)","新潟県(新潟市)","富山県","石川県","福井県","山梨県","長野県","岐阜県","静岡県(静岡市、浜松市)","愛知県(名古屋市)","三重県","滋賀県","京都府(京都市)","大阪府(大阪市、堺市)","兵庫県(神戸市)","奈良県","和歌山県","鳥取県","島根県","岡山県(岡山市)","広島県(広島市)","山口県","徳島県","香川県","愛媛県","高知県","福岡県(北九州市、福岡市)","佐賀県","長崎県","熊本県(熊本市)","大分県","宮崎県","鹿児島県","沖縄県"};
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("■最大震度６弱(特別区５強、政令市５強)   震央管轄都道府県は？");
-        builder.setItems(actions, new DialogInterface.OnClickListener(){
+        // res/values/arrays.xmlにprefectureとして47都道府県を設定している。それを読み込む。
+        int resourceId = getResources().getIdentifier("prefecture", "array", getPackageName());
+        //取得した配列リソースIDを文字列配列に格納
+        String[] mList = getResources().getStringArray(resourceId);
+        GridView gridView = new GridView(this);
+        gridView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, mList));
+        gridView.setNumColumns(3);
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
-            public void onClick(DialogInterface dialog, int which){
-                showCSV(which, "■最大震度６弱(特別区５強、政令市５強)", "riku6weak.csv");
+            public void onItemClick(AdapterView<?>parent, View view, int position, long id){
+                showCSV(position, "■最大震度６弱(特別区５強、政令市５強)", "riku6weak.csv");
             }
         });
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("■最大震度６弱(特別区５強、政令市５強)   震央管轄都道府県は？");
+        builder.setView(gridView);
         builder.setNegativeButton("キャンセル", null);
         builder.setCancelable(true);
         builder.create();
@@ -286,15 +310,22 @@ public class KinentaiActivity extends AppCompatActivity {
 
     //震度７
     private void showKaiiki7(){
-        final CharSequence[] actions = {"北海道","青森県","岩手県","宮城県","秋田県","山形県","福島県","茨城県","栃木県","群馬県","埼玉県","千葉県","東京都","神奈川県","新潟県","富山県","石川県","福井県","山梨県","長野県","岐阜県","静岡県","愛知県","三重県","滋賀県","京都府","大阪府","兵庫県","奈良県","和歌山県","鳥取県","島根県","岡山県","広島県","山口県","徳島県","香川県","愛媛県","高知県","福岡県","佐賀県","長崎県","熊本県","大分県","宮崎県","鹿児島県","沖縄県"};
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("■最大震度７(特別区６強)\n   最大震度都道府県は？");
-        builder.setItems(actions, new DialogInterface.OnClickListener(){
+        // res/values/arrays.xmlにprefectureとして47都道府県を設定している。それを読み込む。
+        int resourceId = getResources().getIdentifier("prefecture", "array", getPackageName());
+        //取得した配列リソースIDを文字列配列に格納
+        String[] mList = getResources().getStringArray(resourceId);
+        GridView gridView = new GridView(this);
+        gridView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, mList));
+        gridView.setNumColumns(3);
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
-            public void onClick(DialogInterface dialog, int which){
-                showCSV(which, "■最大震度７(特別区６強)","kaiiki7.csv");
+            public void onItemClick(AdapterView<?>parent, View view, int position, long id){
+                showCSV(position, "■最大震度７(特別区６強)","kaiiki7.csv");
             }
         });
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("■最大震度７(特別区６強)\n   最大震度都道府県は？");
+        builder.setView(gridView);
         builder.setNegativeButton("キャンセル", null);
         builder.setCancelable(true);
         builder.create();
@@ -303,15 +334,22 @@ public class KinentaiActivity extends AppCompatActivity {
 
     //震度６強
     private void showKaiiki6strong(){
-        final CharSequence[] actions = {"北海道","青森県","岩手県","宮城県","秋田県","山形県","福島県","茨城県","栃木県","群馬県","埼玉県","千葉県","東京都","神奈川県","新潟県","富山県","石川県","福井県","山梨県","長野県","岐阜県","静岡県","愛知県","三重県","滋賀県","京都府","大阪府","兵庫県","奈良県","和歌山県","鳥取県","島根県","岡山県","広島県","山口県","徳島県","香川県","愛媛県","高知県","福岡県","佐賀県","長崎県","熊本県","大分県","宮崎県","鹿児島県","沖縄県"};
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("■最大震度６強(特別区６弱)\n   最大震度都道府県は？");
-        builder.setItems(actions, new DialogInterface.OnClickListener(){
+        // res/values/arrays.xmlにprefectureとして47都道府県を設定している。それを読み込む。
+        int resourceId = getResources().getIdentifier("prefecture", "array", getPackageName());
+        //取得した配列リソースIDを文字列配列に格納
+        String[] mList = getResources().getStringArray(resourceId);
+        GridView gridView = new GridView(this);
+        gridView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, mList));
+        gridView.setNumColumns(3);
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
-            public void onClick(DialogInterface dialog, int which){
-                showCSV(which, "■最大震度６強(特別区６弱)","kaiiki6strong.csv");
+            public void onItemClick(AdapterView<?>parent, View view, int position, long id){
+                showCSV(position,"■最大震度６強(特別区６弱)","kaiiki6strong.csv");
             }
         });
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("■最大震度６強(特別区６弱)\n   最大震度都道府県は？");
+        builder.setView(gridView);
         builder.setNegativeButton("キャンセル", null);
         builder.setCancelable(true);
         builder.create();
@@ -320,15 +358,22 @@ public class KinentaiActivity extends AppCompatActivity {
 
     //震度６弱
     private void showKaiiki6weak(){
-        final CharSequence[] actions = {"北海道(札幌市)","青森県","岩手県","宮城県(仙台市)","秋田県","山形県","福島県","茨城県","栃木県","群馬県","埼玉県(さいたま市)","千葉県(千葉市)","東京都","神奈川県(横浜市、川崎市、相模原市)","新潟県(新潟市)","富山県","石川県","福井県","山梨県","長野県","岐阜県","静岡県(静岡市、浜松市)","愛知県(名古屋市)","三重県","滋賀県","京都府(京都市)","大阪府(大阪市、堺市)","兵庫県(神戸市)","奈良県","和歌山県","鳥取県","島根県","岡山県(岡山市)","広島県(広島市)","山口県","徳島県","香川県","愛媛県","高知県","福岡県(北九州市、福岡市)","佐賀県","長崎県","熊本県(熊本市)","大分県","宮崎県","鹿児島県","沖縄県"};
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("■最大震度６弱(特別区５強、政令市５強)   最大震度都道府県は？");
-        builder.setItems(actions, new DialogInterface.OnClickListener(){
+        // res/values/arrays.xmlにprefectureとして47都道府県を設定している。それを読み込む。
+        int resourceId = getResources().getIdentifier("prefecture", "array", getPackageName());
+        //取得した配列リソースIDを文字列配列に格納
+        String[] mList = getResources().getStringArray(resourceId);
+        GridView gridView = new GridView(this);
+        gridView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, mList));
+        gridView.setNumColumns(3);
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
-            public void onClick(DialogInterface dialog, int which){
-                showCSV(which, "■最大震度６弱(特別区５強、政令市５強)","kaiiki6weak.csv");
+            public void onItemClick(AdapterView<?>parent, View view, int position, long id){
+                showCSV(position, "■最大震度６弱(特別区５強、政令市５強)","kaiiki6weak.csv");
             }
         });
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("■最大震度６弱(特別区５強、政令市５強)   最大震度都道府県は？");
+        builder.setView(gridView);
         builder.setNegativeButton("キャンセル", null);
         builder.setCancelable(true);
         builder.create();

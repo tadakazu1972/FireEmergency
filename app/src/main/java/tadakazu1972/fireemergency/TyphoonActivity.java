@@ -427,44 +427,67 @@ public class TyphoonActivity extends AppCompatActivity {
 
     //河川水位による非常警備
     private void showTyphoon3() {
-        final CharSequence[] actions = {"■淀川（枚方）", "■大和川（柏原）", "■神崎川（三国）", "■安威川（千歳橋）", "■寝屋川（京橋）", "■第二寝屋川（昭明橋）", "■平野川（剣橋）", "■平野川分水路（今里大橋）", "■古川（桑才）", "■東除川（大堀上小橋）","■高潮区域（水防警報（出動））"};
+        final CharSequence[] actions = {"■淀川（枚方）", "■大和川（柏原）", "■神崎川（三国）", "■天竺川（天竺川橋）", "■高川（水路橋）", "■安威川（千歳橋）", "■寝屋川（京橋）", "■第二寝屋川（昭明橋）", "■平野川（剣橋）", "■平野川分水路（今里大橋）", "■古川（桑才）", "■東除川（大堀上小橋）", "■西除川（布忍橋）", "■高潮区域（水防警報（出動））"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("河川を選択してください");
         builder.setItems(actions, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 switch (which) {
+                    //淀川
                     case 0:
                         showTyphoon31();
                         break;
+                    //大和川
                     case 1:
                         showTyphoon32();
                         break;
+                    //神崎川
                     case 2:
                         showTyphoon33();
                         break;
+                    //天竺川 2020.06　追加 showTyphoon3C(既存分を変更しないため)
                     case 3:
+                        showTyphoon3C();
+                        break;
+                    //高川 2020.06　追加 showTyphoon3D(既存分を変更しないため)
+                    case 4:
+                        showTyphoon3D();
+                        break;
+                    //安威川
+                    case 5:
                         showTyphoon34();
                         break;
-                    case 4:
+                    //寝屋川
+                    case 6:
                         showTyphoon35();
                         break;
-                    case 5:
+                    //第二寝屋川
+                    case 7:
                         showTyphoon36();
                         break;
-                    case 6:
+                    //平野川
+                    case 8:
                         showTyphoon37();
                         break;
-                    case 7:
+                    //平野川分水路
+                    case 9:
                         showTyphoon38();
                         break;
-                    case 8:
+                    //古川
+                    case 10:
                         showTyphoon39();
                         break;
-                    case 9:
+                    //東除川
+                    case 11:
                         showTyphoon3A();
                         break;
-                    case 10:
+                    //西除川 2020.06　追加 showTyphoon3E(既存分を変更しないため)
+                    case 12:
+                        showTyphoon3E();
+                        break;
+                    //高潮区域
+                    case 13:
                         showTyphoon3B();
                         break;
                 }
@@ -1308,6 +1331,92 @@ public class TyphoonActivity extends AppCompatActivity {
         builder.show();
     }
 
+    //天竺川 2020.06　追加
+    private void showTyphoon3C() {
+        final CharSequence[] actions = {"■氾濫注意水位(水位3.8m)、水防警報(出動)", "■避難準備・高齢者等避難開始発令の見込み(1時間以内に水位4.8mに到達)", "■【警戒レベル３】避難準備・高齢者等避難開始(水位4.8m)、避難勧告発令の見込み", "■【警戒レベル４】避難勧告(水位5m)", "■【警戒レベル４】避難指示(緊急)(水位5.8m)"};
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("水位の状況は？");
+        builder.setItems(actions, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case 0:{
+                        String[] a = {"淀川", "東淀川", "消防局"};
+                        String gaitousyo = "淀川,東淀川,消防局";
+                        showTyphoonRiver1("■神崎川（三国） 氾濫注意水位(水位3.8m)、水防警報(出動)", a, gaitousyo, 3);
+                        break;}
+                    case 1:{
+                        String[] a = {"西淀川", "淀川", "東淀川", "消防局"};
+                        String gaitousyo = "４号：西淀川,淀川,東淀川,消防局";
+                        showTyphoonRiver2("■神崎川（三国） 避難準備・高齢者等避難開始発令の見込み(1時間以内に水位4.8mに到達)", a, gaitousyo, 3);
+                        break;}
+                    case 2:{
+                        String[] a = {"西淀川", "淀川", "東淀川", "消防局"};
+                        String gaitousyo = "３号：西淀川,淀川,東淀川,消防局";
+                        showTyphoonRiver3b("■神崎川（三国） 避難準備・高齢者等避難開始(水位4.8m)", a, gaitousyo, 3);
+                        break;}
+                    case 3:{
+                        String[] a = {"西淀川", "淀川", "東淀川", "消防局"};
+                        String[] b = {"北", "都島", "福島", "此花", "中央", "西", "港", "大正", "天王寺", "浪速", "東成", "生野", "旭", "城東", "鶴見", "阿倍野", "住之江", "住吉", "東住吉", "平野", "西成", "水上"};
+                        String gaitousyo = "流域署２号：西淀川,淀川,東淀川,消防局\nその他の署４号：北,都島,福島,此花,中央,西,港,大正,天王寺,浪速,東成,生野,旭,城東,鶴見,阿倍野,住之江,住吉,東住吉,平野,西成,水上";
+                        showTyphoonRiver4b("■神崎川（三国） 避難勧告(水位5m)", a, b, gaitousyo, 3);
+                        break;}
+                    case 4:{
+                        String gaitousyo = "２号：全署、消防局";
+                        showTyphoonRiver5("■神崎川（三国） 避難指示(緊急)(水位5.8m)", gaitousyo, 3);
+                        break;}
+                }
+            }
+        });
+        builder.setNegativeButton("キャンセル", null);
+        builder.setCancelable(true);
+        builder.create();
+        builder.show();
+    }
+
+    //高川 2020.06　追加
+    private void showTyphoon3D() {
+        final CharSequence[] actions = {"■氾濫注意水位(水位3.8m)、水防警報(出動)", "■避難準備・高齢者等避難開始発令の見込み(1時間以内に水位4.8mに到達)", "■【警戒レベル３】避難準備・高齢者等避難開始(水位4.8m)、避難勧告発令の見込み", "■【警戒レベル４】避難勧告(水位5m)", "■【警戒レベル４】避難指示(緊急)(水位5.8m)"};
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("水位の状況は？");
+        builder.setItems(actions, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case 0:{
+                        String[] a = {"淀川", "東淀川", "消防局"};
+                        String gaitousyo = "淀川,東淀川,消防局";
+                        showTyphoonRiver1("■神崎川（三国） 氾濫注意水位(水位3.8m)、水防警報(出動)", a, gaitousyo, 3);
+                        break;}
+                    case 1:{
+                        String[] a = {"西淀川", "淀川", "東淀川", "消防局"};
+                        String gaitousyo = "４号：西淀川,淀川,東淀川,消防局";
+                        showTyphoonRiver2("■神崎川（三国） 避難準備・高齢者等避難開始発令の見込み(1時間以内に水位4.8mに到達)", a, gaitousyo, 3);
+                        break;}
+                    case 2:{
+                        String[] a = {"西淀川", "淀川", "東淀川", "消防局"};
+                        String gaitousyo = "３号：西淀川,淀川,東淀川,消防局";
+                        showTyphoonRiver3b("■神崎川（三国） 避難準備・高齢者等避難開始(水位4.8m)", a, gaitousyo, 3);
+                        break;}
+                    case 3:{
+                        String[] a = {"西淀川", "淀川", "東淀川", "消防局"};
+                        String[] b = {"北", "都島", "福島", "此花", "中央", "西", "港", "大正", "天王寺", "浪速", "東成", "生野", "旭", "城東", "鶴見", "阿倍野", "住之江", "住吉", "東住吉", "平野", "西成", "水上"};
+                        String gaitousyo = "流域署２号：西淀川,淀川,東淀川,消防局\nその他の署４号：北,都島,福島,此花,中央,西,港,大正,天王寺,浪速,東成,生野,旭,城東,鶴見,阿倍野,住之江,住吉,東住吉,平野,西成,水上";
+                        showTyphoonRiver4b("■神崎川（三国） 避難勧告(水位5m)", a, b, gaitousyo, 3);
+                        break;}
+                    case 4:{
+                        String gaitousyo = "２号：全署、消防局";
+                        showTyphoonRiver5("■神崎川（三国） 避難指示(緊急)(水位5.8m)", gaitousyo, 3);
+                        break;}
+                }
+            }
+        });
+        builder.setNegativeButton("キャンセル", null);
+        builder.setCancelable(true);
+        builder.create();
+        builder.show();
+    }
+
     //安威川（千歳橋）
     private void showTyphoon34() {
         final CharSequence[] actions = {"■氾濫注意水位(水位3.25m)、水防警報(出動)", "■避難準備・高齢者等避難開始発令の見込み(1時間以内に水位3.5mに到達)", "■【警戒レベル３】避難準備・高齢者等避難開始(水位3.5m)、避難勧告発令の見込み", "■【警戒レベル４】避難勧告(水位4.25m)", "■【警戒レベル４】避難指示(緊急)(水位5.1m)"};
@@ -1533,7 +1642,7 @@ public class TyphoonActivity extends AppCompatActivity {
         builder.show();
     }
 
-    //古川（桑才）
+    //古川（桑才） 2020.06 修正
     private void showTyphoon39() {
         final CharSequence[] actions = {"■氾濫注意水位(水位3.2m)、水防警報(出動)"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -1542,11 +1651,33 @@ public class TyphoonActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 switch (which) {
-                    case 0:
+                    case 0:{
                         String[] a = {"鶴見", "消防局"};
                         String gaitousyo = "鶴見,消防局";
                         showTyphoonRiver1("■古川（桑才） 氾濫注意水位(水位3.2m)、水防警報(出動)", a, gaitousyo, 9);
-                        break;
+                        break;}
+                    case 1:{
+                        String[] a = {"北", "都島", "福島", "此花", "西淀川", "淀川", "東淀川", "旭", "消防局"};
+                        String gaitousyo = "４号：北,都島,福島,此花,西淀川,淀川,東淀川,旭,消防局";
+                        showTyphoonRiver2("■淀川（枚方） 避難準備・高齢者等避難開始発令の見込み(1時間以内に水位5.4mに到達)", a, gaitousyo, 1);
+                        break;}
+                    case 2:{
+                        String[] a = {"北", "都島", "福島", "此花", "西淀川", "淀川", "東淀川", "旭", "消防局"};
+                        String[] b = {"城東", "鶴見"};
+                        String gaitousyo = "流域署３号：北,都島,福島,此花,西淀川,淀川,東淀川,旭,消防局\n流域周辺署４号：城東,鶴見";
+                        showTyphoonRiver3("■淀川（枚方） 避難準備・高齢者等避難開始(水位5.4m)", a, b, gaitousyo, 1);
+                        break;}
+                    case 3:{
+                        String[] a = {"北", "都島", "福島", "此花", "西淀川", "淀川", "東淀川", "旭", "消防局"};
+                        String[] b = {"城東", "鶴見"};
+                        String[] c = {"中央", "西", "港", "大正", "天王寺", "浪速", "東成", "生野", "阿倍野", "住之江", "住吉", "東住吉", "平野", "西成", "水上"};
+                        String gaitousyo = "流域署２号：北,都島,福島,此花,西淀川,淀川,東淀川,旭,消防局\n流域周辺署３号：城東,鶴見\nその他の署４号：中央,西,港,大正,天王寺,浪速,東成,生野,阿倍野,住之江,住吉,東住吉,平野,西成,水上";
+                        showTyphoonRiver4("■淀川（枚方） 避難勧告(水位5.5m)", a, b, c, gaitousyo, 1);
+                        break;}
+                    case 4:{
+                        String gaitousyo = "２号：全署、消防局";
+                        showTyphoonRiver5("■淀川（枚方） 避難指示(緊急)(水位8.3m)", gaitousyo, 1);
+                        break;}
                 }
             }
         });
@@ -1558,6 +1689,49 @@ public class TyphoonActivity extends AppCompatActivity {
 
     //東除川（大堀上小橋）
     private void showTyphoon3A() {
+        final CharSequence[] actions = {"■氾濫注意水位(水位2.9m)、水防警報(出動)", "■避難準備・高齢者等避難開始発令の見込み(1時間以内に水位3.2mに到達)", "■【警戒レベル３】避難準備・高齢者等避難開始(水位3.2m)、避難勧告発令の見込み", "■【警戒レベル４】避難勧告(水位3.9m)", "■【警戒レベル４】避難指示(緊急)(水位5.3m)"};
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("水位の状況は？");
+        builder.setItems(actions, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case 0:{
+                        String[] a = {"平野", "消防局"};
+                        String gaitousyo = "平野,消防局";
+                        showTyphoonRiver1("■東除川（大堀上小橋） 氾濫注意水位(水位2.9m)、水防警報(出動)", a, gaitousyo, 10);
+                        break;}
+                    case 1:{
+                        String[] a = {"平野", "消防局"};
+                        String gaitousyo = "４号：平野,消防局";
+                        showTyphoonRiver2("■東除川（大堀上小橋） 避難準備・高齢者等避難開始発令の見込み(1時間以内に水位3.2mに到達)", a, gaitousyo, 10);
+                        break;}
+                    case 2:{
+                        String[] a = {"平野", "消防局"};
+                        String gaitousyo = "３号：平野,消防局";
+                        showTyphoonRiver3b("■東除川（大堀上小橋） 避難準備・高齢者等避難開始(水位3.2m)", a, gaitousyo, 10);
+                        break;}
+                    case 3:{
+                        String[] a = {"平野", "消防局"};
+                        String[] b = {"北", "都島", "福島", "此花", "中央", "西", "港", "大正", "天王寺", "浪速", "西淀川", "淀川", "東淀川", "東成", "生野", "旭", "城東", "鶴見", "阿倍野", "住之江", "住吉", "東住吉", "西成", "水上"};
+                        String gaitousyo = "流域署２号：平野,消防局\nその他の署４号：北,都島,福島,此花,中央,西,港,大正,天王寺,浪速,西淀川,淀川,東淀川,東成,生野,旭,城東,鶴見,阿倍野,住之江,住吉,東住吉,西成,水上";
+                        showTyphoonRiver4b("■東除川（大堀上小橋） 避難勧告(水位3.9m)", a, b, gaitousyo, 10);
+                        break;}
+                    case 4:{
+                        String gaitousyo = "２号：全署、消防局";
+                        showTyphoonRiver5("■東除川（大堀上小橋） 避難指示(緊急)(水位5.3m)", gaitousyo, 10);
+                        break;}
+                }
+            }
+        });
+        builder.setNegativeButton("キャンセル", null);
+        builder.setCancelable(true);
+        builder.create();
+        builder.show();
+    }
+
+    //西除川(布忍橋) 2020.06　追加
+    private void showTyphoon3E() {
         final CharSequence[] actions = {"■氾濫注意水位(水位2.9m)、水防警報(出動)", "■避難準備・高齢者等避難開始発令の見込み(1時間以内に水位3.2mに到達)", "■【警戒レベル３】避難準備・高齢者等避難開始(水位3.2m)、避難勧告発令の見込み", "■【警戒レベル４】避難勧告(水位3.9m)", "■【警戒レベル４】避難指示(緊急)(水位5.3m)"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("水位の状況は？");

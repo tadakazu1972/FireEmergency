@@ -8,6 +8,8 @@
       <module fileurl="file://$PROJECT_DIR$/app/FireEmergency-app.iml" filepath="$PROJECT_DIR$/app/FireEmergency-app.iml" group="FireEmergency/app" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="FireEmergency/app" />
       <module fileurl="file://$PROJECT_DIR$/ictosakacity-Desktop-FireEmergency.iml" filepath="$PROJECT_DIR$/ictosakacity-Desktop-FireEmergency.iml" group="FireEmergency" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/tadakazu-Desktop-FireEmergency.iml" filepath="$PROJECT_DIR$/.idea/modules/tadakazu-Desktop-FireEmergency.iml" group="FireEmergency" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/tadakazu-Desktop-FireEmergency-app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/tadakazu-Desktop-FireEmergency-app.iml" group="FireEmergency/app" />
     </modules>
   </component>
 </project>

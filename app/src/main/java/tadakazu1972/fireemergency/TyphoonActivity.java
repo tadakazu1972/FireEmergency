@@ -294,7 +294,7 @@ public class TyphoonActivity extends AppCompatActivity {
         } else {
             s = "招集なし";
         }
-        builder.setMessage("４号非常招集(非番・日勤)\n\n" + s);
+        builder.setMessage("４号非常招集\n\n" + s);
         builder.setNegativeButton("キャンセル", null);
         builder.setCancelable(true);
         builder.create();
@@ -768,7 +768,7 @@ public class TyphoonActivity extends AppCompatActivity {
         if (Arrays.asList(a).contains(mMainStation)) {
             //４号招集なので、１号、２号、３号は参集なしの判定する
             if (mKubun.equals("４号招集")) {
-                s1 = "４号非常招集(非番・日勤)";
+                s1 = "４号非常招集";
                 if (mMainStation.equals("消防局")) {
                     s2 = mMainStation + "へ参集(所属担当者に確認すること)\n\n※平日の9時～17時30分は、原則、勤務中の毎日勤務者で活動体制を確保する";
                 } else {
@@ -889,7 +889,7 @@ public class TyphoonActivity extends AppCompatActivity {
         } else if (Arrays.asList(b).contains(mMainStation)) {
             //４号招集なので、１号、２号、３号は参集なしの判定する
             if (mKubun.equals("４号招集")) {
-                s1 = "４号非常招集(非番・日勤)";
+                s1 = "４号非常招集";
                 if (mMainStation.equals("消防局")) {
                     s2 = mMainStation + "へ参集(所属担当者に確認すること)\n\n※平日の9時～17時30分は、原則、勤務中の毎日勤務者で活動体制を確保する";
                 } else {
@@ -1131,7 +1131,7 @@ public class TyphoonActivity extends AppCompatActivity {
         } else if (Arrays.asList(c).contains(mMainStation)) {
             //４号招集なので、１号、２号、３号は参集なしの判定する
             if (mKubun.equals("４号招集")) {
-                s1 = "４号非常招集(非番・日勤)";
+                s1 = "４号非常招集";
                 if (mMainStation.equals("消防局")) {
                     s2 = mMainStation + "へ参集(所属担当者に確認すること)\n\n※平日の9時～17時30分は、原則、勤務中の毎日勤務者で活動体制を確保する";
                 } else {
@@ -1252,7 +1252,7 @@ public class TyphoonActivity extends AppCompatActivity {
         } else if (Arrays.asList(b).contains(mMainStation)) {
             //４号招集なので、１号、２号、３号は参集なしの判定する
             if (mKubun.equals("４号招集")) {
-                s1 = "４号非常招集(非番・日勤)";
+                s1 = "４号非常招集";
                 if (mMainStation.equals("消防局")) {
                     s2 = mMainStation + "へ参集(所属担当者に確認すること)\n\n※平日の9時～17時30分は、原則、勤務中の毎日勤務者で活動体制を確保する";
                 } else {
@@ -1844,7 +1844,7 @@ public class TyphoonActivity extends AppCompatActivity {
 
     //古川（桑才） 2020.06 修正
     private void showTyphoon39() {
-        final CharSequence[] actions = {"■氾濫注意水位(水位3.2m)、水防警報(出動)", "■避難準備・高齢者等避難開始発令の見込み(1時間以内に水位3.3mに到達)", "■【警戒レベル３】避難準備・高齢者等避難開始(水位3.3m)","■■【警戒レベル４】避難勧告(水位3.4m)","■■【警戒レベル４】避難指示(緊急)(水位3.67m)"};
+        final CharSequence[] actions = {"■氾濫注意水位(水位3.2m)、水防警報(出動)", "■避難準備・高齢者等避難開始発令の見込み(1時間以内に水位3.3mに到達)", "■【警戒レベル３】避難準備・高齢者等避難開始(水位3.3m)","■【警戒レベル４】避難勧告(水位3.4m)","■【警戒レベル４】避難指示(緊急)(水位3.67m)"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("水位の状況は？");
         builder.setItems(actions, new DialogInterface.OnClickListener() {

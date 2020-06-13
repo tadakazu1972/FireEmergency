@@ -470,7 +470,7 @@ public class EarthquakeActivity extends AppCompatActivity {
             } else {
                 s = "招集なし";
             }
-            message = "４号非常招集(非番・日勤)\n(天王寺,東淀川,東成,生野,阿倍野,東住吉,平野)\n\n" + s;
+            message = "４号非常招集\n(天王寺,東淀川,東成,生野,阿倍野,東住吉,平野)\n\n" + s;
         } else {
             //３号招集なので、１号、２号は参集なしの判定する
             if (mKubun.equals("１号招集") || mKubun.equals("２号招集")) {
@@ -505,7 +505,7 @@ public class EarthquakeActivity extends AppCompatActivity {
         } else {
             s = "招集なし";
         }
-        builder.setMessage("４号非常招集(非番・日勤)\n\n" + s);
+        builder.setMessage("４号非常招集\n\n" + s);
         builder.setNegativeButton("キャンセル", null);
         builder.setCancelable(true);
         builder.create();
@@ -686,7 +686,7 @@ public class EarthquakeActivity extends AppCompatActivity {
         } else {
             s = "招集なし";
         }
-        builder.setMessage("４号非常招集(非番・日勤)\n\n"+s);
+        builder.setMessage("４号非常招集\n\n"+s);
         builder.setNegativeButton("キャンセル", null);
         builder.setCancelable(true);
         builder.create();
@@ -766,7 +766,7 @@ public class EarthquakeActivity extends AppCompatActivity {
         } else {
             s = "招集なし";
         }
-        builder.setMessage("４号非常招集(非番・日勤)\n\n"+s);
+        builder.setMessage("４号非常招集\n\n"+s);
         builder.setNegativeButton("キャンセル", null);
         builder.setCancelable(true);
         builder.create();
@@ -787,7 +787,7 @@ public class EarthquakeActivity extends AppCompatActivity {
         } else {
             s = "招集なし";
         }
-        builder.setMessage("４号非常招集(非番・日勤)\n\n"+s);
+        builder.setMessage("４号非常招集\n\n"+s);
         builder.setNegativeButton("キャンセル", null);
         builder.setCancelable(true);
         builder.create();

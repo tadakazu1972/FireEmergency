@@ -1585,7 +1585,7 @@ public class TyphoonActivity extends AppCompatActivity {
                     case 3:{
                         String[] a = {"淀川", "消防局"};
                         String[] b = {"北", "都島", "福島", "此花", "中央", "西", "港", "大正", "天王寺", "浪速", "西淀川", "東淀川", "東成", "生野", "旭", "城東", "鶴見", "阿倍野", "住之江", "住吉", "東住吉", "平野", "西成", "水上"};
-                        String gaitousyo = "流域署２号：西淀川,淀川,東淀川,消防局\nその他の署４号：北,都島,福島,此花,中央,西,港,大正,天王寺,浪速,西淀川,東淀川,東成,生野,旭,城東,鶴見,阿倍野,住之江,住吉,東住吉,平野,西成,水上";
+                        String gaitousyo = "流域署２号：淀川,消防局\nその他の署４号：北,都島,福島,此花,中央,西,港,大正,天王寺,浪速,西淀川,東淀川,東成,生野,旭,城東,鶴見,阿倍野,住之江,住吉,東住吉,平野,西成,水上";
                         showTyphoonRiver4b("■高川（水路橋） 避難勧告(水位1.6m)", a, b, gaitousyo, 4);
                         break;}
                     case 4:{
@@ -1828,7 +1828,7 @@ public class TyphoonActivity extends AppCompatActivity {
 
     //古川（桑才） 2020.06 修正
     private void showTyphoon39() {
-        final CharSequence[] actions = {"■氾濫注意水位(水位3.2m)、水防警報(出動)"};
+        final CharSequence[] actions = {"■氾濫注意水位(水位3.2m)、水防警報(出動)", "■避難準備・高齢者等避難開始発令の見込み(1時間以内に水位3.3mに到達)", "■【警戒レベル３】避難準備・高齢者等避難開始(水位3.3m)","■■【警戒レベル４】避難勧告(水位3.4m)","■■【警戒レベル４】避難指示(緊急)(水位3.67m)"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("水位の状況は？");
         builder.setItems(actions, new DialogInterface.OnClickListener() {

@@ -522,7 +522,7 @@ public class TyphoonActivity extends AppCompatActivity {
                         String[] a = {"北", "都島", "福島", "此花", "西淀川", "淀川", "東淀川", "旭", "消防局"};
                         String[] b = {"城東", "鶴見"};
                         String gaitousyo = "流域署３号：北,都島,福島,此花,西淀川,淀川,東淀川,旭,消防局\n流域周辺署４号：城東,鶴見";
-                        showTyphoonRiver3("■淀川（枚方）\n【警戒レベル３】", "避難準備・高齢者等避難開始(水位5.4m)", a, b, gaitousyo, 0);
+                        showTyphoonRiver3("■淀川（枚方）\n【警戒レベル３】", "避難準備・高齢者等避難開始(水位5.4m)、避難勧告発令の見込み", a, b, gaitousyo, 0);
                         break;}
                     case 3:{
                         String[] a = {"北", "都島", "福島", "此花", "西淀川", "淀川", "東淀川", "旭", "消防局"};
@@ -1466,7 +1466,7 @@ public class TyphoonActivity extends AppCompatActivity {
                         String[] a = {"住之江", "住吉", "東住吉", "平野", "消防局"};
                         String[] b = {"天王寺", "浪速", "東成", "生野", "城東", "阿倍野", "西成"};
                         String gaitousyo = "流域署３号：住之江,住吉,東住吉,平野,消防局\n流域周辺署４号：天王寺,浪速,東成,生野,城東,阿倍野,西成";
-                        showTyphoonRiver3("■大和川（柏原）\n【警戒レベル３】", "避難準備・高齢者等避難開始(水位4.7m)", a, b, gaitousyo, 1);
+                        showTyphoonRiver3("■大和川（柏原）\n【警戒レベル３】", "避難準備・高齢者等避難開始(水位4.7m)、避難勧告発令の見込み", a, b, gaitousyo, 1);
                         break;}
                     case 3:{
                         String[] a = {"住之江", "住吉", "東住吉", "平野", "消防局"};
@@ -1510,7 +1510,7 @@ public class TyphoonActivity extends AppCompatActivity {
                     case 2:{
                         String[] a = {"西淀川", "淀川", "東淀川", "消防局"};
                         String gaitousyo = "３号：西淀川,淀川,東淀川,消防局";
-                        showTyphoonRiver3b("■神崎川（三国）\n【警戒レベル３】", "避難準備・高齢者等避難開始(水位4.8m)", a, gaitousyo, 2);
+                        showTyphoonRiver3b("■神崎川（三国）\n【警戒レベル３】", "避難準備・高齢者等避難開始(水位4.8m)、避難勧告発令の見込み", a, gaitousyo, 2);
                         break;}
                     case 3:{
                         String[] a = {"西淀川", "淀川", "東淀川", "消防局"};
@@ -1553,7 +1553,7 @@ public class TyphoonActivity extends AppCompatActivity {
                     case 2:{
                         String[] a = {"淀川", "消防局"};
                         String gaitousyo = "３号：淀川,消防局";
-                        showTyphoonRiver3b("■天竺川 (天竺川橋)\n【警戒レベル３】", "避難準備・高齢者等避難開始(水位2.2m)", a, gaitousyo, 3);
+                        showTyphoonRiver3b("■天竺川 (天竺川橋)\n【警戒レベル３】", "避難準備・高齢者等避難開始(水位2.2m)、避難勧告発令の見込み", a, gaitousyo, 3);
                         break;}
                     case 3:{
                         String[] a = {"淀川", "消防局"};
@@ -1596,7 +1596,7 @@ public class TyphoonActivity extends AppCompatActivity {
                     case 2:{
                         String[] a = {"淀川", "消防局"};
                         String gaitousyo = "３号：淀川,消防局";
-                        showTyphoonRiver3b("■高川（水路橋）\n【警戒レベル３】", "避難準備・高齢者等避難開始(水位1.55m)", a, gaitousyo, 4);
+                        showTyphoonRiver3b("■高川（水路橋）\n【警戒レベル３】", "避難準備・高齢者等避難開始(水位1.55m)、避難勧告発令の見込み", a, gaitousyo, 4);
                         break;}
                     case 3:{
                         String[] a = {"淀川", "消防局"};
@@ -1640,7 +1640,7 @@ public class TyphoonActivity extends AppCompatActivity {
                         String[] a = {"東淀川", "消防局"};
                         String[] b = {"西淀川", "淀川"};
                         String gaitousyo = "流域署３号：東淀川,消防局\n流域周辺署４号：西淀川,淀川";
-                        showTyphoonRiver3("■安威川（千歳橋）\n【警戒レベル３】", "避難準備・高齢者等避難開始(水位3.5m)", a, b, gaitousyo, 5);
+                        showTyphoonRiver3("■安威川（千歳橋）\n【警戒レベル３】", "避難準備・高齢者等避難開始(水位3.5m)、避難勧告発令の見込み", a, b, gaitousyo, 5);
                         break;}
                     case 3:{
                         String[] a = {"東淀川", "消防局"};
@@ -1685,7 +1685,7 @@ public class TyphoonActivity extends AppCompatActivity {
                         String[] a = {"都島", "東成", "生野", "旭", "城東", "鶴見", "東住吉", "平野", "消防局"};
                         String[] b = {"中央", "天王寺", "阿倍野", "住吉"};
                         String gaitousyo = "流域署３号：都島,東成,生野,旭,城東,鶴見,東住吉,平野,消防局\n流域周辺署４号：中央,天王寺,阿倍野,住吉";
-                        showTyphoonRiver3("■寝屋川（京橋）\n【警戒レベル３】", "避難準備・高齢者等避難開始(水位3.1m)", a, b, gaitousyo, 6);
+                        showTyphoonRiver3("■寝屋川（京橋）\n【警戒レベル３】", "避難準備・高齢者等避難開始(水位3.1m)、避難勧告発令の見込み", a, b, gaitousyo, 6);
                         break;}
                     case 3:{
                         String[] a = {"都島", "東成", "生野", "旭", "城東", "鶴見", "東住吉", "平野", "消防局"};
@@ -1730,7 +1730,7 @@ public class TyphoonActivity extends AppCompatActivity {
                         String[] a = {"東成", "城東", "鶴見", "消防局"};
                         String[] b = {"都島", "中央", "天王寺", "生野", "旭", "阿倍野", "住吉", "東住吉", "平野"};
                         String gaitousyo = "流域署３号：東成,城東,鶴見,消防局\n流域周辺署４号：都島,中央,天王寺,生野,旭,阿倍野,住吉,東住吉,平野";
-                        showTyphoonRiver3("■第二寝屋川（昭明橋）\n【警戒レベル３】", "避難準備・高齢者等避難開始(水位4.25m)", a, b, gaitousyo, 7);
+                        showTyphoonRiver3("■第二寝屋川（昭明橋）\n【警戒レベル３】", "避難準備・高齢者等避難開始(水位4.25m)、避難勧告発令の見込み", a, b, gaitousyo, 7);
                         break;}
                     case 3:{
                         String[] a = {"東成", "城東", "鶴見", "消防局"};
@@ -1775,7 +1775,7 @@ public class TyphoonActivity extends AppCompatActivity {
                         String[] a = {"東成", "生野", "城東", "東住吉", "平野", "消防局"};
                         String[] b = {"都島", "中央", "天王寺", "旭", "鶴見", "阿倍野", "住吉"};
                         String gaitousyo = "流域署３号：東成,生野,城東,東住吉,平野,消防局\n流域周辺署４号：都島,中央,天王寺,旭,鶴見,阿倍野,住吉";
-                        showTyphoonRiver3("■平野川（剣橋）\n【警戒レベル３】", "避難準備・高齢者等避難開始(水位3.9m)", a, b, gaitousyo, 8);
+                        showTyphoonRiver3("■平野川（剣橋）\n【警戒レベル３】", "避難準備・高齢者等避難開始(水位3.9m)、避難勧告発令の見込み", a, b, gaitousyo, 8);
                         break;}
                     case 3:{
                         String[] a = {"東成", "生野", "城東", "東住吉", "平野", "消防局"};
@@ -1820,7 +1820,7 @@ public class TyphoonActivity extends AppCompatActivity {
                         String[] a = {"東成", "生野", "城東", "東住吉", "平野", "消防局"};
                         String[] b = {"都島", "中央", "天王寺", "旭", "鶴見", "阿倍野", "住吉"};
                         String gaitousyo = "流域署３号：東成,生野,城東,東住吉,平野,消防局\n流域周辺署４号：都島,中央,天王寺,旭,鶴見,阿倍野,住吉";
-                        showTyphoonRiver3("■平野川分水路（今里大橋）\n【警戒レベル３】", "避難準備・高齢者等避難開始(水位3.4m)", a, b, gaitousyo, 9);
+                        showTyphoonRiver3("■平野川分水路（今里大橋）\n【警戒レベル３】", "避難準備・高齢者等避難開始(水位3.4m)、避難勧告発令の見込み", a, b, gaitousyo, 9);
                         break;}
                     case 3:{
                         String[] a = {"東成", "生野", "城東", "東住吉", "平野", "消防局"};
@@ -1865,7 +1865,7 @@ public class TyphoonActivity extends AppCompatActivity {
                         String[] a = {"旭", "城東", "鶴見", "消防局"};
                         String[] b = {"都島", "中央", "天王寺", "東成", "生野", "阿倍野", "住吉", "東住吉", "平野"};
                         String gaitousyo = "流域署３号：旭,城東,鶴見,消防局\n流域周辺署４号：都島,中央,天王寺,東成,生野,阿倍野,住吉,東住吉, 平野";
-                        showTyphoonRiver3("■古川（桑才）\n【警戒レベル３】", "避難準備・高齢者等避難開始(水位3.3m)", a, b, gaitousyo, 10);
+                        showTyphoonRiver3("■古川（桑才）\n【警戒レベル３】", "避難準備・高齢者等避難開始(水位3.3m)、避難勧告発令の見込み", a, b, gaitousyo, 10);
                         break;}
                     case 3:{
                         String[] a = {"旭", "城東", "鶴見", "消防局"};
@@ -1909,7 +1909,7 @@ public class TyphoonActivity extends AppCompatActivity {
                     case 2:{
                         String[] a = {"平野", "消防局"};
                         String gaitousyo = "３号：平野,消防局";
-                        showTyphoonRiver3b("■東除川（大堀上小橋）\n【警戒レベル３】", "避難準備・高齢者等避難開始(水位3.2m)", a, gaitousyo, 11);
+                        showTyphoonRiver3b("■東除川（大堀上小橋）\n【警戒レベル３】", "避難準備・高齢者等避難開始(水位3.2m)、避難勧告発令の見込み", a, gaitousyo, 11);
                         break;}
                     case 3:{
                         String[] a = {"平野", "消防局"};
@@ -1952,7 +1952,7 @@ public class TyphoonActivity extends AppCompatActivity {
                     case 2:{
                         String[] a = {"東住吉", "平野", "消防局"};
                         String gaitousyo = "３号：東住吉,平野,消防局";
-                        showTyphoonRiver3b("■西除川(布忍橋)\n【警戒レベル３】", "避難準備・高齢者等避難開始(水位3.7m)", a, gaitousyo, 12);
+                        showTyphoonRiver3b("■西除川(布忍橋)\n【警戒レベル３】", "避難準備・高齢者等避難開始(水位3.7m)、避難勧告発令の見込み", a, gaitousyo, 12);
                         break;}
                     case 3:{
                         String[] a = {"東住吉", "平野", "消防局"};

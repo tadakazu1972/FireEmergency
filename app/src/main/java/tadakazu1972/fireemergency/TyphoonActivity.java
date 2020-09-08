@@ -1533,9 +1533,9 @@ public class TyphoonActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 switch (which) {
                     case 0:{
-                        String[] a = {};
-                        String gaitousyo = "";
-                        showTyphoonRiver1b("■天竺川 (天竺川橋)", "氾濫注意水位(水位2m)、水防警報(出動)", a, gaitousyo, 3);
+                        String[] a = {"淀川", "消防局"};
+                        String gaitousyo = "４号：淀川,消防局";
+                        showTyphoonRiver1("■天竺川 (天竺川橋)", "氾濫注意水位(水位2m)、水防警報(出動)", a, gaitousyo, 3);
                         break;}
                     case 1:{
                         String[] a = {"淀川", "消防局"};
@@ -1576,9 +1576,9 @@ public class TyphoonActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 switch (which) {
                     case 0:{
-                        String[] a = {};
-                        String gaitousyo = "";
-                        showTyphoonRiver1b("■高川（水路橋）", "氾濫注意水位(水位1.5m)、水防警報(出動)", a, gaitousyo, 4);
+                        String[] a = {"淀川", "消防局"};
+                        String gaitousyo = "４号：淀川,消防局";
+                        showTyphoonRiver1("■高川（水路橋）", "氾濫注意水位(水位1.5m)、水防警報(出動)", a, gaitousyo, 4);
                         break;}
                     case 1:{
                         String[] a = {"淀川", "消防局"};
@@ -1932,9 +1932,9 @@ public class TyphoonActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 switch (which) {
                     case 0:{
-                        String[] a = {};
-                        String gaitousyo = "";
-                        showTyphoonRiver1b("■西除川(布忍橋)", "氾濫注意水位(水位2.5m)、水防警報(出動)", a, gaitousyo, 12);
+                        String[] a = {"東住吉", "平野", "消防局"};
+                        String gaitousyo = "４号：東住吉,平野,消防局";
+                        showTyphoonRiver1("■西除川(布忍橋)", "氾濫注意水位(水位2.5m)、水防警報(出動)", a, gaitousyo, 12);
                         break;}
                     case 1:{
                         String[] a = {"東住吉", "平野", "消防局"};

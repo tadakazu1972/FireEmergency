@@ -340,19 +340,15 @@ public class TyphoonActivity extends AppCompatActivity {
     private void showTyphoon25() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("■洪水警報");
-        //勤務消防署がリストに該当するか判定
         String s;
-        String[] a = {"北", "都島", "福島", "此花", "中央", "西淀川", "淀川", "東淀川", "東成", "生野", "旭", "城東", "鶴見", "住之江", "住吉", "東住吉", "平野", "消防局"};
-        if (Arrays.asList(a).contains(mMainStation)) {
-            if (mMainStation.equals("消防局")) {
-                s = mMainStation;
-            } else {
-                s = mMainStation + "消防署";
-            }
-        } else {
+        if (mMainStation.equals("教育訓練センター")) {
             s = "ー";
+        } else if (mMainStation.equals("消防局")) {
+            s = mMainStation;
+        } else {
+            s = mMainStation + "消防署";
         }
-        builder.setMessage("第５非常警備(北、都島、福島、此花、中央、西淀川、淀川、東淀川、東成、生野、旭、城東、鶴見、住之江、住吉、東住吉、平野、消防局)\n\n" + s + "\n\n招集なし");
+        builder.setMessage("第５非常警備(全署、消防局)\n\n" + s + "\n\n招集なし");
         builder.setNegativeButton("キャンセル", null);
         builder.setCancelable(true);
         builder.create();
@@ -386,17 +382,15 @@ public class TyphoonActivity extends AppCompatActivity {
         builder.setTitle("■高潮警報");
         //勤務消防署がリストに該当するか判定
         String s;
-        String[] a = {"北", "都島", "福島", "此花", "中央", "西", "港", "大正", "浪速", "西淀川", "淀川", "住之江", "西成", "水上", "消防局"};
-        if (Arrays.asList(a).contains(mMainStation)) {
-            if (mMainStation.equals("消防局")) {
-                s = mMainStation;
-            } else {
-                s = mMainStation + "消防署";
-            }
-        } else {
+        String s;
+        if (mMainStation.equals("教育訓練センター")) {
             s = "ー";
+        } else if (mMainStation.equals("消防局")) {
+            s = mMainStation;
+        } else {
+            s = mMainStation + "消防署";
         }
-        builder.setMessage("第５非常警備(北、都島、福島、此花、中央、西、港、大正、浪速、西淀川、淀川、住之江、西成、水上、消防局)\n\n" + s + "\n\n招集なし");
+        builder.setMessage("第５非常警備(全署、消防局)\n\n" + s + "\n\n招集なし");
         builder.setNegativeButton("キャンセル", null);
         builder.setCancelable(true);
         builder.create();
@@ -408,17 +402,15 @@ public class TyphoonActivity extends AppCompatActivity {
         builder.setTitle("■高潮注意報");
         //勤務消防署がリストに該当するか判定
         String s;
-        String[] a = {"北", "都島", "福島", "此花", "中央", "西", "港", "大正", "浪速", "西淀川", "淀川", "住之江", "西成", "水上", "消防局"};
-        if (Arrays.asList(a).contains(mMainStation)) {
-            if (mMainStation.equals("消防局")) {
-                s = mMainStation;
-            } else {
-                s = mMainStation + "消防署";
-            }
-        } else {
+        String s;
+        if (mMainStation.equals("教育訓練センター")) {
             s = "ー";
+        } else if (mMainStation.equals("消防局")) {
+            s = mMainStation;
+        } else {
+            s = mMainStation + "消防署";
         }
-        builder.setMessage("第５非常警備(北、都島、福島、此花、中央、西、港、大正、浪速、西淀川、淀川、住之江、西成、水上、消防局)\n\n" + s + "\n\n招集なし");
+        builder.setMessage("第５非常警備(全署、消防局)\n\n" + s + "\n\n招集なし");
         builder.setNegativeButton("キャンセル", null);
         builder.setCancelable(true);
         builder.create();

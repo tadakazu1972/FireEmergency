@@ -82,7 +82,7 @@
         <Button
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:text="河川水位による非常招集"
+            android:text="河川水位等による非常招集"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:id="@+id/btnTyphoon3"
             android:layout_gravity="center_horizontal"/>

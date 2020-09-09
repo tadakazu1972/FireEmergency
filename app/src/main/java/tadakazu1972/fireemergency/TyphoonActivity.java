@@ -419,7 +419,7 @@ public class TyphoonActivity extends AppCompatActivity {
     private void showTyphoon3() {
         final CharSequence[] actions = {"■淀川（枚方）", "■大和川（柏原）", "■神崎川（三国）", "■天竺川（天竺川橋）", "■高川（水路橋）", "■安威川（千歳橋）", "■寝屋川（京橋）", "■第二寝屋川（昭明橋）", "■平野川（剣橋）", "■平野川分水路（今里大橋）", "■古川（桑才）", "■東除川（大堀上小橋）", "■西除川（布忍橋）", "■高潮"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("河川を選択してください");
+        builder.setTitle("河川等を選択してください");
         builder.setItems(actions, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -1243,8 +1243,8 @@ public class TyphoonActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 switch (which) {
                     case 0:{
-                        String[] a = {"中央", "東成", "城東", "鶴見", "消防局"};
-                        String gaitousyo = "中央,東成,城東,鶴見,消防局";
+                        String[] a = {"中央", "城東", "鶴見", "消防局"};
+                        String gaitousyo = "中央,城東,鶴見,消防局";
                         showTyphoonRiver1("■第二寝屋川（昭明橋）", "氾濫注意水位(水位3.4m)、水防警報(出動)", a, gaitousyo, 7);
                         break;}
                     case 1:{
@@ -1281,8 +1281,8 @@ public class TyphoonActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 switch (which) {
                     case 0:{
-                        String[] a = {"中央", "東成", "生野", "城東", "東住吉", "平野", "消防局"};
-                        String gaitousyo = "中央,東成,生野,城東,東住吉,平野,消防局";
+                        String[] a = {"東成", "生野", "城東", "東住吉", "平野", "消防局"};
+                        String gaitousyo = "東成,生野,城東,東住吉,平野,消防局";
                         showTyphoonRiver1("■平野川（剣橋）", "氾濫注意水位(水位3.3m)、水防警報(出動)", a, gaitousyo, 8);
                         break;}
                     case 1:{
@@ -1319,8 +1319,8 @@ public class TyphoonActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 switch (which) {
                     case 0:{
-                        String[] a = {"中央", "東成", "生野", "城東", "東住吉", "平野", "消防局"};
-                        String gaitousyo = "中央,東成,生野,城東,東住吉,平野,消防局";
+                        String[] a = {"東成", "生野", "城東", "消防局"};
+                        String gaitousyo = "東成,生野,城東,消防局";
                         showTyphoonRiver1("■平野川分水路（今里大橋）", "氾濫注意水位(水位3.3m)、水防警報(出動)", a, gaitousyo, 9);
                         break;}
                     case 1:{
@@ -1357,8 +1357,8 @@ public class TyphoonActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 switch (which) {
                     case 0:{
-                        String[] a = {"旭", "城東", "鶴見", "消防局"};
-                        String gaitousyo = "旭,城東,鶴見,消防局";
+                        String[] a = {"鶴見", "消防局"};
+                        String gaitousyo = "鶴見,消防局";
                         showTyphoonRiver1("■古川（桑才）", "氾濫注意水位(水位3.2m)、水防警報(出動)", a, gaitousyo, 10);
                         break;}
                     case 1:{
@@ -1471,8 +1471,8 @@ public class TyphoonActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 switch (which) {
                     case 0:{
-                        String[] a = {"北","都島","福島","此花","中央","西","港","大正","天王寺","浪速","西淀川","淀川","東淀川","旭","城東","阿倍野","住之江","住吉","西成","水上","消防局"};
-                        String gaitousyo = "北,都島,福島,此花,中央,西,港,大正,天王寺,浪速,西淀川,淀川,東淀川,旭,城東,阿倍野,住之江,住吉,西成,水上,消防局";
+                        String[] a = {"北","都島","福島","此花","中央","西","港","大正","浪速","西淀川","淀川","住之江","西成","水上","消防局"};
+                        String gaitousyo = "北,都島,福島,此花,中央,西,港,大正,浪速,西淀川,淀川,住之江,西成,水上,消防局";
                         showTyphoonRiver1("■高潮", "高潮区域(水防警報(出動))", a, gaitousyo, 0);
                         break;}
                     case 1:{

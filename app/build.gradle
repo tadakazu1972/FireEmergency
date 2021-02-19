@@ -1,15 +1,15 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 28
-    buildToolsVersion '28.0.3'
+    compileSdkVersion 30
+    buildToolsVersion '30.0.3'
 
     defaultConfig {
         applicationId "tadakazu1972.fireemergency"
         minSdkVersion 16
-        targetSdkVersion 28
+        targetSdkVersion 30
         versionCode 2
-        versionName "1.2"
+        versionName "2"
     }
     buildTypes {
         release {
@@ -22,7 +22,7 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     testImplementation 'junit:junit:4.12'
-    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation files('libs/opencsv-3.8.jar')
     implementation 'net.zetetic:android-database-sqlcipher:4.3.0@aar'
     def sqlite_version = "2.1.0"

@@ -76,6 +76,15 @@ public class DataActivity extends AppCompatActivity {
         setContentView(R.layout.activity_data);
 
         //ボタン設定
+        //非常参集　職員情報入力　ボタン
+        mView.findViewById(R.id.btnPersonal).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(mActivity, PersonalActivity.class);
+                startActivity(intent);
+            }
+        });
+        //アプリ説明書　ボタン
         mView.findViewById(R.id.btnGuide).setOnClickListener(new OnClickListener(){
             @Override
             public void onClick(View v){

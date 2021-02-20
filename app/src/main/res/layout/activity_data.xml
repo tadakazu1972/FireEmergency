@@ -8,6 +8,16 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
     <Button
+        android:id="@+id/btnPersonal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="非常参集　職員情報入力"
+        android:textSize="20sp"
+        android:textColor="#ffffff"
+        android:background="@drawable/red_button"
+        android:layout_marginBottom="16dp"/>
+    <Button
         android:id="@+id/btnGuide"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -27,6 +27,9 @@
         <activity android:name=".DataActivity"
                   android:launchMode="singleTask">
         </activity>
+        <activity android:name=".PersonalActivity"
+                  android:launchMode="singleTask">
+        </activity>
         <activity android:name=".GuideActivity"
                   android:launchMode="singleTask">
         </activity>

@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string-array name="fireClass">
+        <item>正監</item>
+        <item>監</item>
+        <item>司令長</item>
+        <item>司令</item>
+        <item>司令補</item>
+        <item>士長</item>
+        <item>士</item>
+    </string-array>
     <string-array name="firestation">
         <item>消防局</item>
         <item>北</item>

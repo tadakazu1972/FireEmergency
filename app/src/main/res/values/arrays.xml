@@ -36,7 +36,7 @@
         <item>平野</item>
         <item>西成</item>
         <item>水上</item>
-        <item>教育訓練センター</item>
+        <item>訓練センター</item>
     </string-array>
     <string-array name="firestation0">
         <item>総務課</item>
@@ -188,7 +188,7 @@
         <item>水上</item>
     </string-array>
     <string-array name="firestation26">
-        <item>教育訓練センター</item>
+        <item>訓練センター</item>
     </string-array>
     <string-array name="kubun">
         <item>１号招集</item>
@@ -229,7 +229,7 @@
         <item>平野</item>
         <item>西成</item>
         <item>水上</item>
-        <item>教育訓練センター</item>
+        <item>訓練センター</item>
     </string-array>
     <string-array name="firestationB0">
         <item>すべて</item>
@@ -409,7 +409,7 @@
         <item>水上</item>
     </string-array>
     <string-array name="firestationB27">
-        <item>教育訓練センター</item>
+        <item>訓練センター</item>
     </string-array>
     <string-array name="Syo">
         <item>北</item>

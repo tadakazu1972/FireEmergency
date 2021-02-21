@@ -281,7 +281,7 @@ public class EarthquakeActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("■大津波警報");
         String s;
-        if (mTsunamiStation.equals("消防局")||mTsunamiStation.equals("教育訓練センター")){
+        if (mTsunamiStation.equals("消防局")||mTsunamiStation.equals("訓練センター")){
             s = mTsunamiStation+"へ参集";
         } else {
             s = mTsunamiStation+"消防署へ参集";
@@ -297,7 +297,7 @@ public class EarthquakeActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("■津波警報");
         String s;
-        if (mTsunamiStation.equals("消防局")||mTsunamiStation.equals("教育訓練センター")){
+        if (mTsunamiStation.equals("消防局")||mTsunamiStation.equals("訓練センター")){
             s = mTsunamiStation+"へ参集";
         } else {
             s = mTsunamiStation+"消防署へ参集";
@@ -313,7 +313,7 @@ public class EarthquakeActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("■警報なし");
         String s;
-        if (mMainStation.equals("消防局")||mMainStation.equals("教育訓練センター")){
+        if (mMainStation.equals("消防局")||mMainStation.equals("訓練センター")){
             s = mMainStation+"へ参集";
         } else {
             s = mMainStation+"消防署へ参集";
@@ -356,7 +356,7 @@ public class EarthquakeActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("■大津波警報");
         String s;
-        if (mTsunamiStation.equals("消防局")||mTsunamiStation.equals("教育訓練センター")) {
+        if (mTsunamiStation.equals("消防局")||mTsunamiStation.equals("訓練センター")) {
             s = mTsunamiStation+"へ参集";
         } else {
             s = mTsunamiStation+"消防署へ参集";
@@ -376,7 +376,7 @@ public class EarthquakeActivity extends AppCompatActivity {
         if (mKubun.equals("１号招集")){
             s = "招集なし";
         } else {
-            if (mTsunamiStation.equals("消防局")||mTsunamiStation.equals("教育訓練センター")) {
+            if (mTsunamiStation.equals("消防局")||mTsunamiStation.equals("訓練センター")) {
                 s = mTsunamiStation+"へ参集";
             } else {
                 s = mTsunamiStation+"消防署へ参集";
@@ -397,7 +397,7 @@ public class EarthquakeActivity extends AppCompatActivity {
         if (mKubun.equals("１号招集")){
             s = "招集なし";
         } else {
-            if (mMainStation.equals("消防局")||mMainStation.equals("教育訓練センター")) { //勤務消防署であることに注意!
+            if (mMainStation.equals("消防局")||mMainStation.equals("訓練センター")) { //勤務消防署であることに注意!
                 s = mMainStation+"へ参集";
             } else {
                 s = mMainStation+"消防署へ参集";
@@ -441,7 +441,7 @@ public class EarthquakeActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("■大津波警報");
         String s;
-        if (mTsunamiStation.equals("消防局")||mTsunamiStation.equals("教育訓練センター")){
+        if (mTsunamiStation.equals("消防局")||mTsunamiStation.equals("訓練センター")){
             s = mTsunamiStation+"へ参集";
         } else {
             s = mTsunamiStation+"消防署へ参集";
@@ -462,7 +462,7 @@ public class EarthquakeActivity extends AppCompatActivity {
         if (Arrays.asList(a).contains(mMainStation)){
             //４号招集なので、１号、２号、３号は参集なしの判定する
             if (mKubun.equals("４号招集")) {
-                if (mMainStation.equals("消防局")||mMainStation.equals("教育訓練センター")) { //勤務消防署であることに注意!
+                if (mMainStation.equals("消防局")||mMainStation.equals("訓練センター")) { //勤務消防署であることに注意!
                     s = mMainStation + "へ参集　所属担当者に確認すること\n\n※平日の9時～17時30分は、原則、勤務中の毎日勤務者で活動体制を確保する";
                 } else {
                     s = mMainStation + "消防署へ参集\n\n※平日の9時～17時30分は、原則、勤務中の毎日勤務者で活動体制を確保する";
@@ -476,7 +476,7 @@ public class EarthquakeActivity extends AppCompatActivity {
             if (mKubun.equals("１号招集") || mKubun.equals("２号招集")) {
                 s = "招集なし";
             } else {
-                if (mMainStation.equals("消防局") || mMainStation.equals("教育訓練センター")) {
+                if (mMainStation.equals("消防局") || mMainStation.equals("訓練センター")) {
                     s = mMainStation + "へ参集\n\n※平日の9時～17時30分は、原則、勤務中の毎日勤務者で活動体制を確保する";
                 } else {
                     s = mMainStation + "消防署へ参集\n\n※平日の9時～17時30分は、原則、勤務中の毎日勤務者で活動体制を確保する";
@@ -497,7 +497,7 @@ public class EarthquakeActivity extends AppCompatActivity {
         String s;
         //４号招集なので、１号、２号、３号は参集なしの判定する
         if (mKubun.equals("４号招集")) {
-            if (mMainStation.equals("消防局")||mMainStation.equals("教育訓練センター")) { //勤務消防署であることに注意!
+            if (mMainStation.equals("消防局")||mMainStation.equals("訓練センター")) { //勤務消防署であることに注意!
                 s = mMainStation + "へ参集　所属担当者に確認すること\n\n※平日の9時～17時30分は、原則、勤務中の毎日勤務者で活動体制を確保する";
             } else {
                 s = mMainStation + "消防署へ参集\n\n※平日の9時～17時30分は、原則、勤務中の毎日勤務者で活動体制を確保する";
@@ -546,7 +546,7 @@ public class EarthquakeActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("■大津波警報");
         String s;
-        if (mTsunamiStation.equals("消防局")||mTsunamiStation.equals("教育訓練センター")){
+        if (mTsunamiStation.equals("消防局")||mTsunamiStation.equals("訓練センター")){
             s = mTsunamiStation+"へ参集";
         } else {
             s = mTsunamiStation+"消防署へ参集";
@@ -565,7 +565,7 @@ public class EarthquakeActivity extends AppCompatActivity {
         String s, message;
         String[] a = {"天王寺","東淀川","東成","生野","阿倍野","東住吉","平野"};
         if (Arrays.asList(a).contains(mMainStation)){
-            if (mMainStation.equals("消防局")||mMainStation.equals("教育訓練センター")) { //勤務消防署であることに注意!
+            if (mMainStation.equals("消防局")||mMainStation.equals("訓練センター")) { //勤務消防署であることに注意!
                 s = mMainStation;
             } else {
                 s = mMainStation + "消防署";
@@ -576,7 +576,7 @@ public class EarthquakeActivity extends AppCompatActivity {
             if (mKubun.equals("１号招集") || mKubun.equals("２号招集")) {
                 s = "招集なし";
             } else {
-                if (mMainStation.equals("消防局") || mMainStation.equals("教育訓練センター")) {
+                if (mMainStation.equals("消防局") || mMainStation.equals("訓練センター")) {
                     s = mMainStation + "へ参集\n\n※平日の9時～17時30分は、原則、勤務中の毎日勤務者で活動体制を確保する";
                 } else {
                     s = mMainStation + "消防署へ参集\n\n※平日の9時～17時30分は、原則、勤務中の毎日勤務者で活動体制を確保する";
@@ -598,7 +598,7 @@ public class EarthquakeActivity extends AppCompatActivity {
         String s, message;
         String[] a = {"北","都島","福島","此花","中央","西","港","大正","浪速","西淀川","淀川","旭","城東","鶴見","住之江","住吉","西成","水上","消防局"};
         if (Arrays.asList(a).contains(mMainStation)) {
-            if (mMainStation.equals("消防局")||mMainStation.equals("教育訓練センター")) { //勤務消防署であることに注意!
+            if (mMainStation.equals("消防局")||mMainStation.equals("訓練センター")) { //勤務消防署であることに注意!
                 s = mMainStation;
             } else {
                 s = mMainStation + "消防署";
@@ -659,7 +659,7 @@ public class EarthquakeActivity extends AppCompatActivity {
         if (mKubun.equals("１号招集")||mKubun.equals("２号招集")){
             s = "招集なし";
         } else {
-            if (mMainStation.equals("消防局")||mMainStation.equals("教育訓練センター")) {
+            if (mMainStation.equals("消防局")||mMainStation.equals("訓練センター")) {
                 s = mMainStation+"へ参集\n\n※平日の9時～17時30分は、原則、勤務中の毎日勤務者で活動体制を確保する";
             } else {
                 s = mMainStation+"消防署へ参集\n\n※平日の9時～17時30分は、原則、勤務中の毎日勤務者で活動体制を確保する";
@@ -678,7 +678,7 @@ public class EarthquakeActivity extends AppCompatActivity {
         String s;
         //４号招集なので、１号、２号、３号は参集なしの判定する
         if (mKubun.equals("４号招集")) {
-            if (mMainStation.equals("消防局")||mMainStation.equals("教育訓練センター")) { //勤務消防署であることに注意!
+            if (mMainStation.equals("消防局")||mMainStation.equals("訓練センター")) { //勤務消防署であることに注意!
                 s = mMainStation + "へ参集　所属担当者に確認すること\n\n※平日の9時～17時30分は、原則、勤務中の毎日勤務者で活動体制を確保する";
             } else {
                 s = mMainStation + "消防署へ参集\n\n※平日の9時～17時30分は、原則、勤務中の毎日勤務者で活動体制を確保する";
@@ -697,7 +697,7 @@ public class EarthquakeActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("■東海地震に関連する調査情報（臨時）が発表されたとき");
         String s;
-        if (mMainStation.equals("消防局")||mMainStation.equals("教育訓練センター")) { //勤務消防署であることに注意!
+        if (mMainStation.equals("消防局")||mMainStation.equals("訓練センター")) { //勤務消防署であることに注意!
             s = mMainStation;
         } else {
             s = mMainStation + "消防署";
@@ -740,7 +740,7 @@ public class EarthquakeActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("■調査中");
         String s;
-        if (mMainStation.equals("消防局")||mMainStation.equals("教育訓練センター")) { //勤務消防署であることに注意!
+        if (mMainStation.equals("消防局")||mMainStation.equals("訓練センター")) { //勤務消防署であることに注意!
             s = mMainStation;
         } else {
             s = mMainStation + "消防署";
@@ -758,7 +758,7 @@ public class EarthquakeActivity extends AppCompatActivity {
         String s;
         //４号招集なので、１号、２号、３号は参集なしの判定する
         if (mKubun.equals("４号招集")) {
-            if (mMainStation.equals("消防局")||mMainStation.equals("教育訓練センター")) { //勤務消防署であることに注意!
+            if (mMainStation.equals("消防局")||mMainStation.equals("訓練センター")) { //勤務消防署であることに注意!
                 s = mMainStation + "へ参集　所属担当者に確認すること\n\n※平日の9時～17時30分は、原則、勤務中の毎日勤務者で活動体制を確保する";
             } else {
                 s = mMainStation + "消防署へ参集\n\n※平日の9時～17時30分は、原則、勤務中の毎日勤務者で活動体制を確保する";
@@ -779,7 +779,7 @@ public class EarthquakeActivity extends AppCompatActivity {
         String s;
         //４号招集なので、１号、２号、３号は参集なしの判定する
         if (mKubun.equals("４号招集")) {
-            if (mMainStation.equals("消防局")||mMainStation.equals("教育訓練センター")) { //勤務消防署であることに注意!
+            if (mMainStation.equals("消防局")||mMainStation.equals("訓練センター")) { //勤務消防署であることに注意!
                 s = mMainStation + "へ参集　所属担当者に確認すること\n\n※平日の9時～17時30分は、原則、勤務中の毎日勤務者で活動体制を確保する";
             } else {
                 s = mMainStation + "消防署へ参集\n\n※平日の9時～17時30分は、原則、勤務中の毎日勤務者で活動体制を確保する";

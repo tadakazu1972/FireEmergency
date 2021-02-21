@@ -5,9 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
-import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,9 +43,12 @@ public class PersonalActivity extends AppCompatActivity {
     private Boolean personalEngineer = null;
     private Boolean personalParamedic = null;
     //SharedPreferences
+    protected String packageName = null;
     private SharedPreferences sp = null;
     //参集先　消防局or消防署の選択結果判別用
     private Integer mIndex = 0; //0:消防局 1:消防署
+    protected String mMainStation;
+    protected String mTsunamiStation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -58,10 +59,28 @@ public class PersonalActivity extends AppCompatActivity {
         setContentView(R.layout.activity_personal);
 
         //SharedPreferencesインスタンス取得
-        sp = getPreferences(Context.MODE_PRIVATE);
+        packageName = getPackageName();
+        sp = getSharedPreferences(packageName + "_preferences", MODE_PRIVATE);
+        //基礎データで登録したデータ呼び出し
+        loadData();
 
         //EditText, Button 初期化
         initViews();
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        //基礎データを変更してActivity復帰した際に反映させないと前のままなので
+        loadData();
+    }
+
+    //基礎データ読み込み
+    private void loadData(){
+        //勤務消防署
+        mMainStation = sp.getString("mainStation","消防局"); // 第２引数はkeyが存在しない時に返す初期値
+        //大津波・津波警報時指定署
+        mTsunamiStation = sp.getString("tsunamiStation", "消防局"); // 第２引数はkeyが存在しない時に返す初期値
     }
 
     private void initViews(){
@@ -259,8 +278,10 @@ public class PersonalActivity extends AppCompatActivity {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?>parent, View view, int position, long id){
-                String s = mList[position];
-                Toast.makeText(mActivity, s, Toast.LENGTH_SHORT).show();
+                String sansyusaki = mList[position];
+                Toast.makeText(mActivity, sansyusaki, Toast.LENGTH_SHORT).show();
+                //基礎データ　勤務消防署、津波避難消防署とのチェック判定へ
+                CheckSansyusaki(sansyusaki);
             }
         });
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -269,14 +290,35 @@ public class PersonalActivity extends AppCompatActivity {
         builder.setPositiveButton("メール送信", new DialogInterface.OnClickListener(){
             @Override
             public void onClick(DialogInterface dialog, int which){
-                //基礎データ　勤務消防署、津波避難消防署とのチェック判定へ
-                
+
             }
         });
         builder.setNegativeButton("戻る", null);
         builder.setCancelable(true);
         builder.create();
         builder.show();
+    }
+
+    //基礎データで登録されている「勤務消防署」「津波警報時(震度5弱以上)の参集指定署」のどちらにも該当しない場合、アラート表示
+    private void CheckSansyusaki(String sansyusaki){
+        //判定
+        //参集先が消防局の場合
+        if (mIndex==0){
+            if (!mMainStation.equals("消防局") && !mTsunamiStation.equals("消防局")){
+                if (!mMainStation.equals("訓練センター") && !mTsunamiStation.equals("訓練センター")){
+                    //アラート
+                    Toast.makeText(mActivity, "違うけど大丈夫？", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+        //参集先が消防署の場合
+        if (mIndex==1){
+            if (!sansyusaki.equals(mMainStation) && !sansyusaki.equals(mTsunamiStation)){
+                //アラート
+                String s = "参集先:" + sansyusaki + ", mainStation:" + mMainStation + ", tsunamiStation:" + mTsunamiStation;
+                Toast.makeText(mActivity, s + "違うけど大丈夫？", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }
 

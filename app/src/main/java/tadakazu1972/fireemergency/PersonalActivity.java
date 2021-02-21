@@ -1,21 +1,28 @@
 package tadakazu1972.fireemergency;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.text.Editable;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.CheckedTextView;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.Arrays;
 
 public class PersonalActivity extends AppCompatActivity {
     protected PersonalActivity mActivity = null;
@@ -171,6 +178,56 @@ public class PersonalActivity extends AppCompatActivity {
                 Toast.makeText(mActivity, "職員情報を登録しました", Toast.LENGTH_SHORT).show();
             }
         });
+
+        //戻るボタン
+        mView.findViewById(R.id.btnBack).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                //基礎データ入力画面へ戻る
+                Intent intent = new Intent(mActivity, DataActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //参集先　到着ボタン
+        mView.findViewById(R.id.btnNext).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                //消防局　消防署　選択ダイアログへ遷移
+                KyokuSyoDialog();
+            }
+        });
     }
+
+    //消防局　消防署　選択ダイアログ
+    private void KyokuSyoDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        //カスタムビュー設定
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
+        final View layout = inflater.inflate(R.layout.dialog_kyokusyo, (ViewGroup) findViewById(R.id.dlgKyokuSyo));
+        //消防局ボタン　クリックリスナー設定
+        layout.findViewById(R.id.btnKyoku).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //消防局ダイアログへ遷移
+                Toast.makeText(mActivity, "消防局", Toast.LENGTH_SHORT).show();
+            }
+        });
+        //消防署ボタン　クリックリスナー設定
+        layout.findViewById(R.id.btnSyo).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                //消防署ダイアログへ遷移
+                Toast.makeText(mActivity, "消防署", Toast.LENGTH_SHORT).show();
+            }
+        });
+        //セット
+        builder.setView(layout);
+        builder.setNegativeButton("閉じる", null);
+        builder.setCancelable(false);
+        builder.create();
+        builder.show();
+    }
+
 }
 

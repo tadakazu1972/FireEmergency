@@ -46,6 +46,8 @@ public class PersonalActivity extends AppCompatActivity {
     private Boolean personalParamedic = null;
     //SharedPreferences
     private SharedPreferences sp = null;
+    //参集先　消防局or消防署の選択結果判別用
+    private Integer mIndex = 0; //0:消防局 1:消防署
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -210,7 +212,9 @@ public class PersonalActivity extends AppCompatActivity {
         layout.findViewById(R.id.btnKyoku).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //消防局ダイアログへ遷移
+                //消防局選択　ダイアログへ遷移
+                mIndex = 0;
+                SansyusyoSelectDialog(mIndex);
                 Toast.makeText(mActivity, "消防局", Toast.LENGTH_SHORT).show();
             }
         });
@@ -218,9 +222,10 @@ public class PersonalActivity extends AppCompatActivity {
         layout.findViewById(R.id.btnSyo).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                //消防署ダイアログへ遷移
+                //消防署選択　ダイアログへ遷移
+                mIndex = 1;
+                SansyusyoSelectDialog(mIndex);
                 Toast.makeText(mActivity, "消防署", Toast.LENGTH_SHORT).show();
-                SansyusyoSelectDialog();
             }
         });
         //セット
@@ -232,9 +237,16 @@ public class PersonalActivity extends AppCompatActivity {
     }
 
     //消防署選択
-    private void SansyusyoSelectDialog(){
-        // res/values/arrays.xmlにsyoとして消防署を設定している。それを読み込む。
-        int resourceId = getResources().getIdentifier("Syo", "array", getPackageName());
+    private void SansyusyoSelectDialog(Integer index){
+        String resName = "Kyoku"; //デフォルトで消防局に設定しておく
+        //消防局を選択
+        if (index == 0){
+            resName = "Kyoku";
+        } else if (index == 1) {
+            resName = "Syo";
+        }
+        // res/values/arrays.xmlにKyokuまたSyoとして消防局・消防署を設定している。それを読み込む。
+        int resourceId = getResources().getIdentifier(resName, "array", getPackageName());
         //取得した配列リソースIDを文字列配列に格納
         final String[] mList = getResources().getStringArray(resourceId);
         GridView gridView = new GridView(this);
@@ -254,6 +266,13 @@ public class PersonalActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("■参集先　メール送信\n   必ず参集先に到着してから送信");
         builder.setView(gridView);
+        builder.setPositiveButton("メール送信", new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int which){
+                //基礎データ　勤務消防署、津波避難消防署とのチェック判定へ
+                
+            }
+        });
         builder.setNegativeButton("戻る", null);
         builder.setCancelable(true);
         builder.create();

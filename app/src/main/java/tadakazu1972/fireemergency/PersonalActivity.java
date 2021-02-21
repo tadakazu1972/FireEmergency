@@ -16,6 +16,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.CheckedTextView;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -194,13 +195,13 @@ public class PersonalActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 //消防局　消防署　選択ダイアログへ遷移
-                KyokuSyoDialog();
+                KyokuSyoSelectDialog();
             }
         });
     }
 
     //消防局　消防署　選択ダイアログ
-    private void KyokuSyoDialog() {
+    private void KyokuSyoSelectDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         //カスタムビュー設定
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
@@ -219,6 +220,7 @@ public class PersonalActivity extends AppCompatActivity {
             public void onClick(View v){
                 //消防署ダイアログへ遷移
                 Toast.makeText(mActivity, "消防署", Toast.LENGTH_SHORT).show();
+                SansyusyoSelectDialog();
             }
         });
         //セット
@@ -229,5 +231,33 @@ public class PersonalActivity extends AppCompatActivity {
         builder.show();
     }
 
+    //消防署選択
+    private void SansyusyoSelectDialog(){
+        // res/values/arrays.xmlにsyoとして消防署を設定している。それを読み込む。
+        int resourceId = getResources().getIdentifier("Syo", "array", getPackageName());
+        //取得した配列リソースIDを文字列配列に格納
+        final String[] mList = getResources().getStringArray(resourceId);
+        GridView gridView = new GridView(this);
+        gridView.setNumColumns(2);
+        gridView.setHorizontalSpacing(80);
+        gridView.setVerticalSpacing(40);
+        gridView.setPadding(80,20,80,20);
+        gridView.setAdapter(new ArrayAdapter<>(this, R.layout.grid_kyokusyo, mList));
+        //gridView.setNumColumns(2);
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?>parent, View view, int position, long id){
+                String s = mList[position];
+                Toast.makeText(mActivity, s, Toast.LENGTH_SHORT).show();
+            }
+        });
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("■参集先　メール送信\n   必ず参集先に到着してから送信");
+        builder.setView(gridView);
+        builder.setNegativeButton("戻る", null);
+        builder.setCancelable(true);
+        builder.create();
+        builder.show();
+    }
 }
 

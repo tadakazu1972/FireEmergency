@@ -438,6 +438,33 @@
         <item>西成</item>
         <item>水上</item>
     </string-array>
+    <string-array name="SyoAddress">
+        <item>pa0005</item>
+        <item>pa0006</item>
+        <item>pa0007</item>
+        <item>pa0008</item>
+        <item>pa0009</item>
+        <item>pa0036</item>
+        <item>pa0010</item>
+        <item>pa0011</item>
+        <item>pa0013</item>
+        <item>pa0012</item>
+        <item>pa0014</item>
+        <item>pa0015</item>
+        <item>pa0016</item>
+        <item>pa0017</item>
+        <item>pa0018</item>
+        <item>pa0019</item>
+        <item>pa0020</item>
+        <item>pa0021</item>
+        <item>pa0023</item>
+        <item>pa0022</item>
+        <item>pa0024</item>
+        <item>pa0025</item>
+        <item>pa0026</item>
+        <item>pa0027</item>
+        <item>pa0028</item>
+    </string-array>
     <string-array name="Kyoku">
         <item>総務</item>
         <item>施設</item>

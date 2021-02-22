@@ -268,6 +268,7 @@ public class PersonalActivity extends AppCompatActivity {
             AddressName = "KyokuAddress";
         } else if (index == 1) {
             resName = "Syo";
+            AddressName = "SyoAddress";
         }
         // res/values/arrays.xmlにKyokuまたSyoとして消防局・消防署を設定している。それを読み込む。
         int resourceId = getResources().getIdentifier(resName, "array", getPackageName());
@@ -281,11 +282,15 @@ public class PersonalActivity extends AppCompatActivity {
         gridView.setVerticalSpacing(40);
         gridView.setPadding(80,20,80,20);
         gridView.setAdapter(new ArrayAdapter<>(this, R.layout.grid_kyokusyo, mList));
+        //参集先をタップされたら
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?>parent, View view, int position, long id){
+                //参集先の文字列を配列から確保
                 String sansyusaki = mList[position];
+                //宛先のメアドも配列から確保、[0]にしているのは送る変数が配列でないとダメだからその１つ目の意味。
                 mailAddress[0] = addressArray[position] + "@city.osaka.lg.jp";
+                //件名を「＠」と参集先名
                 subject = "@" + sansyusaki;
                 Toast.makeText(mActivity, sansyusaki+mailAddress[0], Toast.LENGTH_SHORT).show();
                 //基礎データ　勤務消防署、津波避難消防署とのチェック判定へ
@@ -295,6 +300,7 @@ public class PersonalActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("■参集先　メール送信\n   必ず参集先に到着してから送信");
         builder.setView(gridView);
+        //メール送信ボタンタップ
         builder.setPositiveButton("メール送信", new DialogInterface.OnClickListener(){
             @Override
             public void onClick(DialogInterface dialog, int which){

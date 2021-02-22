@@ -450,6 +450,18 @@
         <item>司令</item>
         <item>救急</item>
     </string-array>
+    <string-array name="KyokuAddress">
+        <item>pa0002</item>
+        <item>pa0031</item>
+        <item>pa0110</item>
+        <item>pa0030</item>
+        <item>pa0029</item>
+        <item>pa0003</item>
+        <item>pa0032</item>
+        <item>pa0035</item>
+        <item>pa0108</item>
+        <item>pa0034</item>
+    </string-array>
     <string-array name="kubunB">
         <item>すべて</item>
         <item>１号招集</item>

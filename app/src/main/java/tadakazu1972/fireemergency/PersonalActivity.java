@@ -49,6 +49,9 @@ public class PersonalActivity extends AppCompatActivity {
     private Integer mIndex = 0; //0:消防局 1:消防署
     protected String mMainStation;
     protected String mTsunamiStation;
+    //メール送信用
+    private String[] mailAddress = {"pa0035@city.osaka.lg.jp"}; //初期設定　１個でも配列でないとダメ
+    private String subject = "@警防";
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -234,7 +237,7 @@ public class PersonalActivity extends AppCompatActivity {
                 //消防局選択　ダイアログへ遷移
                 mIndex = 0;
                 SansyusyoSelectDialog(mIndex);
-                Toast.makeText(mActivity, "消防局", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(mActivity, "消防局", Toast.LENGTH_SHORT).show();
             }
         });
         //消防署ボタン　クリックリスナー設定
@@ -244,7 +247,7 @@ public class PersonalActivity extends AppCompatActivity {
                 //消防署選択　ダイアログへ遷移
                 mIndex = 1;
                 SansyusyoSelectDialog(mIndex);
-                Toast.makeText(mActivity, "消防署", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(mActivity, "消防署", Toast.LENGTH_SHORT).show();
             }
         });
         //セット
@@ -258,28 +261,33 @@ public class PersonalActivity extends AppCompatActivity {
     //消防署選択
     private void SansyusyoSelectDialog(Integer index){
         String resName = "Kyoku"; //デフォルトで消防局に設定しておく
+        String AddressName = "KyokuAddress";
         //消防局を選択
         if (index == 0){
             resName = "Kyoku";
+            AddressName = "KyokuAddress";
         } else if (index == 1) {
             resName = "Syo";
         }
         // res/values/arrays.xmlにKyokuまたSyoとして消防局・消防署を設定している。それを読み込む。
         int resourceId = getResources().getIdentifier(resName, "array", getPackageName());
+        int resourceId2 = getResources().getIdentifier(AddressName, "array", getPackageName());
         //取得した配列リソースIDを文字列配列に格納
         final String[] mList = getResources().getStringArray(resourceId);
+        final String[] addressArray = getResources().getStringArray(resourceId2);
         GridView gridView = new GridView(this);
         gridView.setNumColumns(2);
         gridView.setHorizontalSpacing(80);
         gridView.setVerticalSpacing(40);
         gridView.setPadding(80,20,80,20);
         gridView.setAdapter(new ArrayAdapter<>(this, R.layout.grid_kyokusyo, mList));
-        //gridView.setNumColumns(2);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?>parent, View view, int position, long id){
                 String sansyusaki = mList[position];
-                Toast.makeText(mActivity, sansyusaki, Toast.LENGTH_SHORT).show();
+                mailAddress[0] = addressArray[position] + "@city.osaka.lg.jp";
+                subject = "@" + sansyusaki;
+                Toast.makeText(mActivity, sansyusaki+mailAddress[0], Toast.LENGTH_SHORT).show();
                 //基礎データ　勤務消防署、津波避難消防署とのチェック判定へ
                 CheckSansyusaki(sansyusaki);
             }
@@ -290,7 +298,7 @@ public class PersonalActivity extends AppCompatActivity {
         builder.setPositiveButton("メール送信", new DialogInterface.OnClickListener(){
             @Override
             public void onClick(DialogInterface dialog, int which){
-
+                sendMail();
             }
         });
         builder.setNegativeButton("戻る", null);
@@ -307,7 +315,9 @@ public class PersonalActivity extends AppCompatActivity {
             if (!mMainStation.equals("消防局") && !mTsunamiStation.equals("消防局")){
                 if (!mMainStation.equals("訓練センター") && !mTsunamiStation.equals("訓練センター")){
                     //アラート
-                    Toast.makeText(mActivity, "違うけど大丈夫？", Toast.LENGTH_SHORT).show();
+                    //String s = "参集先:" + sansyusaki + ", mainStation:" + mMainStation + ", tsunamiStation:" + mTsunamiStation;
+                    //Toast.makeText(mActivity, s + "違うけど大丈夫？", Toast.LENGTH_SHORT).show();
+                    AnotherSansyusakiDialog();
                 }
             }
         }
@@ -315,9 +325,40 @@ public class PersonalActivity extends AppCompatActivity {
         if (mIndex==1){
             if (!sansyusaki.equals(mMainStation) && !sansyusaki.equals(mTsunamiStation)){
                 //アラート
-                String s = "参集先:" + sansyusaki + ", mainStation:" + mMainStation + ", tsunamiStation:" + mTsunamiStation;
-                Toast.makeText(mActivity, s + "違うけど大丈夫？", Toast.LENGTH_SHORT).show();
+                //String s = "参集先:" + sansyusaki + ", mainStation:" + mMainStation + ", tsunamiStation:" + mTsunamiStation;
+                //Toast.makeText(mActivity, s + "違うけど大丈夫？", Toast.LENGTH_SHORT).show();
+                AnotherSansyusakiDialog();
             }
+        }
+    }
+
+    //基礎データに登録していない消防署に参集アラートダイアログ
+    private void AnotherSansyusakiDialog() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        //カスタムビュー設定
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
+        final View layout = inflater.inflate(R.layout.dialog_anothersansyusaki, (ViewGroup) findViewById(R.id.dlgAnotherSansyusaki));
+        //セット
+        builder.setView(layout);
+        builder.setNegativeButton("はい", null);
+        builder.setCancelable(false);
+        builder.create();
+        builder.show();
+    }
+
+    //メール送信
+    private void sendMail(){
+        //メール立ち上げ
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_SEND);
+        intent.setType("message/rfc822");
+        intent.putExtra(Intent.EXTRA_EMAIL, mailAddress); // To:は配列でないとダメ
+        intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+        intent.putExtra(Intent.EXTRA_TEXT, "緊急連絡");
+        try {
+            startActivity(Intent.createChooser(intent, "メールアプリを選択"));
+        } catch (android.content.ActivityNotFoundException ex){
+            Toast.makeText(mActivity, "メールアプリが見つかりません", Toast.LENGTH_LONG).show();
         }
     }
 }

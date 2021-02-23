@@ -15,11 +15,11 @@
         android:layout_marginBottom="16dp"
         android:background="@drawable/data_button"/>
 
-    <androidx.appcompat.widget.ListViewCompat
+    <ListView
         android:id="@+id/listGuide"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    </androidx.appcompat.widget.ListViewCompat>
+    </ListView>
 
     <LinearLayout
         android:layout_width="match_parent"

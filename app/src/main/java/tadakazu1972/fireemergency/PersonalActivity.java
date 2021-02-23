@@ -292,7 +292,7 @@ public class PersonalActivity extends AppCompatActivity {
                 mailAddress[0] = addressArray[position] + "@city.osaka.lg.jp";
                 //件名を「＠」と参集先名
                 subject = "@" + sansyusaki;
-                Toast.makeText(mActivity, sansyusaki+mailAddress[0], Toast.LENGTH_SHORT).show();
+                Toast.makeText(mActivity, sansyusaki+":"+mailAddress[0], Toast.LENGTH_SHORT).show();
                 //基礎データ　勤務消防署、津波避難消防署とのチェック判定へ
                 CheckSansyusaki(sansyusaki);
             }
@@ -354,13 +354,33 @@ public class PersonalActivity extends AppCompatActivity {
 
     //メール送信
     private void sendMail(){
+        //メール本文に書く職員情報を呼び出し
+        personalId = sp.getString("personalId", "9999999");
+        personalClass = sp.getString("personalClass", "士");
+        personalAge = sp.getString("personalAge", "99");
+        personalDepartment = sp.getString("personalDepartment", "消防局");
+        personalName = sp.getString("personalName", "名字名前");
+        String Engineer = "";
+        if (sp.getBoolean("personalEngineer", false)){
+            Engineer = "有";
+        } else {
+            Engineer = "無";
+        }
+        String Paramedic = "";
+        if (sp.getBoolean("personalParamedic", false)) {
+            Paramedic = "有";
+        } else {
+            Paramedic = "無";
+        }
+        //すべてを半角スペースで結合
+        String message = personalId + " " + personalClass + " " + personalAge + " " + personalDepartment + " " + personalName + " " + Engineer + " " + Paramedic;
         //メール立ち上げ
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_SEND);
         intent.setType("message/rfc822");
         intent.putExtra(Intent.EXTRA_EMAIL, mailAddress); // To:は配列でないとダメ
         intent.putExtra(Intent.EXTRA_SUBJECT, subject);
-        intent.putExtra(Intent.EXTRA_TEXT, "緊急連絡");
+        intent.putExtra(Intent.EXTRA_TEXT, message);
         try {
             startActivity(Intent.createChooser(intent, "メールアプリを選択"));
         } catch (android.content.ActivityNotFoundException ex){

@@ -165,6 +165,7 @@ public class PersonalActivity extends AppCompatActivity {
         mEdtPersonalName = (EditText)findViewById(R.id.personalName);
         //保存しているデータを読み込んでEditTextにセット
         personalName = sp.getString("personalName", "");
+        trimSpaces();
         mEdtPersonalName.setText(personalName);
 
         //現在の乗組Spinner
@@ -230,6 +231,10 @@ public class PersonalActivity extends AppCompatActivity {
                 sp.edit().putString("personalDepartment", personalDepartment).apply();
                 //名前
                 personalName = mEdtPersonalName.getText().toString();
+                //空白を削除して
+                trimSpaces();
+                //EditTextに反映させる そうしないと削除したことが伝わらない
+                mEdtPersonalName.setText(personalName);
                 sp.edit().putString("personalName", personalName).apply();
                 //現在の乗組
                 sp.edit().putString("personalRide", personalRide).apply();
@@ -264,6 +269,16 @@ public class PersonalActivity extends AppCompatActivity {
             }
         });
     }
+
+
+    //氏名EditTextの間にスペースがあったら削除
+    private void trimSpaces(){
+        //半角スペース
+        personalName = personalName.replaceAll(" ","");
+        //全角スペース
+        personalName = personalName.replaceAll("　","");
+    }
+
 
     //消防局　消防署　選択ダイアログ
     private void KyokuSyoSelectDialog() {
@@ -401,6 +416,7 @@ public class PersonalActivity extends AppCompatActivity {
         personalAge = sp.getString("personalAge", "99");
         personalDepartment = sp.getString("personalDepartment", "消防局");
         personalName = sp.getString("personalName", "名字名前");
+        trimSpaces();
         personalRide = sp.getString( "personalRide", "ST");
         String Engineer = "";
         if (sp.getBoolean("personalEngineer", false)){

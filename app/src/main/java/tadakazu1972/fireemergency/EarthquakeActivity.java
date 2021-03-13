@@ -100,6 +100,13 @@ public class EarthquakeActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        mView.findViewById(R.id.btnPersonal).setOnClickListener(new OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(mActivity, PersonalActivity.class);
+                startActivity(intent);
+            }
+        });
         mView.findViewById(R.id.btnTyphoon).setOnClickListener(new OnClickListener(){
             @Override
             public void onClick(View v){

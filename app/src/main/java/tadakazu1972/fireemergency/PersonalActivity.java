@@ -32,6 +32,7 @@ public class PersonalActivity extends AppCompatActivity {
     private EditText mEdtPersonalAge = null;
     private Spinner mSpnPersonalDepartment = null;
     private EditText mEdtPersonalName = null;
+    private Spinner mSpnPersonalRide = null;
     private CheckedTextView mCtvPersonalEngineer = null;
     private CheckedTextView mCtvPersonalParamedic = null;
     //非常参集職員情報　保存用
@@ -40,6 +41,7 @@ public class PersonalActivity extends AppCompatActivity {
     private String personalAge = null;
     private String personalDepartment = null;
     private String personalName = null;
+    private String personalRide = null;
     private Boolean personalEngineer = null;
     private Boolean personalParamedic = null;
     //SharedPreferences
@@ -149,6 +151,28 @@ public class PersonalActivity extends AppCompatActivity {
         personalName = sp.getString("personalName", "");
         mEdtPersonalName.setText(personalName);
 
+        //現在の乗組Spinner
+        mSpnPersonalRide = (Spinner)findViewById(R.id.personalRide);
+        //保存しているデータを読み込んでスピナーにセット
+        personalRide = sp.getString("personalRide", "");
+        ArrayAdapter<CharSequence> adapter4 = ArrayAdapter.createFromResource(this, R.array.personalRide, R.layout.custom_spinner_item);
+        mSpnPersonalRide.setAdapter(adapter4);
+        if (personalRide != null){
+            int spinnerPosition = adapter4.getPosition(personalRide);
+            mSpnPersonalRide.setSelection(spinnerPosition);
+        }
+        //Spinnerの選択リスナー設定
+        mSpnPersonalRide.setOnItemSelectedListener(new OnItemSelectedListener(){
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id){
+                personalRide = (String)mSpnPersonalRide.getSelectedItem();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent){
+                //何もしない
+            }
+        });
+
         //資格　機関員CheckedTextView
         mCtvPersonalEngineer = (CheckedTextView)findViewById(R.id.personalEngineer);
         //保存しているデータを読み込んでCheckedTextViewにセット
@@ -192,6 +216,8 @@ public class PersonalActivity extends AppCompatActivity {
                 //名前
                 personalName = mEdtPersonalName.getText().toString();
                 sp.edit().putString("personalName", personalName).apply();
+                //現在の乗組
+                sp.edit().putString("personalRide", personalRide).apply();
                 //資格　機関員
                 personalEngineer = mCtvPersonalEngineer.isChecked();
                 sp.edit().putBoolean("personalEngineer", personalEngineer).apply();
@@ -360,6 +386,7 @@ public class PersonalActivity extends AppCompatActivity {
         personalAge = sp.getString("personalAge", "99");
         personalDepartment = sp.getString("personalDepartment", "消防局");
         personalName = sp.getString("personalName", "名字名前");
+        personalRide = sp.getString( "personalRide", "ST");
         String Engineer = "";
         if (sp.getBoolean("personalEngineer", false)){
             Engineer = "有";
@@ -373,7 +400,7 @@ public class PersonalActivity extends AppCompatActivity {
             Paramedic = "無";
         }
         //すべてを半角スペースで結合
-        String message = personalId + " " + personalClass + " " + personalAge + " " + personalDepartment + " " + personalName + " " + Engineer + " " + Paramedic;
+        String message = personalId + " " + personalClass + " " + personalAge + " " + personalDepartment + " " + personalName + " " + " " + personalRide + " " + Engineer + " " + Paramedic;
         //メール立ち上げ
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_SEND);

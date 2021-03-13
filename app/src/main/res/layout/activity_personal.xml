@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+<LinearLayout
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp">
+    android:padding="16dp">
 
     <TextView
         android:layout_width="match_parent"
@@ -44,7 +48,7 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp">
+            android:layout_marginBottom="12dp">
             <TextView
                 android:layout_width="0dp"
                 android:layout_weight="1"
@@ -64,7 +68,7 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp">
+            android:layout_marginBottom="12dp">
             <TextView
                 android:layout_width="0dp"
                 android:layout_weight="1"
@@ -83,7 +87,7 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp">
+            android:layout_marginBottom="12dp">
             <TextView
                 android:layout_width="0dp"
                 android:layout_weight="1"
@@ -103,7 +107,7 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            >
+            android:layout_marginBottom="12dp">
             <TextView
                 android:layout_width="0dp"
                 android:layout_weight="1"
@@ -117,6 +121,26 @@
                 android:layout_weight="1.5"
                 android:layout_height="wrap_content"
                 android:hint="姓名の間に空白入れない"/>
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textColor="#111111"
+                android:textSize="20sp"
+                android:text="現在の乗組" />
+            <Spinner
+                android:id="@+id/personalRide"
+                android:layout_width="0dp"
+                android:layout_weight="1.5"
+                android:layout_height="wrap_content"
+                android:prompt="@string/spn1Prompt"
+                android:entries="@array/personalRide" />
         </LinearLayout>
         <LinearLayout
             android:orientation="horizontal"
@@ -172,11 +196,11 @@
         android:layout_height="wrap_content"
         android:text="登録"
         android:textAlignment="center"
-        android:textSize="20sp"
+        android:textSize="16sp"
         android:textColor="#ffffff"
         android:background="@drawable/red_button"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         />
     </LinearLayout>
     <LinearLayout
@@ -188,7 +212,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="戻る"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textColor="#ffffff"
             android:background="@drawable/data_button"
             android:layout_weight="1"/>
@@ -197,9 +221,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="参集先　到着"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textColor="#ffffff"
             android:background="@drawable/red_button"
             android:layout_weight="1"/>
     </LinearLayout>
     </LinearLayout>
+</ScrollView>

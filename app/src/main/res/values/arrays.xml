@@ -9,6 +9,14 @@
         <item>士長</item>
         <item>士</item>
     </string-array>
+    <string-array name="personalRide">
+        <item>ST</item>
+        <item>R</item>
+        <item>A</item>
+        <item>特殊隊</item>
+        <item>通信</item>
+        <item>日勤</item>
+    </string-array>
     <string-array name="firestation">
         <item>消防局</item>
         <item>北</item>

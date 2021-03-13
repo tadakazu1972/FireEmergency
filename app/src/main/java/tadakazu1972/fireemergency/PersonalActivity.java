@@ -309,47 +309,66 @@ public class PersonalActivity extends AppCompatActivity {
         //ボタンに基礎データの勤務所、指定参集署のテキストを設定
         final Button mBtnKinmusyo = layout.findViewById(R.id.btnKinmusyo);
         final Button mBtnShiteisansyusyo = layout.findViewById(R.id.btnShiteisansyusyo);
+        final Button mBtnAnother = layout.findViewById(R.id.btnAnother);
         //保存しているデータを読み込んでEditTextにセット
         mBtnKinmusyo.setText(mMainStation);
         mBtnShiteisansyusyo.setText(mTsunamiStation);
         //勤務署ボタン　クリックリスナー設定
-        layout.findViewById(R.id.btnKinmusyo).setOnClickListener(new View.OnClickListener() {
+        mBtnKinmusyo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                isSelected = true;
-                //勤務消防署が消防局の登録だった場合は、課の選択をするためmIndex:0で書房局ダイアログへ遷移
-                if (mMainStation.equals("消防局")) {
-                    mIndex = 0;
-                    SansyusyoSelectDialog(mIndex);
-                } else {
-                    //勤務消防署のメールアドレス確保しに行く
-                    pickupSyoMailAddress(mMainStation);
+                //セレクター切替
+                v.setSelected(!v.isSelected());
+                mBtnShiteisansyusyo.setSelected(false);
+                mBtnAnother.setSelected(false);
+                if (v.isSelected()){
+                    isSelected = true;
+                    //勤務消防署が消防局の登録だった場合は、課の選択をするためmIndex:0で書房局ダイアログへ遷移
+                    if (mMainStation.equals("消防局")) {
+                        mIndex = 0;
+                        SansyusyoSelectDialog(mIndex);
+                    } else {
+                        //勤務消防署のメールアドレス確保しに行く
+                        pickupSyoMailAddress(mMainStation);
+                    }
                 }
             }
         });
         //指定参集署ボタン　クリックリスナー設定
-        layout.findViewById(R.id.btnShiteisansyusyo).setOnClickListener(new View.OnClickListener(){
+        mBtnShiteisansyusyo.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                isSelected = true;
-                //勤務消防署が消防局の登録だった場合は、課の選択をするためmIndex:0で書房局ダイアログへ遷移
-                if (mTsunamiStation.equals("消防局")) {
-                    mIndex = 0;
-                    SansyusyoSelectDialog(mIndex);
-                } else {
-                    //指定参集所のメールアドレス確保しに行く
-                    pickupSyoMailAddress(mTsunamiStation);
+                //セレクター切替
+                v.setSelected(!v.isSelected());
+                mBtnKinmusyo.setSelected(false);
+                mBtnAnother.setSelected(false);
+                if (v.isSelected()){
+                    isSelected = true;
+                    //勤務消防署が消防局の登録だった場合は、課の選択をするためmIndex:0で書房局ダイアログへ遷移
+                    if (mTsunamiStation.equals("消防局")) {
+                        mIndex = 0;
+                        SansyusyoSelectDialog(mIndex);
+                    } else {
+                        //指定参集所のメールアドレス確保しに行く
+                        pickupSyoMailAddress(mTsunamiStation);
+                    }
                 }
             }
         });
         //その他ボタン　クリックリスナー設定
-        layout.findViewById(R.id.btnAnother).setOnClickListener(new View.OnClickListener(){
+        mBtnAnother.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                isSelected = true;
-                //消防局　消防署　選択ダイアログへ遷移
-                KyokuSyoSelectDialog();
-                //Toast.makeText(mActivity, "消防署", Toast.LENGTH_SHORT).show();
+                //セレクター切替
+                v.setSelected(!v.isSelected());
+                mBtnKinmusyo.setSelected(false);
+                mBtnShiteisansyusyo.setSelected(false);
+                if (v.isSelected()){
+                    isSelected = true;
+                    //消防局　消防署　選択ダイアログへ遷移
+                    KyokuSyoSelectDialog();
+                    //Toast.makeText(mActivity, "消防署", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         //セット
@@ -466,6 +485,8 @@ public class PersonalActivity extends AppCompatActivity {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?>parent, View view, int position, long id){
+                //セレクター切替
+                view.setSelected(!view.isSelected());
                 //参集先の文字列を配列から確保
                 String sansyusaki = mList[position];
                 //宛先のメアドも配列から確保、[0]にしているのは送る変数が配列でないとダメだからその１つ目の意味。

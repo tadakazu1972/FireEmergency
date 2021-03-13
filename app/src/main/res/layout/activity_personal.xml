@@ -76,12 +76,13 @@
                 android:textColor="#111111"
                 android:textSize="20sp"
                 android:text="年　　齢" />
-            <EditText
+            <Spinner
                 android:id="@+id/personalAge"
                 android:layout_width="0dp"
                 android:layout_weight="1.5"
                 android:layout_height="wrap_content"
-                android:hint="半角数字で入力"/>
+                android:prompt="@string/spn1Prompt"
+                android:entries="@array/age" />
         </LinearLayout>
         <LinearLayout
             android:orientation="horizontal"

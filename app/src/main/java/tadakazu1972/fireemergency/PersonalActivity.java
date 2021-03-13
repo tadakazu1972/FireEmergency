@@ -29,7 +29,7 @@ public class PersonalActivity extends AppCompatActivity {
     //EditText, Spinner, CheckedTextViewの変数確保
     private EditText mEdtPersonalId = null;
     private Spinner mSpnPersonalClass = null;
-    private EditText mEdtPersonalAge = null;
+    private Spinner mSpnPersonalAge = null;
     private Spinner mSpnPersonalDepartment = null;
     private EditText mEdtPersonalName = null;
     private Spinner mSpnPersonalRide = null;
@@ -117,11 +117,27 @@ public class PersonalActivity extends AppCompatActivity {
             }
         });
 
-        //年齢EditText
-        mEdtPersonalAge = (EditText)findViewById(R.id.personalAge);
-        //保存しているデータを読み込んでEditTextにセット
-        personalAge = sp.getString("personalAge", "");
-        mEdtPersonalAge.setText(personalAge);
+        //年齢Spinner
+        mSpnPersonalAge = (Spinner)findViewById(R.id.personalAge);
+        //保存しているデータを読み込んでスピナーにセット
+        personalAge = sp.getString("personalClass", "");
+        ArrayAdapter<CharSequence> adapter3 = ArrayAdapter.createFromResource(this, R.array.age, R.layout.custom_spinner_item);
+        mSpnPersonalAge.setAdapter(adapter3);
+        if (personalAge != null){
+            int spinnerPosition = adapter3.getPosition(personalAge);
+            mSpnPersonalAge.setSelection(spinnerPosition);
+        }
+        //Spinnerの選択リスナー設定
+        mSpnPersonalAge.setOnItemSelectedListener(new OnItemSelectedListener(){
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id){
+                personalAge = (String)mSpnPersonalAge.getSelectedItem();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent){
+                //何もしない
+            }
+        });
 
         //所属Spinner
         mSpnPersonalDepartment = (Spinner)findViewById(R.id.personalDepartment);
@@ -209,7 +225,6 @@ public class PersonalActivity extends AppCompatActivity {
                 //階級
                 sp.edit().putString("personalClass", personalClass).apply();
                 //年齢
-                personalAge = mEdtPersonalAge.getText().toString();
                 sp.edit().putString("personalAge", personalAge).apply();
                 //所属
                 sp.edit().putString("personalDepartment", personalDepartment).apply();

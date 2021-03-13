@@ -17,6 +17,35 @@
         <item>通信</item>
         <item>日勤</item>
     </string-array>
+    <string-array name="personalDepartment">
+        <item>北</item>
+        <item>都島</item>
+        <item>福島</item>
+        <item>此花</item>
+        <item>中央</item>
+        <item>西</item>
+        <item>港</item>
+        <item>大正</item>
+        <item>天王寺</item>
+        <item>浪速</item>
+        <item>西淀川</item>
+        <item>淀川</item>
+        <item>東淀川</item>
+        <item>東成</item>
+        <item>生野</item>
+        <item>旭</item>
+        <item>城東</item>
+        <item>鶴見</item>
+        <item>住之江</item>
+        <item>阿倍野</item>
+        <item>住吉</item>
+        <item>東住吉</item>
+        <item>平野</item>
+        <item>西成</item>
+        <item>水上</item>
+        <item>消防局</item>
+        <item>訓練センター</item>
+    </string-array>
     <string-array name="firestation">
         <item>消防局</item>
         <item>北</item>

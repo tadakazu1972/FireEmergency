@@ -1,7 +1,6 @@
 package tadakazu1972.fireemergency;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,16 +11,17 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckedTextView;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PersonalActivity extends AppCompatActivity {
     protected PersonalActivity mActivity = null;
@@ -54,6 +54,10 @@ public class PersonalActivity extends AppCompatActivity {
     //メール送信用
     private String[] mailAddress = {"pa0035@city.osaka.lg.jp"}; //初期設定　１個でも配列でないとダメ
     private String subject = "@警防";
+    //参集先ダイアログで使う消防署とメールアドレスの辞書型：ボタンタップでStringしか得られないから配列の引数指定ができない、よって辞書型を使う
+    private Map<String, String> syoMailAddress = null;
+    //参集先を選択したかどうか
+    protected Boolean isSelected = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -66,11 +70,25 @@ public class PersonalActivity extends AppCompatActivity {
         //SharedPreferencesインスタンス取得
         packageName = getPackageName();
         sp = getSharedPreferences(packageName + "_preferences", MODE_PRIVATE);
+
         //基礎データで登録したデータ呼び出し
         loadData();
 
         //EditText, Button 初期化
         initViews();
+
+        //署のメールアドレス辞書　初期化
+        syoMailAddress = new HashMap<String, String>();
+        // res/values/arrays.xmlにSyoとして消防署とメールアドレスを設定している。それを読み込む。
+        int resourceId = getResources().getIdentifier("Syo", "array", getPackageName());
+        int resourceId2 = getResources().getIdentifier("SyoAddress", "array", getPackageName());
+        //取得した配列リソースIDを文字列配列に格納
+        final String[] mList = getResources().getStringArray(resourceId);
+        final String[] addressArray = getResources().getStringArray(resourceId2);
+        //辞書に格納
+        for (int i=0; i < mList.length; i++){
+            syoMailAddress.put(mList[i], addressArray[i]);
+        }
     }
 
     @Override
@@ -143,7 +161,7 @@ public class PersonalActivity extends AppCompatActivity {
         mSpnPersonalDepartment = (Spinner)findViewById(R.id.personalDepartment);
         //保存しているデータを読み込んでスピナーにセット
         personalDepartment = sp.getString("personalDepartment", "");
-        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this, R.array.firestation, R.layout.custom_spinner_item);
+        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this, R.array.personalDepartment, R.layout.custom_spinner_item);
         mSpnPersonalDepartment.setAdapter(adapter2);
         if (personalDepartment != null){
             int spinnerPosition = adapter2.getPosition(personalDepartment);
@@ -265,7 +283,7 @@ public class PersonalActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 //消防局　消防署　選択ダイアログへ遷移
-                KyokuSyoSelectDialog();
+                SansyusyoSelectDialog0();
             }
         });
     }
@@ -279,6 +297,112 @@ public class PersonalActivity extends AppCompatActivity {
         personalName = personalName.replaceAll("　","");
     }
 
+
+    //消防署選択
+    private void SansyusyoSelectDialog0(){
+        //３つのボタンどれも押していない初期状態
+        isSelected = false;
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        //カスタムビュー設定
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
+        final View layout = inflater.inflate(R.layout.dialog_sansyusyo, (ViewGroup) findViewById(R.id.dlgSansyusyo));
+        //ボタンに基礎データの勤務所、指定参集署のテキストを設定
+        final Button mBtnKinmusyo = layout.findViewById(R.id.btnKinmusyo);
+        final Button mBtnShiteisansyusyo = layout.findViewById(R.id.btnShiteisansyusyo);
+        //保存しているデータを読み込んでEditTextにセット
+        mBtnKinmusyo.setText(mMainStation);
+        mBtnShiteisansyusyo.setText(mTsunamiStation);
+        //勤務署ボタン　クリックリスナー設定
+        layout.findViewById(R.id.btnKinmusyo).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isSelected = true;
+                //勤務消防署が消防局の登録だった場合は、課の選択をするためmIndex:0で書房局ダイアログへ遷移
+                if (mMainStation.equals("消防局")) {
+                    mIndex = 0;
+                    SansyusyoSelectDialog(mIndex);
+                } else {
+                    //勤務消防署のメールアドレス確保しに行く
+                    pickupSyoMailAddress(mMainStation);
+                }
+            }
+        });
+        //指定参集署ボタン　クリックリスナー設定
+        layout.findViewById(R.id.btnShiteisansyusyo).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                isSelected = true;
+                //勤務消防署が消防局の登録だった場合は、課の選択をするためmIndex:0で書房局ダイアログへ遷移
+                if (mTsunamiStation.equals("消防局")) {
+                    mIndex = 0;
+                    SansyusyoSelectDialog(mIndex);
+                } else {
+                    //指定参集所のメールアドレス確保しに行く
+                    pickupSyoMailAddress(mTsunamiStation);
+                }
+            }
+        });
+        //その他ボタン　クリックリスナー設定
+        layout.findViewById(R.id.btnAnother).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                isSelected = true;
+                //消防局　消防署　選択ダイアログへ遷移
+                KyokuSyoSelectDialog();
+                //Toast.makeText(mActivity, "消防署", Toast.LENGTH_SHORT).show();
+            }
+        });
+        //セット
+        builder.setView(layout);
+        builder.setTitle("■参集先　メール送信\n   必ず参集先に到着してから送信");
+        //メール送信ボタンタップ
+        builder.setPositiveButton("メール送信", new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int which){
+                //参集先をタップしていない場合は警告出してメール送信に進ませない
+                if (!isSelected){
+                    //参集先を指定していないのでメールアドレスがnull
+                    NullMailAddressDialog();
+                } else {
+                    //メール送信処理へ
+                    sendMail();
+                }
+            }
+        });
+        builder.setNegativeButton("戻る", null);
+        builder.setCancelable(true);
+        builder.create();
+        builder.show();
+    }
+
+    private void pickupSyoMailAddress(String _syo){
+        //勤務消防署もしくは指定参集署のメールアドレスを格納
+        //宛先のメアドも配列から確保、[0]にしているのは送る変数が配列でないとダメだからその１つ目の意味。
+        mailAddress[0] = syoMailAddress.get(_syo) + "@city.osaka.lg.jp";
+        //件名を「＠」と参集先名
+        subject = "@" + _syo;
+        Toast.makeText(mActivity, _syo+":"+mailAddress[0], Toast.LENGTH_SHORT).show();
+    }
+
+    //参集先指定していないのでメールアドレスがnullアラートダイアログ
+    private void NullMailAddressDialog() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        //カスタムビュー設定
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
+        final View layout = inflater.inflate(R.layout.dialog_nullmailaddress, (ViewGroup) findViewById(R.id.dlgNullMailAddress));
+        //セット
+        builder.setView(layout);
+        builder.setPositiveButton("はい", new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int which){
+                //参集先選択へ戻る
+                SansyusyoSelectDialog0();
+            }
+        });
+        builder.setCancelable(false);
+        builder.create();
+        builder.show();
+    }
 
     //消防局　消防署　選択ダイアログ
     private void KyokuSyoSelectDialog() {

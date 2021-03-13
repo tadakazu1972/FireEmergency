@@ -84,6 +84,14 @@ public class DataActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        //ホーム帰還　ボタン
+        mView.findViewById(R.id.btnHome).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(mActivity, EarthquakeActivity.class);
+                startActivity(intent);
+            }
+        });
         //アプリ説明書　ボタン
         mView.findViewById(R.id.btnGuide).setOnClickListener(new OnClickListener(){
             @Override

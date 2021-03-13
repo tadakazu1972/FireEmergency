@@ -18,17 +18,33 @@
         android:textSize="20sp"
         android:textColor="#ffffff"
         android:background="@drawable/red_button"
-        android:layout_marginBottom="8dp"/>
-    <Button
-        android:id="@+id/btnGuide"
+        android:layout_marginBottom="0dp"/>
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:text="アプリ説明書"
-        android:textSize="20sp"
-        android:textColor="#ffffff"
-        android:background="@drawable/data_button"
-        android:layout_marginBottom="8dp"/>
+        android:orientation="horizontal">
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="戻る"
+            android:textSize="18sp"
+            android:textColor="#ffffff"
+            android:background="@drawable/data_button"
+            android:id="@+id/btnHome"/>
+        <Button
+            android:id="@+id/btnGuide"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="アプリ説明書"
+            android:textSize="20sp"
+            android:textColor="#ffffff"
+            android:background="@drawable/guide_button"
+            android:layout_marginBottom="8dp"/>
+    </LinearLayout>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

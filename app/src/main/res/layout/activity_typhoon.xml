@@ -4,15 +4,31 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:background="#2299ff">
-    <Button
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:text="基礎データ入力"
-        android:textSize="20sp"
-        android:textColor="#ffffff"
-        android:background="@drawable/red_button"
-        android:id="@+id/btnData"/>
+        android:orientation="horizontal">
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="基礎データ入力"
+            android:textSize="18sp"
+            android:textColor="#ffffff"
+            android:background="@drawable/red_button"
+            android:id="@+id/btnData"/>
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="非常参集受付"
+            android:textSize="18sp"
+            android:textColor="#ffffff"
+            android:background="@drawable/red_button"
+            android:id="@+id/btnPersonal"/>
+    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

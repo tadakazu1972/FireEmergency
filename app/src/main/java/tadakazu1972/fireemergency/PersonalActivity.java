@@ -238,33 +238,9 @@ public class PersonalActivity extends AppCompatActivity {
         mView.findViewById(R.id.btnPersonalSave).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                //職員番号
-                personalId = mEdtPersonalId.getText().toString();
-                sp.edit().putString("personalId", personalId).apply();
-                //階級
-                sp.edit().putString("personalClass", personalClass).apply();
-                //年齢
-                sp.edit().putString("personalAge", personalAge).apply();
-                //所属
-                sp.edit().putString("personalDepartment", personalDepartment).apply();
-                //名前
-                personalName = mEdtPersonalName.getText().toString();
-                //空白を削除して
-                trimSpaces();
-                //EditTextに反映させる そうしないと削除したことが伝わらない
-                mEdtPersonalName.setText(personalName);
-                sp.edit().putString("personalName", personalName).apply();
-                //現在の乗組
-                sp.edit().putString("personalRide", personalRide).apply();
-                //資格　機関員
-                personalEngineer = mCtvPersonalEngineer.isChecked();
-                sp.edit().putBoolean("personalEngineer", personalEngineer).apply();
-                //資格　救命士
-                personalParamedic = mCtvPersonalParamedic.isChecked();
-                sp.edit().putBoolean("personalParamedic", personalParamedic).apply();
-
-                //メッセージ表示
-                Toast.makeText(mActivity, "職員情報を登録しました", Toast.LENGTH_SHORT).show();
+                //後述した登録ボタンタップ後の処理関数を呼び出し
+                //登録ボタンを押さずに「参集先　到着」を押す場合を想定して、ここに書かず切り離して関数とした。
+                OnClickBtnPersonalSave();
             }
         });
 
@@ -282,8 +258,13 @@ public class PersonalActivity extends AppCompatActivity {
         mView.findViewById(R.id.btnNext).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+                //あせって「登録」ボタンを押さずに「参集先　到着」を押す場合を想定して、
+                //登録ボタンを押す関数を呼ぶ
+                OnClickBtnPersonalSave();
+
                 //職員番号～現在の乗組まで、すべて入力されているかチェック。資格はtrue/falseの二択しかないからチェックしない
-                if ( personalId.equals("") || personalClass.equals("") || personalAge.equals("") || personalDepartment.equals("") || personalName.equals("") || personalRide.equals("")) {
+                //職員番号と氏名は、EditTextが""であれば、上の登録でそれぞれの変数にspから呼び出した値が記録されていてもダメ、とする。
+                if ( mEdtPersonalId.getText().toString().equals("") || personalClass.equals("") || personalAge.equals("") || personalDepartment.equals("") || mEdtPersonalName.getText().toString().equals("") || personalRide.equals("")) {
                     //警告表示
                     InputAlert();
                 } else {
@@ -293,6 +274,67 @@ public class PersonalActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    //登録ボタンを押した処理
+    private void OnClickBtnPersonalSave(){
+        //職員番号
+        personalId = mEdtPersonalId.getText().toString();
+        //桁数7桁チェック
+        if (personalId.length() != 7){
+            //職員番号桁数間違いアラート表示
+            PersonalIdAlert();
+            //氏名が空白かチェック
+        } else if (mEdtPersonalName.getText().toString().equals("")) {
+            //氏名が空白アラート表示
+            InputAlert();
+        } else {
+            //以下、登録処理
+            sp.edit().putString("personalId", personalId).apply();
+            //階級
+            sp.edit().putString("personalClass", personalClass).apply();
+            //年齢
+            sp.edit().putString("personalAge", personalAge).apply();
+            //所属
+            sp.edit().putString("personalDepartment", personalDepartment).apply();
+            //名前
+            personalName = mEdtPersonalName.getText().toString();
+            //空白を削除して
+            trimSpaces();
+            //EditTextに反映させる そうしないと削除したことが伝わらない
+            mEdtPersonalName.setText(personalName);
+            sp.edit().putString("personalName", personalName).apply();
+            //現在の乗組
+            sp.edit().putString("personalRide", personalRide).apply();
+            //資格　機関員
+            personalEngineer = mCtvPersonalEngineer.isChecked();
+            sp.edit().putBoolean("personalEngineer", personalEngineer).apply();
+            //資格　救命士
+            personalParamedic = mCtvPersonalParamedic.isChecked();
+            sp.edit().putBoolean("personalParamedic", personalParamedic).apply();
+
+            //メッセージ表示
+            Toast.makeText(mActivity, "職員情報を登録しました", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    //入力もれ警告
+    private void PersonalIdAlert(){
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        //カスタムビュー設定
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
+        final View layout = inflater.inflate(R.layout.dialog_personalidalert, (ViewGroup) findViewById(R.id.dlgPersonalIdAlert));
+        //セット
+        builder.setView(layout);
+        builder.setPositiveButton("はい", new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int which){
+                //ここに何も記述しなくていい。setPositiveButtonを押されれば閉じる処理は走る
+            }
+        });
+        builder.setCancelable(false);
+        builder.create();
+        builder.show();
     }
 
     //入力もれ警告
@@ -313,7 +355,6 @@ public class PersonalActivity extends AppCompatActivity {
         builder.create();
         builder.show();
     }
-
 
     //氏名EditTextの間にスペースがあったら削除
     private void trimSpaces(){

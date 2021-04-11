@@ -282,10 +282,36 @@ public class PersonalActivity extends AppCompatActivity {
         mView.findViewById(R.id.btnNext).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                //消防局　消防署　選択ダイアログへ遷移
-                SansyusyoSelectDialog0();
+                //職員番号～現在の乗組まで、すべて入力されているかチェック。資格はtrue/falseの二択しかないからチェックしない
+                if ( personalId.equals("") || personalClass.equals("") || personalAge.equals("") || personalDepartment.equals("") || personalName.equals("") || personalRide.equals("")) {
+                    //警告表示
+                    InputAlert();
+                } else {
+                    //入力OKなので、消防局　消防署　選択ダイアログへ遷移
+                    SansyusyoSelectDialog0();
+                }
+
             }
         });
+    }
+
+    //入力もれ警告
+    private void InputAlert(){
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        //カスタムビュー設定
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
+        final View layout = inflater.inflate(R.layout.dialog_inputalert, (ViewGroup) findViewById(R.id.dlgInputAlert));
+        //セット
+        builder.setView(layout);
+        builder.setPositiveButton("はい", new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int which){
+                //ここに何も記述しなくていい。setPositiveButtonを押されれば閉じる処理は走る
+            }
+        });
+        builder.setCancelable(false);
+        builder.create();
+        builder.show();
     }
 
 

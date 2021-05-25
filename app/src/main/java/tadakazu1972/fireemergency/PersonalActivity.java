@@ -138,7 +138,7 @@ public class PersonalActivity extends AppCompatActivity {
         //年齢Spinner
         mSpnPersonalAge = (Spinner)findViewById(R.id.personalAge);
         //保存しているデータを読み込んでスピナーにセット
-        personalAge = sp.getString("personalClass", "");
+        personalAge = sp.getString("personalAge", "");
         ArrayAdapter<CharSequence> adapter3 = ArrayAdapter.createFromResource(this, R.array.age, R.layout.custom_spinner_item);
         mSpnPersonalAge.setAdapter(adapter3);
         if (personalAge != null){

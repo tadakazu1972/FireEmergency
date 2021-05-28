@@ -424,7 +424,7 @@ public class TyphoonActivity extends AppCompatActivity {
 
     //河川水位による非常警備
     private void showTyphoon3() {
-        final CharSequence[] actions = {"■淀川（枚方）", "■大和川（柏原）", "■神崎川（三国）", "■天竺川（天竺川橋）", "■高川（水路橋）", "■安威川（千歳橋）", "■寝屋川（京橋）", "■第二寝屋川（昭明橋）", "■平野川（剣橋）", "■平野川分水路（今里大橋）", "■古川（桑才）", "■東除川（大堀上小橋）", "■西除川（布忍橋）", "■高潮"};
+        final CharSequence[] actions = {"■淀川（枚方）", "■大和川（柏原）", "■神崎川（三国）", "■天竺川（天竺川橋）", "■高川（水路橋）", "■安威川（千歳橋）", "■寝屋川（京橋）", "■第二寝屋川（昭明橋）", "■平野川（剣橋）", "■平野川分水路（今里大橋）", "■古川（桑才）", "■東除川（大堀上小橋）", "■石川（玉手橋）", "■西除川（布忍橋）", "■高潮"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("河川等を選択してください");
         builder.setItems(actions, new DialogInterface.OnClickListener() {
@@ -479,12 +479,16 @@ public class TyphoonActivity extends AppCompatActivity {
                     case 11:
                         showTyphoon3A();
                         break;
-                    //西除川 2020.06　追加 showTyphoon3E(既存分を変更しないため)
+                    //石川 2021.05　追加 showTyphoon3F(既存分を変更しないため)
                     case 12:
+                        showTyphoon3F();
+                        break;
+                    //西除川 2020.06　追加 showTyphoon3E(既存分を変更しないため)
+                    case 13:
                         showTyphoon3E();
                         break;
                     //高潮 2020-9 名称変更　区域削除
-                    case 13:
+                    case 14:
                         showTyphoon3B();
                         break;
                 }
@@ -584,9 +588,12 @@ public class TyphoonActivity extends AppCompatActivity {
                         showTyphoon3A();
                         break;
                     case 12:
-                        showTyphoon3E();
+                        showTyphoon3F();
                         break;
                     case 13:
+                        showTyphoon3E();
+                        break;
+                    case 14:
                         showTyphoon3B();
                         break;
                 }
@@ -698,9 +705,12 @@ public class TyphoonActivity extends AppCompatActivity {
                         showTyphoon3A();
                         break;
                     case 12:
-                        showTyphoon3E();
+                        showTyphoon3F();
                         break;
                     case 13:
+                        showTyphoon3E();
+                        break;
+                    case 14:
                         showTyphoon3B();
                         break;
                 }
@@ -824,9 +834,12 @@ public class TyphoonActivity extends AppCompatActivity {
                         showTyphoon3A();
                         break;
                     case 12:
-                        showTyphoon3E();
+                        showTyphoon3F();
                         break;
                     case 13:
+                        showTyphoon3E();
+                        break;
+                    case 14:
                         showTyphoon3B();
                         break;
                 }
@@ -960,9 +973,142 @@ public class TyphoonActivity extends AppCompatActivity {
                         showTyphoon3A();
                         break;
                     case 12:
-                        showTyphoon3E();
+                        showTyphoon3F();
                         break;
                     case 13:
+                        showTyphoon3E();
+                        break;
+                    case 14:
+                        showTyphoon3B();
+                        break;
+                }
+            }
+        });
+        builder.setNegativeButton("キャンセル", null);
+        builder.setCancelable(true);
+        builder.create();
+        builder.show();
+    }
+
+    //緊急安全確保
+    private void showTyphoonRiver5(String title, String title2, String[] a, String gaitousyo, int number) {
+        final int i = number;
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        //カスタムビュー設定
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
+        final View layout = inflater.inflate(R.layout.dialog_river, (ViewGroup) findViewById(R.id.dlgRiver));
+        //テキスト放りこみ先準備
+        final TextView text0 = layout.findViewById(R.id.txtRiver0);
+        final TextView text1 = layout.findViewById(R.id.txtRiver1);
+        final TextView text2 = layout.findViewById(R.id.txtRiver2);
+        final TextView text3 = layout.findViewById(R.id.txtRiver3);
+        //放り込むテキストの設定
+        //勤務消防署がリストに該当するか判定
+        String s1;
+        String s2;
+        final String s3 = gaitousyo;
+        if (Arrays.asList(a).contains(mMainStation)) {
+            //１号、２号、３号対象者は(非番・日勤)表示
+            if (mKubun.equals("１号招集") || mKubun.equals("２号招集") || mKubun.equals("３号招集")){
+                s1 = "１号非常招集(非番・日勤)";
+                //４号対象者は(非番・日勤)非表示
+            } else {
+                s1 = "１号非常招集";
+            }
+            if (mMainStation.equals("消防局") || mMainStation.equals("訓練センター")) {
+                s2 = mMainStation + "へ参集(所属担当者に確認すること)";
+            } else {
+                s2 = mMainStation + "消防署へ参集";
+            }
+        } else {
+            //該当署以外は２号招集なので、１号は参集なしの判定する
+            if (mKubun.equals("１号招集")) {
+                s1 = "招集なし";
+                s2 = "";
+                //２号、３号対象者は(非番・日勤)表示
+            } else if (mKubun.equals("２号招集") || mKubun.equals("３号招集")){
+                s1 = "２号非常招集(非番・日勤)";
+                if (mMainStation.equals("消防局") || mMainStation.equals("訓練センター")) {
+                    s2 = mMainStation + "へ参集(所属担当者に確認すること)";
+                } else {
+                    s2 = mMainStation + "消防署へ参集";
+                }
+                //４号対象者は(非番・日勤)非表示
+            } else {
+                s1 = "２号非常招集";
+                if (mMainStation.equals("消防局")||mMainStation.equals("訓練センター")) {
+                    s2 = mMainStation + "へ参集(所属担当者に確認すること)";
+                } else {
+                    s2 = mMainStation + "消防署へ参集";
+                }
+            }
+        }
+        //テキストセット
+        text0.setText(title2);
+        text1.setText(s1);
+        text2.setText(s2);
+        //ボタン クリックリスナー設定
+        layout.findViewById(R.id.btnGaitousyo).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!gaitousyo_visible) {
+                    text3.setText(s3);
+                    gaitousyo_visible = true;
+                } else {
+                    text3.setText("");
+                    gaitousyo_visible = false;
+                }
+            }
+        });
+        builder.setTitle(title);
+        builder.setView(layout);
+        builder.setPositiveButton("戻る", new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (i) {
+                    case 0:
+                        showTyphoon31();
+                        break;
+                    case 1:
+                        showTyphoon32();
+                        break;
+                    case 2:
+                        showTyphoon33();
+                        break;
+                    case 3:
+                        showTyphoon3C();
+                        break;
+                    case 4:
+                        showTyphoon3D();
+                        break;
+                    case 5:
+                        showTyphoon34();
+                        break;
+                    case 6:
+                        showTyphoon35();
+                        break;
+                    case 7:
+                        showTyphoon36();
+                        break;
+                    case 8:
+                        showTyphoon37();
+                        break;
+                    case 9:
+                        showTyphoon38();
+                        break;
+                    case 10:
+                        showTyphoon39();
+                        break;
+                    case 11:
+                        showTyphoon3A();
+                        break;
+                    case 12:
+                        showTyphoon3F();
+                        break;
+                    case 13:
+                        showTyphoon3E();
+                        break;
+                    case 14:
                         showTyphoon3B();
                         break;
                 }
@@ -1430,6 +1576,29 @@ public class TyphoonActivity extends AppCompatActivity {
         builder.show();
     }
 
+    //石川（玉手橋）
+    private void showTyphoon3F() {
+        final CharSequence[] actions = {"■【警戒レベル５】緊急安全確保(参考水位5.88m)"};
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("水位の状況は？");
+        builder.setItems(actions, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case 0:{
+                        String[] a = {"平野", "消防局"};
+                        String gaitousyo = "平野,消防局";
+                        showTyphoonRiver5("■石川（玉手橋）", "緊急安全確保(参考水位5.88m)", a, gaitousyo, 12);
+                        break;}
+                }
+            }
+        });
+        builder.setNegativeButton("キャンセル", null);
+        builder.setCancelable(true);
+        builder.create();
+        builder.show();
+    }
+
     //西除川(布忍橋) 2020.06　追加
     private void showTyphoon3E() {
         final CharSequence[] actions = {"■氾濫注意水位(水位2.5m)、水防警報(出動)", "■【警戒レベル３】避難準備・高齢者等避難開始(見込みを含む。)又は避難勧告が発令される見込みとなったとき(水位3.7m)", "■【警戒レベル４】避難勧告(水位4m)", "■【警戒レベル４】避難指示(緊急)(水位5.06m)"};
@@ -1442,22 +1611,22 @@ public class TyphoonActivity extends AppCompatActivity {
                     case 0:{
                         String[] a = {"東住吉", "平野", "消防局"};
                         String gaitousyo = "東住吉,平野,消防局";
-                        showTyphoonRiver1("■西除川(布忍橋)", "氾濫注意水位(水位2.5m)、水防警報(出動)", a, gaitousyo, 12);
+                        showTyphoonRiver1("■西除川(布忍橋)", "氾濫注意水位(水位2.5m)、水防警報(出動)", a, gaitousyo, 13);
                         break;}
                     case 1:{
                         String[] a = {"東住吉", "平野", "消防局"};
                         String gaitousyo = "４号：東住吉,平野,消防局\n５号：その他の署";
-                        showTyphoonRiver2("■西除川(布忍橋)\n【警戒レベル３】", "避難準備・高齢者等避難開始(見込みを含む。)又は避難勧告が発令される見込みとなったとき(水位3.7m)", a, gaitousyo, 12);
+                        showTyphoonRiver2("■西除川(布忍橋)\n【警戒レベル３】", "避難準備・高齢者等避難開始(見込みを含む。)又は避難勧告が発令される見込みとなったとき(水位3.7m)", a, gaitousyo, 13);
                         break;}
                     case 2:{
                         String[] a = {"東住吉", "平野", "消防局"};
                         String gaitousyo = "３号：東住吉,平野,消防局\n４号：その他の署";
-                        showTyphoonRiver3("■西除川(布忍橋)\n【警戒レベル４】", "避難勧告(水位4m)", a, gaitousyo, 12);
+                        showTyphoonRiver3("■西除川(布忍橋)\n【警戒レベル４】", "避難勧告(水位4m)", a, gaitousyo, 13);
                         break;}
                     case 3:{
                         String[] a = {"東住吉", "平野", "消防局"};
                         String gaitousyo = "２号：東住吉,平野,消防局\n３号：その他の署";
-                        showTyphoonRiver4("■西除川(布忍橋)\n【警戒レベル４】", "避難指示(緊急)(水位5.06m)", a, gaitousyo, 12);
+                        showTyphoonRiver4("■西除川(布忍橋)\n【警戒レベル４】", "避難指示(緊急)(水位5.06m)", a, gaitousyo, 13);
                         break;}
                 }
             }

@@ -748,9 +748,9 @@ public class TyphoonActivity extends AppCompatActivity {
                 } else {
                     s2 = mMainStation + "消防署へ参集\n\n※平日の9時～17時30分は、原則、勤務中の毎日勤務者で活動体制を確保する";
                 }
-                //４号招集対象者の判定　(非番・日勤)を非表示
+                //４号招集対象者の判定　(非番・日勤)を非表示 <- 2021.06　菊本さんの指示で２号３号のみ表示にすることに
             } else if (mKubun.equals("４号招集")) {
-                s1 = "３号非常招集";
+                s1 = "３号非常招集(非番・日勤)";
                 if (mMainStation.equals("消防局")) {
                     s2 = mMainStation + "へ参集(所属担当者に確認すること)\n\n※平日の9時～17時30分は、原則、勤務中の毎日勤務者で活動体制を確保する";
                 } else {
@@ -883,7 +883,7 @@ public class TyphoonActivity extends AppCompatActivity {
                 }
                 //４号対象者は(非番・日勤)非表示
             } else {
-                s1 = "２号非常招集";
+                s1 = "２号非常招集(非番・日勤)";
                 if (mMainStation.equals("消防局")||mMainStation.equals("訓練センター")) {
                     s2 = mMainStation + "へ参集(所属担当者に確認すること)";
                 } else {
@@ -905,7 +905,7 @@ public class TyphoonActivity extends AppCompatActivity {
                 }
                 //４号対象者は(非番・日勤)非表示
             } else {
-                s1 = "３号非常招集";
+                s1 = "３号非常招集(非番・日勤)";
                 if (mMainStation.equals("消防局")) {
                     s2 = mMainStation + "へ参集(所属担当者に確認すること)\n\n※平日の9時～17時30分は、原則、勤務中の毎日勤務者で活動体制を確保する";
                 } else {
@@ -1008,9 +1008,9 @@ public class TyphoonActivity extends AppCompatActivity {
         String s2;
         final String s3 = gaitousyo;
         if (Arrays.asList(a).contains(mMainStation)) {
-            //１号、２号、３号対象者は(非番・日勤)表示
+            //１号、２号、３号対象者は(非番・日勤)表示 <- 2021.06　修正
             if (mKubun.equals("１号招集") || mKubun.equals("２号招集") || mKubun.equals("３号招集")){
-                s1 = "１号非常招集(非番・日勤)";
+                s1 = "１号非常招集";
                 //４号対象者は(非番・日勤)非表示
             } else {
                 s1 = "１号非常招集";
@@ -1033,9 +1033,9 @@ public class TyphoonActivity extends AppCompatActivity {
                 } else {
                     s2 = mMainStation + "消防署へ参集";
                 }
-                //４号対象者は(非番・日勤)非表示
+                //４号対象者は(非番・日勤)非表示 <- 2021.06修正
             } else {
-                s1 = "２号非常招集";
+                s1 = "２号非常招集(非番・日勤)";
                 if (mMainStation.equals("消防局")||mMainStation.equals("訓練センター")) {
                     s2 = mMainStation + "へ参集(所属担当者に確認すること)";
                 } else {

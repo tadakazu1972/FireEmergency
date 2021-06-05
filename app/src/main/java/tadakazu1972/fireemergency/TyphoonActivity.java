@@ -1638,7 +1638,7 @@ public class TyphoonActivity extends AppCompatActivity {
 
     //石川（玉手橋）
     private void showTyphoon3F() {
-        final CharSequence[] actions = {"■【警戒レベル５】緊急安全確保(参考水位5.88m)"};
+        final CharSequence[] actions = {"■【警戒レベル５】緊急安全確保(参考水位5.88m)\n※石川が上記水位に到達している場合は、東除川の水位を確認してください。"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("水位の状況は？");
         builder.setItems(actions, new DialogInterface.OnClickListener() {
@@ -1646,9 +1646,8 @@ public class TyphoonActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 switch (which) {
                     case 0:{
-                        String[] a = {"平野", "消防局"};
-                        String gaitousyo = "平野,消防局";
-                        showTyphoonRiver5("■石川（玉手橋）", "緊急安全確保(参考水位5.88m)", a, gaitousyo, 12);
+                        //東除川の水位選択にジャンプ 2021.06
+                        showTyphoon3A();
                         break;}
                 }
             }

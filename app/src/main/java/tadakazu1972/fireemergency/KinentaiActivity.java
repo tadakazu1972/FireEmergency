@@ -63,6 +63,9 @@ public class KinentaiActivity extends AppCompatActivity {
     private ArrayList<String> mailArray;
     //連絡網初回パスワード要求フラグ
     public boolean mPassFlag = false;
+    //複数都道府県選択
+    protected ArrayList<Integer> mSelectedPrefectureIndexList; //選択した都道府県のインデックス(showCSVで使う)格納用
+    protected ArrayList<String> mSelectedPrefectureCSVList; //選択した都道府県の震度のcsvファイル名格納用
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -80,6 +83,8 @@ public class KinentaiActivity extends AppCompatActivity {
         String mKey = sp.getString("key", null);
         db = mDBHelper.getWritableDatabase(mKey);
         mailArray = new ArrayList<String>();
+        mSelectedPrefectureIndexList = new ArrayList<Integer>();
+        mSelectedPrefectureCSVList = new ArrayList<String>();
     }
 
     //ボタン設定
@@ -122,7 +127,7 @@ public class KinentaiActivity extends AppCompatActivity {
         mView.findViewById(R.id.btnKinentai1).setOnClickListener(new OnClickListener(){
             @Override
             public void onClick(View v){
-                showKinentai1();
+                selectSingleMultipleLand();
             }
         });
         mView.findViewById(R.id.btnKinentai2).setOnClickListener(new OnClickListener(){
@@ -185,6 +190,125 @@ public class KinentaiActivity extends AppCompatActivity {
                 showWeather();
             }
         });
+    }
+
+    //2021.9追加
+    //地震（震央「陸」）ボタンを押下したら、都道府県の選択を単一か複数かを選択させる
+    private void selectSingleMultipleLand(){
+        final CharSequence[] actions = {"■単一都道府県で発生","■複数の都道府県で発生"};
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("最大震度６弱(政令市等は震度５強)以上の地震が発生した都道府県は？");
+        builder.setItems(actions, new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int which){
+                switch(which){
+                    case 0:
+                        showKinentai1();
+                        break;
+                    case 1:
+                        //初回は念のため複数都道府県選択のインデックスと配列をクリア
+                        mSelectedPrefectureIndexList.clear();
+                        mSelectedPrefectureCSVList.clear();
+                        selectMultiplePrefecture();
+                        break;
+                }
+            }
+        });
+        builder.setNegativeButton("キャンセル", null);
+        builder.setCancelable(true);
+        builder.create();
+        builder.show();
+    }
+
+    //2021.9追加
+    //複数都道府県の選択と最大深度の選択を終わるまでさせる
+    private void selectMultiplePrefecture(){
+        // res/values/arrays.xmlにprefectureとして47都道府県を設定している。それを読み込む。
+        int resourceId = getResources().getIdentifier("prefecture", "array", getPackageName());
+        //取得した配列リソースIDを文字列配列に格納
+        final String[] mList = getResources().getStringArray(resourceId);
+        GridView gridView = new GridView(this);
+        gridView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, mList));
+        gridView.setNumColumns(3);
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?>parent, View view, int position, long id){
+                //選択した都道府県のインデックスをリストに格納
+                Toast.makeText(getApplicationContext(), mList[position], Toast.LENGTH_SHORT).show();
+                mSelectedPrefectureIndexList.add(position);
+                selectScale(mList[position]);
+            }
+        });
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("■都道府県選択");
+        builder.setView(gridView);
+        builder.setPositiveButton("選択終了", new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int which){
+                //結果表示へ
+                showSelectedPrefectureResult();
+            }
+        });
+        builder.setNegativeButton("キャンセル", new DialogInterface.OnClickListener(){
+            public void onClick(DialogInterface dialog, int which){
+                dialog.cancel();
+            }
+        });
+        builder.setCancelable(true);
+        builder.create();
+        builder.show();
+    }
+
+    //複数都道府県の選択の都道府県ごとの最大震度を選択させるループ
+    private void selectScale(String _prefecture){
+        final CharSequence[] actions = {"■震度７(特別区６強)","■震度６強(特別区６弱)","■震度６弱(特別区５強、政令市５強)"};
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(_prefecture + "の最大震度は？");
+        builder.setItems(actions, new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int which){
+                switch(which){
+                    case 0:
+                        Toast.makeText(getApplicationContext(), "震度７", Toast.LENGTH_SHORT).show();
+                        mSelectedPrefectureCSVList.add("riku7.csv");
+                        //複数都道府県選択へ再帰
+                        selectMultiplePrefecture();
+                        break;
+                    case 1:
+                        Toast.makeText(getApplicationContext(), "震度６強", Toast.LENGTH_SHORT).show();
+                        mSelectedPrefectureCSVList.add("riku6strong.csv");
+                        //複数都道府県選択へ再帰
+                        selectMultiplePrefecture();
+                        break;
+                    case 2:
+                        Toast.makeText(getApplicationContext(), "震度６弱", Toast.LENGTH_SHORT).show();
+                        mSelectedPrefectureCSVList.add("riku6weak.csv");
+                        //複数都道府県選択へ再帰
+                        selectMultiplePrefecture();
+                        break;
+                }
+            }
+        });
+        builder.setNegativeButton("キャンセル", null);
+        builder.setCancelable(true);
+        builder.create();
+        builder.show();
+    }
+
+    //複数選択した都道府県の結果表示
+    private void showSelectedPrefectureResult(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("【複数選択した都道府県】");
+        //テキストファイル読み込み
+        String text = "";
+        for(int i = 0; i < mSelectedPrefectureIndexList.size(); i++){
+            text = text + "index:" + mSelectedPrefectureIndexList.get(i) + " file:" + mSelectedPrefectureCSVList.get(i) + "\n";
+        }
+        builder.setMessage(text);
+        builder.setNegativeButton("キャンセル", null);
+        builder.setCancelable(true);
+        builder.create();
+        builder.show();
     }
 
     //震央「陸」

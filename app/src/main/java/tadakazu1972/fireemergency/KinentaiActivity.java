@@ -65,6 +65,7 @@ public class KinentaiActivity extends AppCompatActivity {
     public boolean mPassFlag = false;
     //複数都道府県選択
     protected ArrayList<Integer> mSelectedPrefectureIndexList; //選択した都道府県のインデックス(showCSVで使う)格納用
+    protected ArrayList<String> mSelectedPrefectureScaleList; //選択した都道府県の最大深度文字列格納用
     protected ArrayList<String> mSelectedPrefectureCSVList; //選択した都道府県の震度のcsvファイル名格納用
 
     @Override
@@ -84,6 +85,7 @@ public class KinentaiActivity extends AppCompatActivity {
         db = mDBHelper.getWritableDatabase(mKey);
         mailArray = new ArrayList<String>();
         mSelectedPrefectureIndexList = new ArrayList<Integer>();
+        mSelectedPrefectureScaleList = new ArrayList<String>();
         mSelectedPrefectureCSVList = new ArrayList<String>();
     }
 
@@ -208,6 +210,7 @@ public class KinentaiActivity extends AppCompatActivity {
                     case 1:
                         //初回は念のため複数都道府県選択のインデックスと配列をクリア
                         mSelectedPrefectureIndexList.clear();
+                        mSelectedPrefectureScaleList.clear();
                         mSelectedPrefectureCSVList.clear();
                         selectMultiplePrefecture();
                         break;
@@ -270,18 +273,21 @@ public class KinentaiActivity extends AppCompatActivity {
                 switch(which){
                     case 0:
                         Toast.makeText(getApplicationContext(), "震度７", Toast.LENGTH_SHORT).show();
+                        mSelectedPrefectureScaleList.add("震度７");
                         mSelectedPrefectureCSVList.add("riku7.csv");
                         //複数都道府県選択へ再帰
                         selectMultiplePrefecture();
                         break;
                     case 1:
                         Toast.makeText(getApplicationContext(), "震度６強", Toast.LENGTH_SHORT).show();
+                        mSelectedPrefectureScaleList.add("震度６強");
                         mSelectedPrefectureCSVList.add("riku6strong.csv");
                         //複数都道府県選択へ再帰
                         selectMultiplePrefecture();
                         break;
                     case 2:
                         Toast.makeText(getApplicationContext(), "震度６弱", Toast.LENGTH_SHORT).show();
+                        mSelectedPrefectureScaleList.add("震度６弱");
                         mSelectedPrefectureCSVList.add("riku6weak.csv");
                         //複数都道府県選択へ再帰
                         selectMultiplePrefecture();
@@ -302,13 +308,51 @@ public class KinentaiActivity extends AppCompatActivity {
         //テキストファイル読み込み
         String text = "";
         for(int i = 0; i < mSelectedPrefectureIndexList.size(); i++){
-            text = text + "index:" + mSelectedPrefectureIndexList.get(i) + " file:" + mSelectedPrefectureCSVList.get(i) + "\n";
+            //CSVファイル読み込みに行く
+            text = text + readCSV(mSelectedPrefectureIndexList.get(i), mSelectedPrefectureScaleList.get(i), mSelectedPrefectureCSVList.get(i), i);
+            //text = text + "index:" + mSelectedPrefectureIndexList.get(i) + " file:" + mSelectedPrefectureCSVList.get(i) + "\n";
         }
         builder.setMessage(text);
         builder.setNegativeButton("キャンセル", null);
         builder.setCancelable(true);
         builder.create();
         builder.show();
+    }
+
+    //選択した都道府県と震度に対応したCSVの結果を読み込んで返すルーチン
+    private String readCSV(int _index, String _scale, String _filename, int _i){
+        //csvファイル読み込み
+        InputStream is = null;
+        String pref = ""; //都道府県
+        String scale = _scale; //最大深度
+        String data1 = ""; //指揮支援隊
+        String data2 = ""; //大阪府大隊(陸上)
+        String data3 = ""; //大阪府隊(航空小隊)
+        String result = "";
+        try {
+            try {
+                //assetsフォルダ内のcsvファイル読み込み
+                is = getAssets().open(_filename);
+                InputStreamReader ir = new InputStreamReader(is,"UTF-8");
+                CSVReader csvreader = new CSVReader(ir, CSVParser.DEFAULT_SEPARATOR, CSVParser.DEFAULT_QUOTE_CHARACTER, 1); //ヘッダー0行読み込まないため1行から
+                List<String[]> csv = csvreader.readAll();
+                String line = Arrays.toString(csv.get(_index));
+                String[] data = line.split(Pattern.quote(","),0);
+                //データ代入　先頭と最後に[]がついてくるのでreplaceで削除している
+                pref = data[0]; pref = pref.replace("[","");
+                data1 = data[1]; data1 = data1.replaceAll("、","\n     "); //２行になる答えなので改行とスペースを挿入
+                data2 = data[2]; data2 = data2.replaceAll("、","\n     "); //２行になる答えなので改行とスペースを挿入
+                data3 = data[3]; data3 = data3.replace("]","").replaceAll("、","\n     "); //２行になる答えなので改行とスペースを挿入;
+                result = (_i + 1) +". "+pref + "：" + scale + "\n" + "・指揮支援隊\n　"+data1+"\n・大阪府大隊(陸上)\n　"+data2+"\n・大阪府大隊(航空)\n　"+data3+"\n====================\n";
+            } finally {
+                if (is != null) is.close();
+            }
+        } catch (Exception e) {
+            //エラーメッセージ
+            Toast.makeText(this, "テキスト読込エラー", Toast.LENGTH_LONG).show();
+        }
+        //結果を返す
+        return result;
     }
 
     //震央「陸」

@@ -148,7 +148,7 @@ public class KinentaiActivity extends AppCompatActivity {
         mView.findViewById(R.id.btnKinentaiOtsunami).setOnClickListener(new OnClickListener(){
             @Override
             public void onClick(View v){
-                showKinentai4();
+                selectSingleMultipleOtsunami();
             }
         });
         mView.findViewById(R.id.btnKinentai4).setOnClickListener(new OnClickListener(){
@@ -1185,6 +1185,127 @@ public class KinentaiActivity extends AppCompatActivity {
         builder.create();
         builder.show();
     }*/
+
+    //2021.9追加
+    //大津波警報ボタンを押下したら、都道府県の選択を単一か複数かを選択させる
+    private void selectSingleMultipleOtsunami(){
+        final CharSequence[] actions = {"■単一都道府県で発生","■複数の都道府県で発生"};
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("大津波警報が発表された都道府県は？");
+        builder.setItems(actions, new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int which){
+                switch(which){
+                    case 0:
+                        showKinentai2();
+                        break;
+                    case 1:
+                        //初回は念のため複数都道府県選択のインデックスと配列をクリア
+                        mSelectedPrefectureIndexList.clear();
+                        mSelectedPrefectureScaleList.clear();
+                        mSelectedPrefectureCSVList.clear();
+                        selectMultiplePrefectureOtsunami();
+                        break;
+                }
+            }
+        });
+        builder.setNegativeButton("キャンセル", null);
+        builder.setCancelable(true);
+        builder.create();
+        builder.show();
+    }
+
+    //2021.9追加
+    //複数都道府県の選択と最大深度の選択を終わるまでさせる
+    private void selectMultiplePrefectureOtsunami(){
+        // res/values/arrays.xmlにprefectureとして47都道府県を設定している。それを読み込む。
+        int resourceId = getResources().getIdentifier("prefecture", "array", getPackageName());
+        //取得した配列リソースIDを文字列配列に格納
+        final String[] mList = getResources().getStringArray(resourceId);
+        GridView gridView = new GridView(this);
+        gridView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, mList));
+        gridView.setNumColumns(3);
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?>parent, View view, int position, long id){
+                //選択した都道府県のインデックスをリストに格納
+                Toast.makeText(getApplicationContext(), mList[position], Toast.LENGTH_SHORT).show();
+                mSelectedPrefectureIndexList.add(position);
+            }
+        });
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("■都道府県選択");
+        builder.setView(gridView);
+        builder.setPositiveButton("選択終了", new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int which){
+                //結果表示へ
+                showSelectedPrefectureResultOtsunami();
+            }
+        });
+        builder.setNegativeButton("キャンセル", new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int which){
+                dialog.cancel();
+            }
+        });
+        builder.setCancelable(true);
+        builder.create();
+        builder.show();
+    }
+
+    //選択した都道府県と震度に対応したCSVの結果を読み込んで返すルーチン
+    private String readCSVOtsunami(int _index, String _filename, int _i){
+        //csvファイル読み込み
+        InputStream is = null;
+        String pref = ""; //都道府県
+        String data1 = ""; //指揮支援隊
+        String data2 = ""; //大阪府大隊(陸上)
+        String data3 = ""; //大阪府隊(航空小隊)
+        String result = "";
+        try {
+            try {
+                //assetsフォルダ内のcsvファイル読み込み
+                is = getAssets().open(_filename);
+                InputStreamReader ir = new InputStreamReader(is,"UTF-8");
+                CSVReader csvreader = new CSVReader(ir, CSVParser.DEFAULT_SEPARATOR, CSVParser.DEFAULT_QUOTE_CHARACTER, 1); //ヘッダー0行読み込まないため1行から
+                List<String[]> csv = csvreader.readAll();
+                String line = Arrays.toString(csv.get(_index));
+                String[] data = line.split(Pattern.quote(","),0);
+                //データ代入　先頭と最後に[]がついてくるのでreplaceで削除している
+                pref = data[0]; pref = pref.replace("[","");
+                data1 = data[1]; data1 = data1.replaceAll("、","\n     "); //２行になる答えなので改行とスペースを挿入
+                data2 = data[2]; data2 = data2.replaceAll("、","\n     "); //２行になる答えなので改行とスペースを挿入
+                data3 = data[3]; data3 = data3.replace("]","").replaceAll("、","\n     "); //２行になる答えなので改行とスペースを挿入;
+                result = (_i + 1) +". "+pref + "：大津波警報" + "\n" + "・指揮支援隊\n　"+data1+"\n・大阪府大隊(陸上)\n　"+data2+"\n・大阪府大隊(航空)\n　"+data3+"\n====================\n";
+            } finally {
+                if (is != null) is.close();
+            }
+        } catch (Exception e) {
+            //エラーメッセージ
+            Toast.makeText(this, "テキスト読込エラー", Toast.LENGTH_LONG).show();
+        }
+        //結果を返す
+        return result;
+    }
+
+    //複数選択した都道府県の結果表示
+    private void showSelectedPrefectureResultOtsunami(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("【複数選択した都道府県】");
+        //テキストファイル読み込み
+        String text = "";
+        for(int i = 0; i < mSelectedPrefectureIndexList.size(); i++){
+            //CSVファイル読み込みに行く
+            text = text + readCSVOtsunami(mSelectedPrefectureIndexList.get(i), "otsunami.csv", i);
+            //text = text + "index:" + mSelectedPrefectureIndexList.get(i) + " file:" + mSelectedPrefectureCSVList.get(i) + "\n";
+        }
+        builder.setMessage(text);
+        builder.setNegativeButton("キャンセル", null);
+        builder.setCancelable(true);
+        builder.create();
+        builder.show();
+    }
 
     //大津波・噴火
     private void showKinentai4(){

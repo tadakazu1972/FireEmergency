@@ -77,7 +77,7 @@
             android:textColor="#cccc11"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textAlignment="center"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="4dp"
             android:layout_gravity="center_horizontal"/>
         <Button
             android:layout_width="300dp"
@@ -85,7 +85,7 @@
             android:text="地震(震央「陸」)"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:id="@+id/btnKinentai1"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="4dp"
             android:layout_gravity="center"/>
         <Button
             android:layout_width="300dp"
@@ -93,7 +93,7 @@
             android:text="地震(震央「海域」)"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:id="@+id/btnKinentai2"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="4dp"
             android:layout_gravity="center"/>
         <Button
             android:layout_width="300dp"
@@ -101,15 +101,23 @@
             android:text="アクションプラン"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:id="@+id/btnKinentai3"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="4dp"
             android:layout_gravity="center"/>
         <Button
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:text="大津波警報・噴火"
+            android:text="大津波警報"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/btnKinentaiOtsunami"
+            android:layout_marginBottom="4dp"
+            android:layout_gravity="center"/>
+        <Button
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="噴火警報(居住区域)"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:id="@+id/btnKinentai4"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="4dp"
             android:layout_gravity="center"/>
     </LinearLayout>
     <LinearLayout

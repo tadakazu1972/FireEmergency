@@ -145,6 +145,12 @@ public class KinentaiActivity extends AppCompatActivity {
                 showKinentai3();
             }
         });
+        mView.findViewById(R.id.btnKinentaiOtsunami).setOnClickListener(new OnClickListener(){
+            @Override
+            public void onClick(View v){
+                showKinentai4();
+            }
+        });
         mView.findViewById(R.id.btnKinentai4).setOnClickListener(new OnClickListener(){
             @Override
             public void onClick(View v){

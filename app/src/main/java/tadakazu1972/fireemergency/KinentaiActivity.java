@@ -204,7 +204,7 @@ public class KinentaiActivity extends AppCompatActivity {
     //2021.9追加
     //地震（震央「陸」）ボタンを押下したら、都道府県の選択を単一か複数かを選択させる
     private void selectSingleMultipleLand(){
-        final CharSequence[] actions = {"■単一都道府県で発生","■複数の都道府県で発生"};
+        final CharSequence[] actions = {"■震度６弱(政令市等は震度５強)以上","■複数の都道府県において震度６弱(政令市等は震度５強)以上"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("最大震度６弱(政令市等は震度５強)以上の地震が発生した都道府県は？");
         builder.setItems(actions, new DialogInterface.OnClickListener(){
@@ -250,7 +250,7 @@ public class KinentaiActivity extends AppCompatActivity {
             }
         });
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("■都道府県選択");
+        builder.setTitle("■都道府県選択(複数選択可)");
         builder.setView(gridView);
         builder.setPositiveButton("選択終了", new DialogInterface.OnClickListener(){
             @Override
@@ -272,7 +272,7 @@ public class KinentaiActivity extends AppCompatActivity {
 
     //複数都道府県の選択の都道府県ごとの最大震度を選択させるループ
     private void selectScale(String _prefecture){
-        final CharSequence[] actions = {"■震度７(特別区６強)","■震度６強(特別区６弱)","■震度６弱(特別区５強、政令市５強)"};
+        final CharSequence[] actions = {"■震度７","■震度６強(特別区６弱)","■震度６弱(特別区は５強、政令市は５強又は６弱)"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(_prefecture + "の最大震度は？");
         builder.setItems(actions, new DialogInterface.OnClickListener(){
@@ -365,7 +365,7 @@ public class KinentaiActivity extends AppCompatActivity {
 
     //震央「陸」
     private void showKinentai1(){
-        final CharSequence[] actions = {"■震度７(特別区６強)","■震度６強(特別区６弱)","■震度６弱(特別区５強、政令市５強)"};
+        final CharSequence[] actions = {"■震度７","■震度６強(特別区６弱)","■震度６弱(特別区は５強、政令市は５強又は６弱)"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("最大震度は？");
         builder.setItems(actions, new DialogInterface.OnClickListener(){
@@ -403,11 +403,11 @@ public class KinentaiActivity extends AppCompatActivity {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?>parent, View view, int position, long id){
-                showCSV(position, "■最大震度７(特別区６強)", "riku7.csv");
+                showCSV(position, "■最大震度７", "riku7.csv");
             }
         });
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("■最大震度７(特別区６強)\n   震央管轄都道府県は？");
+        builder.setTitle("■最大震度７\n   震央管轄都道府県は？");
         builder.setView(gridView);
         builder.setNegativeButton("キャンセル", null);
         builder.setCancelable(true);
@@ -451,11 +451,11 @@ public class KinentaiActivity extends AppCompatActivity {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?>parent, View view, int position, long id){
-                showCSV(position, "■最大震度６弱(特別区５強、政令市５強)", "riku6weak.csv");
+                showCSV(position, "■最大震度６弱(特別区５強、政令市５強又は６弱)", "riku6weak.csv");
             }
         });
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("■最大震度６弱(特別区５強、政令市５強)   震央管轄都道府県は？");
+        builder.setTitle("■最大震度６弱(特別区５強、政令市５強又は６弱い)   震央管轄都道府県は？");
         builder.setView(gridView);
         builder.setNegativeButton("キャンセル", null);
         builder.setCancelable(true);
@@ -466,7 +466,7 @@ public class KinentaiActivity extends AppCompatActivity {
     //2021.9追加
     //地震（震央「海域」）ボタンを押下したら、都道府県の選択を単一か複数かを選択させる
     private void selectSingleMultipleKaiiki(){
-        final CharSequence[] actions = {"■単一都道府県で発生","■複数の都道府県で発生"};
+        final CharSequence[] actions = {"■震度６弱(政令市等は震度５強)以上","■複数の都道府県において震度６弱(政令市等は震度５強)以上"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("最大震度６弱(政令市等は震度５強)以上の地震が発生した都道府県は？");
         builder.setItems(actions, new DialogInterface.OnClickListener(){
@@ -512,7 +512,7 @@ public class KinentaiActivity extends AppCompatActivity {
             }
         });
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("■都道府県選択");
+        builder.setTitle("■都道府県選択(複数選択可)");
         builder.setView(gridView);
         builder.setPositiveButton("選択終了", new DialogInterface.OnClickListener(){
             @Override
@@ -534,7 +534,7 @@ public class KinentaiActivity extends AppCompatActivity {
 
     //複数都道府県の選択の都道府県ごとの最大震度を選択させるループ
     private void selectScaleKaiiki(String _prefecture){
-        final CharSequence[] actions = {"■震度７(特別区６強)","■震度６強(特別区６弱)","■震度６弱(特別区５強、政令市５強)"};
+        final CharSequence[] actions = {"■震度７","■震度６強(特別区６弱)","■震度６弱(特別区は５強、政令市は５強又は６弱)"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(_prefecture + "の最大震度は？");
         builder.setItems(actions, new DialogInterface.OnClickListener(){
@@ -591,7 +591,7 @@ public class KinentaiActivity extends AppCompatActivity {
 
     //震央「海域」
     private void showKinentai2(){
-        final CharSequence[] actions = {"■震度７(特別区６強)","■震度６強(特別区６弱)","■震度６弱(特別区５強、政令市５強)"};
+        final CharSequence[] actions = {"■震度７","■震度６強(特別区６弱)","■震度６弱(特別区は５強、政令市は５強又は６弱)"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("最大震度は？");
         builder.setItems(actions, new DialogInterface.OnClickListener(){
@@ -628,11 +628,11 @@ public class KinentaiActivity extends AppCompatActivity {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?>parent, View view, int position, long id){
-                showCSV(position, "■最大震度７(特別区６強)","kaiiki7.csv");
+                showCSV(position, "■最大震度７","kaiiki7.csv");
             }
         });
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("■最大震度７(特別区６強)\n   最大震度都道府県は？");
+        builder.setTitle("■最大震度７\n   最大震度都道府県は？");
         builder.setView(gridView);
         builder.setNegativeButton("キャンセル", null);
         builder.setCancelable(true);
@@ -676,11 +676,11 @@ public class KinentaiActivity extends AppCompatActivity {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?>parent, View view, int position, long id){
-                showCSV(position, "■最大震度６弱(特別区５強、政令市５強)","kaiiki6weak.csv");
+                showCSV(position, "■最大震度６弱(特別区５強、政令市５強又は６弱)","kaiiki6weak.csv");
             }
         });
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("■最大震度６弱(特別区５強、政令市５強)   最大震度都道府県は？");
+        builder.setTitle("■最大震度６弱(特別区５強、政令市５強又は６弱)   最大震度都道府県は？");
         builder.setView(gridView);
         builder.setNegativeButton("キャンセル", null);
         builder.setCancelable(true);
@@ -690,7 +690,7 @@ public class KinentaiActivity extends AppCompatActivity {
 
     //アクションプラン
     private void showKinentai3(){
-        final CharSequence[] actions = {"東海地震","首都直下地震","南海トラフ"}; //"東南海・南海地震"削除　2018/08/28
+        final CharSequence[] actions = {"首都直下地震","南海トラフ地震"}; //"東南海・南海地震"削除　2018/08/28 "東海地震"削除 2021.10
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("アクションプラン");
         builder.setItems(actions, new DialogInterface.OnClickListener(){
@@ -698,17 +698,14 @@ public class KinentaiActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which){
                 switch(which){
                     case 0:
-                        showToukai1(); //showActionPlan((String)actions[which],"kinentai_toukai.txt");
+                        showShutochokka1();
                         break;
                     case 1:
-                        showShutochokka1(); //showActionPlan((String)actions[which],"kinentai_syutochokka.txt");
+                        showNankaitraf1();
                         break;
                     /* case 2:
                         showActionPlan((String)actions[which],"kinentai_tounankai.txt");
                         break; */
-                    case 2: //3:
-                        showNankaitraf1(); //showNankaitraf(); 2018/08/29 showNankaitrafを経ずに直接実行
-                        break;
                 }
             }
         });
@@ -1189,7 +1186,7 @@ public class KinentaiActivity extends AppCompatActivity {
     //2021.9追加
     //大津波警報ボタンを押下したら、都道府県の選択を単一か複数かを選択させる
     private void selectSingleMultipleOtsunami(){
-        final CharSequence[] actions = {"■単一都道府県で発生","■複数の都道府県で発生"};
+        final CharSequence[] actions = {"■単一の都道府県で発表","■複数の都道府県で発表"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("大津波警報が発表された都道府県は？");
         builder.setItems(actions, new DialogInterface.OnClickListener(){
@@ -1234,7 +1231,7 @@ public class KinentaiActivity extends AppCompatActivity {
             }
         });
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("■都道府県選択");
+        builder.setTitle("■都道府県選択(複数選択可)");
         builder.setView(gridView);
         builder.setPositiveButton("選択終了", new DialogInterface.OnClickListener(){
             @Override
@@ -1277,7 +1274,7 @@ public class KinentaiActivity extends AppCompatActivity {
                 data1 = data[1]; data1 = data1.replaceAll("、","\n     "); //２行になる答えなので改行とスペースを挿入
                 data2 = data[2]; data2 = data2.replaceAll("、","\n     "); //２行になる答えなので改行とスペースを挿入
                 data3 = data[3]; data3 = data3.replace("]","").replaceAll("、","\n     "); //２行になる答えなので改行とスペースを挿入;
-                result = (_i + 1) +". "+pref + "：大津波警報" + "\n" + "・指揮支援隊\n　"+data1+"\n・大阪府大隊(陸上)\n　"+data2+"\n・大阪府大隊(航空)\n　"+data3+"\n====================\n";
+                result = (_i + 1) +". "+pref + "：大津波警報" + "\n" + "・指揮支援部隊\n　"+data1+"\n・大阪府大隊(陸上)\n　"+data2+"\n・大阪府大隊(航空)\n　"+data3+"\n====================\n";
             } finally {
                 if (is != null) is.close();
             }

@@ -9,12 +9,9 @@ import android.database.Cursor;
 import android.graphics.Matrix;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -29,6 +26,8 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import net.sqlcipher.database.SQLiteDatabase;
 
 import java.io.BufferedReader;
@@ -42,8 +41,8 @@ import java.util.UUID;
 /**
  * Created by tadakazu on 2016/07/17.
  */
-public class KokuminhogoActivity extends AppCompatActivity {
-    protected KokuminhogoActivity mActivity = null;
+public class KokuminhogoActivity2 extends AppCompatActivity {
+    protected KokuminhogoActivity2 mActivity = null;
     protected View mView = null;
     //基礎データ保存用変数
     protected String mMainStation;
@@ -74,7 +73,7 @@ public class KokuminhogoActivity extends AppCompatActivity {
 
         mActivity = this;
         mView = this.getWindow().getDecorView();
-        setContentView(R.layout.activity_kokuminhogo);
+        setContentView(R.layout.activity_kokuminhogo2);
         initButtons();
         //基礎データ読み込み
         loadData();
@@ -125,6 +124,13 @@ public class KokuminhogoActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        mView.findViewById(R.id.btnKokuminhogo).setOnClickListener(new OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mActivity, KokuminhogoActivity.class);
+                startActivity(intent);
+            }
+        });
         mView.findViewById(R.id.btnKinentai).setOnClickListener(new OnClickListener(){
             @Override
             public void onClick(View v){
@@ -132,77 +138,11 @@ public class KokuminhogoActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        mView.findViewById(R.id.btnKokuminhogo1).setOnClickListener(new OnClickListener(){
+        mView.findViewById(R.id.btnKokuminhogo6Close).setOnClickListener(new OnClickListener(){
             @Override
-            public void onClick(View v){
-                showKokuminhogo("１号非常招集","kokuminhogo1.txt");
-            }
-        });
-        mView.findViewById(R.id.btnKokuminhogo2).setOnClickListener(new OnClickListener(){
-            @Override
-            public void onClick(View v){
-                showKokuminhogo("２号非常招集","kokuminhogo2.txt");
-            }
-        });
-        mView.findViewById(R.id.btnKokuminhogo3).setOnClickListener(new OnClickListener(){
-            @Override
-            public void onClick(View v){
-                showKokuminhogo("３号非常招集","kokuminhogo3.txt");
-            }
-        });
-        mView.findViewById(R.id.btnKokuminhogo4).setOnClickListener(new OnClickListener(){
-            @Override
-            public void onClick(View v){
-                showKokuminhogo("４号非常招集","kokuminhogo4.txt");
-            }
-        });
-        mView.findViewById(R.id.btnKokuminhogo5).setOnClickListener(new OnClickListener(){
-            @Override
-            public void onClick(View v){
-                showKokuminhogo("５号非常招集","kokuminhogo5.txt");
-            }
-        });
-        mView.findViewById(R.id.btnKokuminhogo6).setOnClickListener(new OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Intent intent = new Intent(mActivity, KokuminhogoActivity2.class);
+            public void onClick(View v) {
+                Intent intent = new Intent(mActivity, KokuminhogoActivity.class);
                 startActivity(intent);
-            }
-        });
-        mView.findViewById(R.id.btnKokuminhogoEarthquake).setOnClickListener(new OnClickListener(){
-            @Override
-            public void onClick(View v){
-                showKankeikikan();
-            }
-        });
-        mView.findViewById(R.id.btnKokuminhogoBlackout).setOnClickListener(new OnClickListener(){
-            @Override
-            public void onClick(View v){
-                showBlackout();
-            }
-        });
-        mView.findViewById(R.id.btnKokuminhogoRoad).setOnClickListener(new OnClickListener(){
-           @Override
-            public void onClick(View v){
-               showRoad();
-           }
-        });
-        mView.findViewById(R.id.btnKokuminhogoTel).setOnClickListener(new OnClickListener(){
-            @Override
-            public void onClick(View v){
-                showCheck();
-            }
-        });
-        mView.findViewById(R.id.btnKokuminhogoCaution).setOnClickListener(new OnClickListener(){
-            @Override
-            public void onClick(View v){
-                selectCaution();
-            }
-        });
-        mView.findViewById(R.id.btnKokuminhogoBousaiNet).setOnClickListener(new OnClickListener(){
-            @Override
-            public void onClick(View v){
-                showBousaiNet();
             }
         });
     }
@@ -248,19 +188,6 @@ public class KokuminhogoActivity extends AppCompatActivity {
         }
         builder.setMessage(text);
         builder.setNegativeButton("キャンセル", null);
-        builder.setCancelable(true);
-        builder.create();
-        builder.show();
-    }
-
-    //北朝鮮ミサイル発射時等に係る体制
-    private void showKokuminhogo6(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        //カスタムビュー設定
-        LayoutInflater inflater = (LayoutInflater)this.getSystemService(LAYOUT_INFLATER_SERVICE);
-        final View layout = inflater.inflate(R.layout.alert_kokuminhogo6, (ViewGroup)findViewById(R.id.alert_kokuminhogo6));
-        builder.setView(layout);
-        builder.setNegativeButton("閉じる",null);
         builder.setCancelable(true);
         builder.create();
         builder.show();

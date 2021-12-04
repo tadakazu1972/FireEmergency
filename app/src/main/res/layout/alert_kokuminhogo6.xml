@@ -21,15 +21,13 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="80dp"
             android:src="@drawable/scrollpinch"
             android:scaleType="fitCenter"/>
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="500dp"
-            android:src="@drawable/northkorea"
-            android:scaleType="fitCenter"/>
+        <tadakazu1972.fireemergency.CustomImageView
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"/>
 
     </LinearLayout>
 </ScrollView>

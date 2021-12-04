@@ -119,6 +119,14 @@
             android:id="@+id/btnKokuminhogo5"
             android:layout_marginBottom="10dp"
             android:layout_gravity="center"/>
+        <Button
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="北朝鮮ミサイル発射時等に係る体制"
+            android:textSize="14sp"
+            android:id="@+id/btnKokuminhogo6"
+            android:layout_marginBottom="10dp"
+            android:layout_gravity="center"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"

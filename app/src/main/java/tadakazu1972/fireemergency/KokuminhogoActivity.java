@@ -155,6 +155,12 @@ public class KokuminhogoActivity extends AppCompatActivity {
                 showKokuminhogo("５号非常招集","kokuminhogo5.txt");
             }
         });
+        mView.findViewById(R.id.btnKokuminhogo6).setOnClickListener(new OnClickListener(){
+            @Override
+            public void onClick(View v){
+                showKokuminhogo6();
+            }
+        });
         mView.findViewById(R.id.btnKokuminhogoEarthquake).setOnClickListener(new OnClickListener(){
             @Override
             public void onClick(View v){
@@ -234,6 +240,19 @@ public class KokuminhogoActivity extends AppCompatActivity {
         }
         builder.setMessage(text);
         builder.setNegativeButton("キャンセル", null);
+        builder.setCancelable(true);
+        builder.create();
+        builder.show();
+    }
+
+    //北朝鮮ミサイル発射時等に係る体制
+    private void showKokuminhogo6(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        //カスタムビュー設定
+        LayoutInflater inflater = (LayoutInflater)this.getSystemService(LAYOUT_INFLATER_SERVICE);
+        final View layout = inflater.inflate(R.layout.alert_kokuminhogo6, (ViewGroup)findViewById(R.id.alert_kokuminhogo6));
+        builder.setView(layout);
+        builder.setNegativeButton("閉じる",null);
         builder.setCancelable(true);
         builder.create();
         builder.show();

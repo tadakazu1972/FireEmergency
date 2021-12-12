@@ -312,7 +312,7 @@ public class KinentaiActivity extends AppCompatActivity {
     //複数選択した都道府県の結果表示
     private void showSelectedPrefectureResult(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("【複数選択した都道府県】");
+        builder.setTitle("【複数選択した都道府県】\n※応援先は長官が指定");
         //テキストファイル読み込み
         String text = "";
         for(int i = 0; i < mSelectedPrefectureIndexList.size(); i++){
@@ -574,7 +574,7 @@ public class KinentaiActivity extends AppCompatActivity {
     //複数選択した都道府県の結果表示
     private void showSelectedPrefectureResultKaiiki(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("【複数選択した都道府県】");
+        builder.setTitle("【複数選択した都道府県】\n※応援先は長官が指定");
         //テキストファイル読み込み
         String text = "";
         for(int i = 0; i < mSelectedPrefectureIndexList.size(); i++){
@@ -766,7 +766,7 @@ public class KinentaiActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 CheckBox chk = (CheckBox) v;
-                if(chk.isChecked() == true) {
+                if(chk.isChecked()) {
                     countToukai1Checked += 1;
                 }
                 else {
@@ -778,7 +778,7 @@ public class KinentaiActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 CheckBox chk = (CheckBox) v;
-                if(chk.isChecked() == true) {
+                if(chk.isChecked()) {
                     countToukai1Checked += 1;
                 }
                 else {
@@ -790,7 +790,7 @@ public class KinentaiActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 CheckBox chk = (CheckBox) v;
-                if(chk.isChecked() == true) {
+                if(chk.isChecked()) {
                     countToukai1Checked += 1;
                 }
                 else {
@@ -802,7 +802,7 @@ public class KinentaiActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 CheckBox chk = (CheckBox) v;
-                if(chk.isChecked() == true) {
+                if(chk.isChecked()) {
                     countToukai1Checked += 1;
                 }
                 else {
@@ -814,7 +814,7 @@ public class KinentaiActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 CheckBox chk = (CheckBox) v;
-                if(chk.isChecked() == true) {
+                if(chk.isChecked()) {
                     countToukai1Checked += 1;
                 }
                 else {
@@ -826,7 +826,7 @@ public class KinentaiActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 CheckBox chk = (CheckBox) v;
-                if(chk.isChecked() == true) {
+                if(chk.isChecked()) {
                     countToukai1Checked += 1;
                 }
                 else {
@@ -838,7 +838,7 @@ public class KinentaiActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 CheckBox chk = (CheckBox) v;
-                if(chk.isChecked() == true) {
+                if(chk.isChecked()) {
                     countToukai1Checked += 1;
                 }
                 else {
@@ -850,7 +850,7 @@ public class KinentaiActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 CheckBox chk = (CheckBox) v;
-                if(chk.isChecked() == true) {
+                if(chk.isChecked()) {
                     countToukai1Checked += 1;
                 }
                 else {
@@ -1044,11 +1044,14 @@ public class KinentaiActivity extends AppCompatActivity {
         final Spinner nankaitraf1 = (Spinner)layout.findViewById(R.id.spnNankaitraf1);
         //checkbox
         countNankaitrafChecked = 0;
+        //M8.0チェックボックスのON/OFF保存用
+        boolean isMagnitude8 = false;
+
         layout.findViewById(R.id.chkNankai1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 CheckBox chk = (CheckBox) v;
-                if(chk.isChecked() == true) {
+                if(chk.isChecked()) {
                     countNankaitrafChecked += 1;
                 }
                 else {
@@ -1060,7 +1063,7 @@ public class KinentaiActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 CheckBox chk = (CheckBox) v;
-                if(chk.isChecked() == true) {
+                if(chk.isChecked()) {
                     countNankaitrafChecked += 1;
                 }
                 else {
@@ -1072,7 +1075,7 @@ public class KinentaiActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 CheckBox chk = (CheckBox) v;
-                if(chk.isChecked() == true) {
+                if(chk.isChecked()) {
                     countNankaitrafChecked += 1;
                 }
                 else {
@@ -1085,9 +1088,12 @@ public class KinentaiActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which){
                 String check1 = (String)nankaitraf1.getSelectedItem();
+                //2021-12-12追加　M8.0以上のチェックボックス
+                CheckBox chk = (CheckBox)layout.findViewById(R.id.chkNankai4);
                 //いざ、判定
                 if (!check1.equals("その他")&& countNankaitrafChecked==3){
-                    // showActionPlan("南海トラフ地震アクションプラン","kinentai_nankaitraf.txt");
+                    showNankaitraf2();
+                } else if(chk.isChecked()){
                     showNankaitraf2();
                 } else {
                     showActionPlan("南海トラフ地震アクションプラン","kinentai_nankaitraf2.txt");
@@ -1289,7 +1295,7 @@ public class KinentaiActivity extends AppCompatActivity {
     //複数選択した都道府県の結果表示
     private void showSelectedPrefectureResultOtsunami(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("【複数選択した都道府県】");
+        builder.setTitle("【複数選択した都道府県】\n※応援先は長官が指定");
         //テキストファイル読み込み
         String text = "";
         for(int i = 0; i < mSelectedPrefectureIndexList.size(); i++){

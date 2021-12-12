@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+<LinearLayout
     android:id="@+id/plan_nankaitraf"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -47,5 +50,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="四国・九州地方：徳島県、香川県、愛媛県、高知県、大分県、宮崎県" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="又は"
+        android:textColor="#111111"
+        android:textSize="14sp"
+        android:layout_marginTop="20dp"/>
+    <CheckBox
+        android:id="@+id/chkNankai4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="発生した地震がM8.0以上の場合(南海トラフ地震臨時情報(巨大地震警戒)が発表される可能性がある場合)" />
 
 </LinearLayout>
+</ScrollView>

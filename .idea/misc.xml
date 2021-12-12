@@ -3,9 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/tadak/Desktop/FireEmergency/app/src/main/res/layout/activity_data.xml" value="0.3523550724637681" />
         <entry key="..\:/Users/tadak/Desktop/FireEmergency/app/src/main/res/layout/activity_kokuminhogo.xml" value="0.24974670719351572" />
         <entry key="..\:/Users/tadak/Desktop/FireEmergency/app/src/main/res/layout/activity_kokuminhogo2.xml" value="0.3442028985507246" />
         <entry key="..\:/Users/tadak/Desktop/FireEmergency/app/src/main/res/layout/alert_kokuminhogo6.xml" value="0.3070652173913043" />
+        <entry key="..\:/Users/tadak/Desktop/FireEmergency/app/src/main/res/layout/plan_nankaitraf.xml" value="0.3523550724637681" />
+        <entry key="..\:/Users/tadak/Desktop/FireEmergency/app/src/main/res/layout/plan_nankaitraf2.xml" value="0.3523550724637681" />
       </map>
     </option>
   </component>

@@ -3,20 +3,48 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+              android:padding="2dp">
+
     <Button
-        android:id="@+id/btnGuide"
+        android:id="@+id/btnPersonal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:text="アプリ説明書"
+        android:text="非常参集　職員情報入力"
         android:textSize="20sp"
         android:textColor="#ffffff"
-        android:background="@drawable/data_button"
-        android:layout_marginBottom="16dp"/>
+        android:background="@drawable/red_button"
+        android:layout_marginBottom="0dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="戻る"
+            android:textSize="18sp"
+            android:textColor="#ffffff"
+            android:background="@drawable/data_button"
+            android:id="@+id/btnHome"/>
+        <Button
+            android:id="@+id/btnGuide"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="アプリ説明書"
+            android:textSize="20sp"
+            android:textColor="#ffffff"
+            android:background="@drawable/guide_button"
+            android:layout_marginBottom="8dp"/>
+    </LinearLayout>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -93,7 +121,8 @@
         android:text="連絡網データ操作"
         android:textColor="#111111"
         android:textAlignment="center"
-        android:textSize="20sp"/>
+        android:textSize="20sp"
+        android:gravity="center_horizontal" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -167,5 +196,5 @@
             android:layout_weight="1"
             android:id="@+id/btnKinentai"/>
     </LinearLayout>
-</LinearLayout>
+    </LinearLayout>
 </ScrollView>

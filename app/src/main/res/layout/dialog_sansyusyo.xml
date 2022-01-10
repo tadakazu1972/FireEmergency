@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dlgSansyusyo"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="18dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="8dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textColor="#111111"
+            android:textSize="20sp"
+            android:text = "勤務消防署"
+            android:layout_marginBottom="20dp"/>
+        <Button
+            android:id="@+id/btnKinmusyo"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/button_select"
+            android:background="@drawable/kyokusyo_button"
+            android:textSize="18sp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="8dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textColor="#111111"
+            android:textSize="20sp"
+            android:text = "指定参集署"
+            android:layout_marginBottom="20dp"/>
+        <Button
+            android:id="@+id/btnShiteisansyusyo"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/button_select"
+            android:background="@drawable/kyokusyo_button"
+            android:textSize="18sp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textColor="#111111"
+            android:textSize="20sp"
+            android:text = "上記以外"
+            android:layout_marginBottom="20dp"/>
+        <Button
+            android:id="@+id/btnAnother"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="その他"
+            android:textColor="@color/button_select"
+            android:background="@drawable/kyokusyo_button"
+            android:textSize="18sp"/>
+    </LinearLayout>
+
+</LinearLayout>

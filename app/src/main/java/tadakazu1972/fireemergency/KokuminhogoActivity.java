@@ -6,10 +6,16 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Matrix;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
+import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -17,6 +23,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
@@ -97,6 +104,13 @@ public class KokuminhogoActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        mView.findViewById(R.id.btnPersonal).setOnClickListener(new OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(mActivity, PersonalActivity.class);
+                startActivity(intent);
+            }
+        });
         mView.findViewById(R.id.btnEarthquake).setOnClickListener(new OnClickListener(){
             @Override
             public void onClick(View v){
@@ -146,6 +160,13 @@ public class KokuminhogoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 showKokuminhogo("５号非常招集","kokuminhogo5.txt");
+            }
+        });
+        mView.findViewById(R.id.btnKokuminhogo6).setOnClickListener(new OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(mActivity, KokuminhogoActivity2.class);
+                startActivity(intent);
             }
         });
         mView.findViewById(R.id.btnKokuminhogoEarthquake).setOnClickListener(new OnClickListener(){
@@ -227,6 +248,19 @@ public class KokuminhogoActivity extends AppCompatActivity {
         }
         builder.setMessage(text);
         builder.setNegativeButton("キャンセル", null);
+        builder.setCancelable(true);
+        builder.create();
+        builder.show();
+    }
+
+    //北朝鮮ミサイル発射時等に係る体制
+    private void showKokuminhogo6(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        //カスタムビュー設定
+        LayoutInflater inflater = (LayoutInflater)this.getSystemService(LAYOUT_INFLATER_SERVICE);
+        final View layout = inflater.inflate(R.layout.alert_kokuminhogo6, (ViewGroup)findViewById(R.id.alert_kokuminhogo6));
+        builder.setView(layout);
+        builder.setNegativeButton("閉じる",null);
         builder.setCancelable(true);
         builder.create();
         builder.show();

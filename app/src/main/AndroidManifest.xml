@@ -21,10 +21,16 @@
         <activity android:name=".KokuminhogoActivity"
                   android:launchMode="singleTask">
         </activity>
+        <activity android:name=".KokuminhogoActivity2"
+            android:launchMode="singleTask">
+        </activity>
         <activity android:name=".KinentaiActivity"
                   android:launchMode="singleTask">
         </activity>
         <activity android:name=".DataActivity"
+                  android:launchMode="singleTask">
+        </activity>
+        <activity android:name=".PersonalActivity"
                   android:launchMode="singleTask">
         </activity>
         <activity android:name=".GuideActivity"

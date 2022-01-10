@@ -67,6 +67,7 @@ public class KinentaiActivity extends AppCompatActivity {
     protected ArrayList<Integer> mSelectedPrefectureIndexList; //選択した都道府県のインデックス(showCSVで使う)格納用
     protected ArrayList<String> mSelectedPrefectureScaleList; //選択した都道府県の最大深度文字列格納用
     protected ArrayList<String> mSelectedPrefectureCSVList; //選択した都道府県の震度のcsvファイル名格納用
+    protected String specialSet[] = {"北海道", "宮城県", "埼玉県", "千葉県", "東京都", "神奈川県", "新潟県", "静岡県", "愛知県", "京都府", "大阪府", "兵庫県", "岡山県", "広島県", "福岡県", "熊本県"}; //震度６強、６弱の場合に（）で追加表記を行う東京都と政令市含む都道府県リスト
     //Boolean isAlertDialogExist = false; //複数ド道府県選択AlertDialogのキャンセルボタンが選択した数を押下しないともとにもどらないのを防ぐ用
 
     @Override
@@ -272,6 +273,7 @@ public class KinentaiActivity extends AppCompatActivity {
 
     //複数都道府県の選択の都道府県ごとの最大震度を選択させるループ
     private void selectScale(String _prefecture){
+        final String prefecture = _prefecture;
         final CharSequence[] actions = {"■震度７","■震度６強(特別区６弱)","■震度６弱(特別区は５強、政令市は５強又は６弱)"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(_prefecture + "の最大震度は？");
@@ -288,14 +290,22 @@ public class KinentaiActivity extends AppCompatActivity {
                         break;
                     case 1:
                         Toast.makeText(getApplicationContext(), "震度６強", Toast.LENGTH_SHORT).show();
-                        mSelectedPrefectureScaleList.add("震度６強");
+                        if (prefecture.equals("東京都")){
+                            mSelectedPrefectureScaleList.add("震度６強(特別区６弱)");
+                        } else {
+                            mSelectedPrefectureScaleList.add("震度６強");
+                        }
                         mSelectedPrefectureCSVList.add("riku6strong_multi.csv");
                         //複数都道府県選択へ再帰
                         selectMultiplePrefecture();
                         break;
                     case 2:
                         Toast.makeText(getApplicationContext(), "震度６弱", Toast.LENGTH_SHORT).show();
-                        mSelectedPrefectureScaleList.add("震度６弱");
+                        if (Arrays.asList(specialSet).contains(prefecture)){
+                            mSelectedPrefectureScaleList.add("震度６弱(特別区は５強、政令市は５強又は６弱)");
+                        } else {
+                            mSelectedPrefectureScaleList.add("震度６弱");
+                        }
                         mSelectedPrefectureCSVList.add("riku6weak_multi.csv");
                         //複数都道府県選択へ再帰
                         selectMultiplePrefecture();
@@ -534,6 +544,7 @@ public class KinentaiActivity extends AppCompatActivity {
 
     //複数都道府県の選択の都道府県ごとの最大震度を選択させるループ
     private void selectScaleKaiiki(String _prefecture){
+        final String prefecture = _prefecture;
         final CharSequence[] actions = {"■震度７","■震度６強(特別区６弱)","■震度６弱(特別区は５強、政令市は５強又は６弱)"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(_prefecture + "の最大震度は？");
@@ -550,14 +561,22 @@ public class KinentaiActivity extends AppCompatActivity {
                         break;
                     case 1:
                         Toast.makeText(getApplicationContext(), "震度６強", Toast.LENGTH_SHORT).show();
-                        mSelectedPrefectureScaleList.add("震度６強");
+                        if (prefecture.equals("東京都")){
+                            mSelectedPrefectureScaleList.add("震度６強(特別区６弱)");
+                        } else {
+                            mSelectedPrefectureScaleList.add("震度６強");
+                        }
                         mSelectedPrefectureCSVList.add("kaiiki6strong_multi.csv");
                         //複数都道府県選択へ再帰
                         selectMultiplePrefectureKaiiki();
                         break;
                     case 2:
                         Toast.makeText(getApplicationContext(), "震度６弱", Toast.LENGTH_SHORT).show();
-                        mSelectedPrefectureScaleList.add("震度６弱");
+                        if (Arrays.asList(specialSet).contains(prefecture)){
+                            mSelectedPrefectureScaleList.add("震度６弱(特別区は５強、政令市は５強又は６弱)");
+                        } else {
+                            mSelectedPrefectureScaleList.add("震度６弱");
+                        }
                         mSelectedPrefectureCSVList.add("kaiiki6weak_multi.csv");
                         //複数都道府県選択へ再帰
                         selectMultiplePrefectureKaiiki();

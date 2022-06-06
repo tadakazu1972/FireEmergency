@@ -301,7 +301,7 @@ public class TyphoonActivity extends AppCompatActivity {
         } else {
             s = "招集なし";
         }
-        builder.setMessage("４号非常招集\n\n" + s);
+        builder.setMessage("・台風時以外\n第５非常警備（全署、消防局）\n\n・台風時\n４号非常召集\n※警戒体制検討会議で検討し決定\n" + s);
         builder.setNegativeButton("キャンセル", null);
         builder.setCancelable(true);
         builder.create();
